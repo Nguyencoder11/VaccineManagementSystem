@@ -60,5 +60,5 @@ public class CustomerSchedule {
 
     @ManyToOne
     @JoinColumn(name = "vaccine_schedule_time_id")
-    VaccinceScheduleTime vaccinceScheduleTime;
+    VaccineScheduleTime vaccinceScheduleTime;
 }
