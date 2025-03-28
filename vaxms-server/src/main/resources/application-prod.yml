@@ -1,0 +1,40 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  # Ghi đè cấu hình datasource cho môi trường prod (PostgreSQL)
+  datasource:
+    url: ${PROD_URL}
+    username: ${PROD_USERNAME}
+    password: ${PROD_PASSWORD}
+
+  # Ghi đè cấu hình JPA
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  # Ghi đè cấu hình email (dùng email chính thức)
+  mail:
+    username: ${PROD_MAIL_USERNAME}
+    password: ${PROD_MAIL_PASSWORD}
+
+# Ghi đè cấu hình server
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Ghi đè cấu hình logging
+logging:
+  level:
+    root: INFO
+    com.vaxms: INFO
+  file:
+    name: /var/log/vaxms-server.log
+
+# Tắt Swagger trong môi trường production
+springdoc:
+  swagger-ui:
+    enabled: false
