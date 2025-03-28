@@ -34,4 +34,4 @@ build/
 
 # Ignore .env files
 .env
-/resources/.env
+/src/main/resources/.env
