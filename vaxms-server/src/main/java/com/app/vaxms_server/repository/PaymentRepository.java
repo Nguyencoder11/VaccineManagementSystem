@@ -1,17 +1,14 @@
 package com.app.vaxms_server.repository;
 
-import com.app.vaxms_server.entity.Authority;
+import com.app.vaxms_server.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface AuthorityRepository extends JpaRepository<Authority, Long> {
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
     @Query()
-    Authority findByName(String name);
-
-    @Query()
-    List<Authority> findAll();
+    Optional<Payment> findByOrderIdAndRequestId(String orderId, String requestId);
 }

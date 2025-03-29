@@ -1,0 +1,22 @@
+package com.app.vaxms_server.repository;
+
+import com.app.vaxms_server.entity.VaccineScheduleDoctor;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.sql.Date;
+import java.util.List;
+
+@Repository
+public interface VaccineScheduleDoctorRepository extends JpaRepository<VaccineScheduleDoctor, Long> {
+    @Modifying
+    @Transactional
+    @Query()
+    int deleteByVaccineSchedule(Long vaccineScheduleId, Date date);
+
+    @Query()
+    List<VaccineScheduleDoctor> findBySchedule(Long vaccineScheduleId);
+}

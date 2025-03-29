@@ -1,6 +1,6 @@
 package com.app.vaxms_server.repository;
 
-import com.app.vaxms_server.entity.Authority;
+import com.app.vaxms_server.entity.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AuthorityRepository extends JpaRepository<Authority, Long> {
+public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     @Query()
-    Authority findByName(String name);
-
-    @Query()
-    List<Authority> findAll();
+    List<Feedback> findByUser(Long userId);
 }
