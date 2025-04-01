@@ -1,4 +1,8 @@
-FROM ubuntu:latest
-LABEL authors="admin"
+FROM maven:3.8.5-openjdk-17 as build
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

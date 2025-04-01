@@ -1,0 +1,37 @@
+services:
+  backend:
+    image: vaxms-backend
+    container_name: vaxms-backend-1
+    build:
+      context: ./vaxms-server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - /vaxms-server/src/main/resources/.env
+    depends_on:
+      -
+    networks:
+      - app-network
+
+  frontend:
+    image: vaxms-frontend
+    container_name: vaxms-frontend-1
+    build:
+      context: ./vaxms-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      -
+    networks:
+      - app-network
+
+  db:
+    image:
+    environment:
+    ports:
+      -
+networks:
+  app-network:
+    driver: bridge

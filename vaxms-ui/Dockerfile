@@ -1,4 +1,7 @@
-FROM ubuntu:latest
-LABEL authors="admin"
+FROM node:18-alpine as build
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+EXPOSE 80
+
+ENTRYPOINT[]
