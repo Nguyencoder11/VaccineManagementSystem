@@ -1,0 +1,342 @@
+/* staffChat.module.scss */
+
+/* Variables */
+$primary-color: #8e44ad;
+/* Màu tím chủ đạo */
+$secondary-color: #6c757d;
+$light-gray: #f1f1f1;
+$chat-bg-color: #ffffff;
+$sidebar-bg-color: #f3e5f5;
+/* Màu nền sidebar nhạt hơn */
+$hover-bg-color: #e1bee7;
+/* Màu hover cho item trong sidebar */
+$admin-chat-bg: #e9ecef;
+$customer-chat-bg: $primary-color;
+$border-color: #dcdcdc;
+
+/* Mixin for rounded corners */
+@mixin rounded-corners($radius) {
+    border-radius: $radius;
+}
+
+/* General Styles */
+.chatContainer {
+    display: flex;
+    height: 85vh;
+    background-color: #510385;
+
+
+    /* Sidebar */
+    .sidebar {
+        width: 400px;
+        background-color: $sidebar-bg-color;
+        border-right: 1px solid $border-color;
+        display: flex;
+        flex-direction: column;
+
+        /* Header */
+        .sidebarHeader {
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            color: $secondary-color;
+            border-bottom: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+
+            .headerTitle {
+                flex: 1;
+            }
+
+            .headerIcon {
+                cursor: pointer;
+                font-size: 20px;
+                color: $secondary-color;
+
+                &:hover {
+                    color: darken($secondary-color, 10%);
+                }
+            }
+        }
+
+        /* Search Input */
+        .searchWrapper {
+            padding: 10px;
+
+            .searchInput {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid $border-color;
+                @include rounded-corners(20px);
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+        }
+
+        /* User List */
+        .userList {
+            flex: 1;
+            overflow-y: auto;
+
+            .userItem {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: $hover-bg-color;
+                }
+
+                .avatar {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+                .userInfo {
+                    flex: 1;
+
+                    .userName {
+                        font-weight: bold;
+                        font-size: 16px;
+                        color: $secondary-color;
+                    }
+
+                    .lastMessage {
+                        font-size: 14px;
+                        color: darken($secondary-color, 20%);
+                        margin-top: 2px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+
+                .unreadBadge {
+                    background-color: red;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+
+    /* Chat Area */
+    .chatArea {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: $chat-bg-color;
+
+        /* Chat Header */
+        .chatHeader {
+            padding: 15px;
+            background-color: $sidebar-bg-color;
+            border-bottom: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+
+            .chatTitle {
+                flex: 1;
+                font-weight: bold;
+                font-size: 18px;
+                color: $secondary-color;
+            }
+
+            .chatOptions {
+                .iconButton {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    color: $secondary-color;
+                    font-size: 20px;
+                    margin-left: 10px;
+                    transition: color 0.3s;
+
+                    &:hover {
+                        color: darken($secondary-color, 10%);
+                    }
+                }
+            }
+        }
+
+        /* Chat Content */
+        .chatContent {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: $chat-bg-color;
+
+            /* Scrollbar Styling */
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: $light-gray;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 3px;
+            }
+
+            /* Chat Messages */
+            .message {
+                max-width: 70%;
+                word-wrap: break-word;
+                margin: 5px 0;
+                padding: 10px 15px;
+                font-size: 15px;
+                line-height: 1.4;
+                @include rounded-corners(18px);
+
+                &.admin {
+                    align-self: flex-start;
+                    background-color: $primary-color;
+                    /* Màu tím chủ đạo */
+                    color: white;
+                    /* Màu chữ trắng */
+                    border-radius: 18px 18px 0 18px;
+                }
+
+                &.customer {
+                    align-self: flex-end;
+                    background-color: $admin-chat-bg;
+                    /* Màu xám nhạt */
+                    color: #343a40;
+                    /* Màu chữ đen đậm */
+                    border-radius: 18px 18px 18px 0;
+                }
+
+                &.image {
+                    padding: 0;
+                    background: none;
+
+                    img {
+                        max-width: 100%;
+                        @include rounded-corners(10px);
+                    }
+                }
+            }
+
+            /* Định nghĩa class toàn cục */
+            :global(.adminchat) {
+                background-color: $primary-color;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 18px 18px 0 18px;
+                max-width: 70%;
+                margin: 5px 0;
+                align-self: flex-start;
+                word-wrap: break-word;
+            }
+
+            :global(.mychat) {
+                background-color: $admin-chat-bg;
+                color: #343a40;
+                padding: 10px 15px;
+                border-radius: 18px 18px 18px 0;
+                max-width: 70%;
+                margin: 5px 0;
+                align-self: flex-end;
+                word-wrap: break-word;
+            }
+
+            :global(.adminchatimg) {
+                max-width: 70%;
+                margin: 5px 0;
+                align-self: flex-start;
+                border-radius: 10px;
+            }
+
+            :global(.mychatimg) {
+                max-width: 70%;
+                margin: 5px 0;
+                align-self: flex-end;
+                border-radius: 10px;
+            }
+
+            // :global(.messageTime) {
+            //     font-size: 12px;
+            //     color: #999;
+            //     margin-top: 5px;
+            //     text-align: right;
+            //     display: block;
+            // }
+
+            // :global(.seenStatus) {
+            //     font-size: 12px;
+            //     color: $primary-color;
+            //     margin-top: 5px;
+            //     display: block;
+            //     text-align: right;
+            // }
+        }
+
+        /* Chat Footer */
+        .chatFooter {
+            padding: 10px 15px;
+            background-color: $sidebar-bg-color;
+            border-top: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+
+            .inputMessage {
+                flex: 1;
+                padding: 10px 15px;
+                border: 1px solid $border-color;
+                @include rounded-corners(20px);
+                font-size: 15px;
+                box-sizing: border-box;
+                margin-right: 10px;
+            }
+
+            .iconButton {
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: $primary-color;
+                font-size: 24px;
+                margin-right: 10px;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: darken($primary-color, 10%);
+                }
+            }
+
+            .sendButton {
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                @include rounded-corners(50%);
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+
+                i {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,240 @@
+// Primary Colors
+$primary-color: #79bcf7; // Màu xanh chủ đạo tươi sáng
+$secondary-color: #f9fafc; // Màu nền xanh nhạt
+$highlight-color: #4fc3f7; // Màu xanh nhạt dùng để nhấn mạnh
+$text-color: #333333; // Màu đen nhẹ cho văn bản
+$secondary-text-color: #6b6b6b; // Màu xám cho mô tả và văn bản phụ
+
+// Accent Colors
+$hover-color: #1565c0; // Màu xanh đậm hơn khi hover
+$danger-color: #e53935; // Màu đỏ cho cảnh báo hoặc trạng thái lỗi
+$success-color: #43a047; // Màu xanh lá cho trạng thái thành công
+$warning-color: #fdd835; // Màu vàng cho trạng thái cảnh báo
+
+// Background Colors
+$background-light: #e3f2fd; // Màu xanh nhạt cho các vùng cần làm mềm
+$card-background: #ffffff; // Màu trắng cho nền thẻ hoặc vùng nội dung
+$border-color: #d1e3f3; // Màu viền nhẹ xanh
+
+// Shadows
+$box-shadow-color: rgba(0, 0, 0, 0.1); // Đổ bóng nhẹ
+
+// Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Đảm bảo border và padding được tính trong kích thước phần tử */
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $secondary-color;
+  color: $text-color;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+// Left Navigation Bar
+.navleft {
+  background-color: $primary-color;
+  width: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px $box-shadow-color;
+  overflow-y: auto;
+
+  .divroot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    padding: 5px;
+    background-color: darken($primary-color, 5%);
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .name-status {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px; // Khoảng cách giữa Staff và trạng thái Online
+
+      h4 {
+        font-size: 20px;
+        color: #fff;
+        font-weight: bold;
+        margin: 0; // Xóa margin để không bị khoảng cách thừa
+      }
+
+      .online-status {
+        font-size: 16px;
+        color: $success-color;
+        display: flex;
+        align-items: center;
+
+        i {
+          font-size: 10px;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+
+  .listmenumain {
+    padding: 20px;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-size: 15px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+
+      i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}
+
+// Header
+.header {
+  position: fixed; /* Giữ cố định */
+  top: 0; /* Đặt ở trên cùng */
+  left: 260px; /* Dịch ngang tương ứng với chiều rộng sidebar */
+  width: calc(100% - 260px); /* Chiếm toàn bộ chiều ngang trừ sidebar */
+  height: 70px; /* Giữ nguyên chiều cao */
+  background-color: $background-light; /* Màu nền */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000; /* Đặt lên trên các thành phần khác */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+
+  .header-left h2 {
+    color: $text-color;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    i {
+      font-size: 18px;
+      color: $primary-color;
+      cursor: pointer;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      span {
+        color: $text-color;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Content Area
+.contentadminweb {
+  margin-left: 260px;
+  padding-top: 70px;
+  background-color: $secondary-color;
+  min-height: 100vh;
+
+  .contentmain {
+    width: 100%; /* Đảm bảo toàn bộ chiều ngang */
+    height: 100%; /* Chiếm toàn bộ chiều cao của container */
+    margin: 0; /* Loại bỏ khoảng cách bên ngoài */
+    padding: 0; /* Loại bỏ khoảng cách bên trong */
+    display: flex; /* Dùng flexbox để căn chỉnh nội dung */
+    flex-direction: column;
+    background-color: $card-background;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px $box-shadow-color;
+
+    .table-section {
+
+      margin-top: 20px;
+      background-color: $card-background;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px $box-shadow-color;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        th, td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid $border-color;
+        }
+        th {
+          background-color: $primary-color;
+          color: #fff;
+          font-size: 14px;
+        }
+        td {
+          color: $text-color;
+          font-size: 14px;
+        }
+        tr:hover {
+          background-color: $background-light;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .navleft {
+    width: 200px;
+  }
+
+  .header {
+    left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .contentadminweb {
+    margin-left: 200px;
+  }
+}

@@ -1,0 +1,809 @@
+body{
+  font-family: "MyriadPro-Regular";
+}
+#headerweb{
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  height: 100px;
+
+}
+.container-web{
+  width: 80%;
+  margin-left: 10%;
+}
+.container-bottom-header {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.itemheader {
+  text-decoration: none;
+  color: #000;
+  padding: 10px;
+  text-transform: uppercase;
+  color: #606060;
+  font-size: 15px;
+  height: 100%;
+  text-transform: uppercase;
+  padding: 8px 5px 7px;
+  background-color: transparent;
+  font-family: "MyriadPro-Regular";
+}
+.itemheader:hover{
+  color: #fff;
+  background: #4d63a6;
+  border-radius: 3px;
+}
+.imagelogoheader{
+  height: 30px;
+  max-height: 80px;
+}
+.itemtopheader{
+  color: #2A388F;
+  font-family: 'MyriadPro-Bold';
+  font-size: 13px;
+  font-weight: 600;
+}
+.itemtopheader:hover{
+  background: none;
+  color: #2A388F;
+}
+.hotlineheader{
+  color: #FF7400 !important;
+}
+#footer-web{
+  background-color: #2a388f;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+#footer-web a{
+  text-decoration: none !important;
+}
+.hrheader-web{
+  padding:0; margin-bottom: 2px;margin-top: 0px;
+}
+.main-content-web{
+  padding-top: 100px;
+}
+.section-content-web{
+  background-color: #f2f2f2;
+  padding: 1.5em 1.5em;
+}
+.img-section-dky-tiem{
+  max-width: 100%;
+  height: auto;
+}
+.flex-section{
+  display: flex;
+}
+.divsc-dkytiem{
+  flex: 0 96px;
+  margin-right: 2em;
+  padding-right: 2em;
+  border-right: 1px solid #ddd;
+}
+.title-dki-tiem-chung{
+  font-size: 22px;
+  color: #2a388f;
+}
+.link-head-section a{
+  text-decoration: none;
+}
+.ghi-chu-tiem-chung{
+  color: #6D6E70;
+  margin-top: 20px;
+  font-size: 16px;
+}
+.title-form-dki-tiem{
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6D6E70;
+  display: block;
+  margin-top: 10px;
+}
+.form-dky-tiem{
+  margin-bottom: 100px;
+}
+.lb-form-dky-tiem{
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.lb-form-dky-tiem span{
+  color: red;
+}
+.dichvu-dky-tiem{
+  margin-top: 20px;
+}
+.headerwebadmin{
+  // height: 170px !important;
+  background-color: #fff;
+  width: 100%;
+  box-shadow: 0 4px 2px -2px gray;
+  padding-left: 40px;
+  position: fixed;
+  left: 250px;
+  padding-right: 250px;
+  z-index: 1000;
+}
+.singletgtiem{
+  margin-top: 20px;
+  background-color: #575757;
+  padding: 3px 8px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.activetiem{
+  background-color: #0b2185;
+  color: #fff;
+}
+.hiddendiv{
+  display: none;
+}
+#btndangkytiem{
+  margin-top: 30px;
+}
+.pointer{
+  cursor: pointer;
+}
+.acctaikhoan{
+  padding-top: 50px;
+}
+.tablediv{
+  border: 1px solid #e3e3e3;
+  -webkit-box-shadow: 0 0 10px #d4d4d4;
+  box-shadow: 0 0 10px #d4d4d4;
+}
+.headertable{
+  /* background-color: #fafafa; */
+  padding: 7px 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.lbtable{
+  color: #5733dd;
+  font-weight: 500;
+}
+.divcontenttable{
+  background: #fff;
+  padding: 17px 20px;
+}
+.divcenter{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.headersection{
+  background: #009981;
+  margin-bottom: 20px;
+  display: inline-block;
+  height: 30px;
+  overflow: hidden;
+  margin-top: 30px;
+}
+.headersection h4{
+  padding: 5px 60px 6px 35px;
+  margin: 0 0 0 60px;
+  background: #00483d;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  height: 30px;
+}
+.headersection:after {
+  content: " ";
+  border-top: 35px solid #00483d;
+  border-left: 30px solid #009981;
+  margin-left: 40px;
+}
+.img-vaccine-index{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+.taga-index{
+  text-decoration: none;
+}
+.vaccine-name-index{
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.news-slider {
+  width: 100%;
+  margin: auto;
+}
+
+.news-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+}
+
+.news-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.news-item h3 {
+  font-size: 18px;
+  margin-top: 12px;
+  color: #1a3d7b;
+  text-decoration: none;
+}
+.news-item a {
+  text-decoration: none;
+}
+
+.news-item p {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.news-index-block{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.headeraccount {
+  padding: 15px 20px 10px 20px;
+  border-bottom: 2px solid #f5f5f0;
+  margin-bottom: 20px;
+  min-height: 60px;
+  width: 100%;
+  background-color: #a6a6a6;
+  color: #fff;
+}
+.fontyel {
+  color: #fcaf17 !important;
+  font-family: 'SVN-Gilroy Bold';
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.lbacc {
+  margin-bottom: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+.btndoimk{
+  background: transparent linear-gradient(180deg,#00917a 0%,#00483d 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0 4px 6px #00000029;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-top: 30px;
+  width: 50%;
+}
+.checkbox-custom {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.checkbox-custom input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  /* background-color: #eee; */
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.checkbox-custom:hover input~.checkmark-checkbox {
+  /* background-color: #ccc; */
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.checkbox-custom input:checked~.checkmark-checkbox {
+  background-color: #ee4d2d;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.checkbox-custom input:checked~.checkmark-checkbox:after {
+  display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.checkbox-custom .checkmark-checkbox:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.image-profile{
+  display: block;
+  margin-top: 20px;
+  width: 200px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.btnuploadimage-profile{
+  width: 200px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #2A388F;
+}
+.hidden{
+  visibility: hidden;
+}
+
+@keyframes barWidth {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 50%;
+  }
+  50% {
+    width: 100%;
+  }
+  75% {
+    width: 50%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes barWidth2 {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+#loading {
+  margin-top: 20px;
+  height: 4px;
+  width: 100%;
+  display: none;
+}
+
+.bar {
+  position: relative;
+  width: 0%;
+  height: 100%;
+  margin: 0 auto;
+  animation: barWidth;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.bar1 {
+  animation-delay: 0s;
+  background: #02a09a;
+  top: 0;
+  z-index: 1;
+}
+
+
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10000;
+}
+
+.chat-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.chat-box {
+  display: none;
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  border: 1px solid #ccc;
+}
+
+.chat-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.chat-body {
+  padding: 10px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.chat-footer {
+  padding: 10px;
+}
+
+.chat-footer input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 60% !important;
+}
+.chat-footer i {
+  // flex: 1;
+  cursor: pointer;
+  width: 20%;
+  padding-left: 10px;
+}
+
+.chat-footer button {
+  // flex: 1;
+  color: #007bff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  background: none;
+}
+
+
+#listchat {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+.mychat{
+  background-color: #0084ff;
+  color: #fff;
+  max-width: 70%;
+  padding: 3px 7px;
+  border-radius: 10px;
+  display: inline-block;
+  align-self: flex-end;
+}
+.adminchat{
+  background-color: #f0f0f0;
+  max-width: 70%;
+  padding: 3px 7px;
+  border-radius: 10px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+
+#thanhcong{
+  text-align: center;margin-top: 15px; line-height: 25px;
+}
+.headthanhcong{
+  font-size: 25px; font-weight: bold;
+}
+.notithanhcong{
+  margin-top: 15px;
+}
+#thatbai{
+  text-align: center;margin-top: 15px; display: none;
+}
+.imgtracuulichtiem{
+  width: 100%;
+}
+.input-search-schedule{
+  width: 300px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #bdbdbd;
+  padding-left: 10px;
+}
+.input-search-schedule:focus{
+  outline: 1px solid #bdbdbd;
+}
+
+.tablelichtiemvaccine thead tr{
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.col-gre{
+  color: #0d66a3; text-align: center;
+  background: #c2e4ff !important;
+}
+.col-blue{
+  color: #ffffff;
+  text-align: center;
+  background: #3a6ded !important;
+}
+.whiteText{
+  color: #fff;
+  font-weight: bold;
+}
+.redText{
+  color: red;
+  font-weight: bold;
+}
+.headertracuu{
+  position: relative;
+}
+.headertracuu a{
+  position: absolute;
+  right: 0;
+  top: 30px;
+  text-decoration: none;
+}
+.hoverschedule:hover{
+  background: #cfcfcf !important;
+}
+.imgtableschedule{
+  width: 150px;
+}
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+.yellow{
+  color: #9c8f22;
+}
+.hidden{
+  visibility: hidden;
+}
+.mychatimg{
+  max-width: 70%;
+  display: inline-block;
+  align-self: flex-end;
+  margin-top: 20px;
+}
+.adminimg{
+  max-width: 70%;
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+.btncommont{
+  background-color: #2A388F !important;
+}
+#titlediadiem{
+  display: none;
+}
+.listdiadiemtiem{
+  padding-bottom: 20px;
+}
+.singletimetiem{
+  display: block;
+  margin-top: 8px !important;
+}
+.tablexacnhandki th, td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.momopay {
+  width: 30px;
+}
+
+.tablepay {
+  border: 1px solid #e0e0d1;
+  /* border-collapse:separate;
+  border-spacing: 0 1em; */
+}
+
+.tablepay td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+.paycode {
+  font-size: 28px;
+  color: #fcaf17;
+}
+.momopay {
+  width: 60px;
+}
+
+.radiocustom {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.radiocustom p{
+  margin-left: 30px;
+}
+.radiocustom input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.radiocustom:hover input~.checkmark {
+  background-color: #828282;
+}
+
+.radiocustom input~.checkmark {
+  background-color: #828282;
+}
+
+.radiocustom input:checked~.checkmark {
+  background-color: #fcaf17;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.radiocustom input:checked~.checkmark:after {
+  display: block;
+}
+
+.radiocustom .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+.imgvaccine{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.listvaccinesearch{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.divcntvaccine{
+  padding: 10px;
+  text-align: center;
+}
+.tenvaccinesearch{
+  color: #000;
+  text-decoration: none;
+}
+.singlevcsearch{
+  -webkit-box-shadow: 0 0 10px #c2c2c2;
+  box-shadow: 0 0 10px #c2c2c2;
+  cursor: pointer;
+}
+.nhomtuoivc{
+  display: block;
+  margin-top: 10px;
+}
+.motavaccinesearch{
+  display: block;
+  margin-top: 10px;
+}
+.hetslottiem{
+  color: #a62e21;
+  color: #fff;
+}
+
+
+.singletgtiem {
+  position: relative;
+}
+
+.cross {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hetslottiem {
+  background-color: #f8d7da; /* Màu nền để biểu thị hết slot */
+  border: 1px solid #f5c6cb;
+}
+
+.hetslottiem .cross::before {
+  content: '✖'; /* Biểu tượng gạch chéo */
+}

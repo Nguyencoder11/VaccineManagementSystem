@@ -1,0 +1,70 @@
+.activate-account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.activate-account-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.activate-account-card h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.activate-account-card p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.activate-account-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.activate-account-card form label {
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.activate-account-card form input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.activate-account-card .activate-btn {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.activate-account-card .resend-code {
+  margin-top: 10px;
+  font-size: 12px;
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

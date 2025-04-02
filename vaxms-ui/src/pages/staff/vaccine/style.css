@@ -1,0 +1,72 @@
+.filter-container {
+    margin-top: 10px;
+    height: auto;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.input-form{
+    height: 35px;
+}
+.search-button{
+    background-color: #335ddc;
+    color: white;
+}
+
+.clear-button{
+    background-color: #e36517;
+    color: white;
+    margin-left: 10px;
+}
+.table-container{
+    margin-top: 20px;
+}
+.table-container-title{
+    margin-top: 10px;
+    height: auto;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 20px;
+}
+.add-button{
+    background-color: #335ddc;
+    color: white;
+    margin-bottom: 15px;
+    float: right;
+}
+
+.tag-status{
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+.detail-button{
+    background-color: #FF9900;
+    color: white;
+    height: 35px;
+}
+.update-button{
+    background-color: #0066CC;
+    color: white;
+    height: 35px;
+}
+.cancel-button{
+    background-color: white;
+    height: 35px;
+    width: 80px;
+}
+.submit-button{
+    background-color: #0066CC;
+    color: white;
+    height: 35px;
+    width: 80px;
+    margin-left: 10px;
+}
+.input-form-name{
+    width: 100%;
+    margin: 0 10px;
+}
+

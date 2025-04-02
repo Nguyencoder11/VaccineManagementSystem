@@ -1,0 +1,393 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+
+  .login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+
+    .login-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .register-btn {
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 6px 14px;
+        background: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+
+      label {
+        font-size: 14px;
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .password-wrapper {
+        position: relative;
+
+        input {
+          padding-right: 40px;
+        }
+
+        .password-eye-icon {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .stay-signed-in {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 16px;
+
+      input {
+        margin-right: 8px;
+      }
+    }
+
+    .login-btn {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .forgot-password {
+      margin-top: 16px;
+
+      a {
+        font-size: 12px;
+        color: #000;
+        text-decoration: none;
+      }
+    }
+
+    .or-divider {
+      margin: 20px 0;
+      font-size: 12px;
+      color: #aaa;
+      position: relative;
+
+      span {
+        background: white;
+        padding: 0 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        border-top: 1px solid #ddd;
+        z-index: 0;
+      }
+    }
+
+    .google-login-btn {
+      background-color: white;
+      border: 1px solid #ccc;
+      color: black;
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+
+      .google-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+      }
+    }
+
+    .login-footer {
+      font-size: 10px;
+      color: #555;
+      margin-top: 20px;
+
+      a {
+        text-decoration: underline;
+        color: black;
+      }
+    }
+  }
+}
+
+/* Login modal custom styles */
+.modal-dialog {
+  max-width: 400px;
+  /* Width restriction */
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 90vh;
+  /* This ensures the modal doesn't exceed 90% of the viewport height */
+  overflow-y: auto;
+  /* Add scroll for longer content if needed */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+  /* Remove fixed height */
+  padding: 20px;
+  background-color: #f7f7f7;
+
+  .login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    /* Keep the width consistent */
+    width: 100%;
+    text-align: center;
+  }
+}.login-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   background-color: #f7f7f7;
+
+   .login-card {
+     background: white;
+     border-radius: 8px;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+     max-width: 400px;
+     width: 100%;
+     text-align: center;
+
+     .login-header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 20px;
+
+       h2 {
+         font-size: 24px;
+         font-weight: 600;
+       }
+
+       .register-btn {
+         border: 1px solid black;
+         border-radius: 20px;
+         padding: 6px 14px;
+         background: none;
+         font-size: 14px;
+         cursor: pointer;
+       }
+     }
+
+     .form-group {
+       margin-bottom: 16px;
+       text-align: left;
+
+       label {
+         font-size: 14px;
+         margin-bottom: 4px;
+         display: block;
+       }
+
+       input {
+         width: 100%;
+         padding: 10px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+       }
+
+       .password-wrapper {
+         position: relative;
+
+         input {
+           padding-right: 40px;
+         }
+
+         .password-eye-icon {
+           position: absolute;
+           right: 10px;
+           top: 50%;
+           transform: translateY(-50%);
+           cursor: pointer;
+         }
+       }
+     }
+
+     .stay-signed-in {
+       display: flex;
+       align-items: center;
+       font-size: 14px;
+       margin-bottom: 16px;
+
+       input {
+         margin-right: 8px;
+       }
+     }
+
+     .login-btn {
+       background-color: black;
+       color: white;
+       padding: 10px;
+       width: 100%;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+     }
+
+     .forgot-password {
+       margin-top: 16px;
+
+       a {
+         font-size: 12px;
+         color: #000;
+         text-decoration: none;
+       }
+     }
+
+     .or-divider {
+       margin: 20px 0;
+       font-size: 12px;
+       color: #aaa;
+       position: relative;
+
+       span {
+         background: white;
+         padding: 0 10px;
+         position: relative;
+         z-index: 1;
+       }
+
+       &::before {
+         content: '';
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 50%;
+         border-top: 1px solid #ddd;
+         z-index: 0;
+       }
+     }
+
+     .google-login-btn {
+       background-color: white;
+       border: 1px solid #ccc;
+       color: black;
+       width: 100%;
+       padding: 10px;
+       border-radius: 4px;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 14px;
+       font-weight: 500;
+
+       .google-icon {
+         width: 18px;
+         height: 18px;
+         margin-right: 8px;
+       }
+     }
+
+     .login-footer {
+       font-size: 10px;
+       color: #555;
+       margin-top: 20px;
+
+       a {
+         text-decoration: underline;
+         color: black;
+       }
+     }
+   }
+ }
+
+/* Login modal custom styles */
+.modal-dialog {
+  max-width: 400px;
+  /* Width restriction */
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 90vh;
+  /* This ensures the modal doesn't exceed 90% of the viewport height */
+  overflow-y: auto;
+  /* Add scroll for longer content if needed */
+  margin-left: -170px;
+  width: 1000px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+  /* Remove fixed height */
+  padding: 20px;
+  background-color: #f7f7f7;
+
+  .login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    /* Keep the width consistent */
+    width: 100%;
+    text-align: center;
+  }
+}
