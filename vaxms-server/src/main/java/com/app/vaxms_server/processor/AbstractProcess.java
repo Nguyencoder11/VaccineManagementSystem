@@ -1,6 +1,5 @@
 package com.app.vaxms_server.processor;
 
-
 import com.app.vaxms_server.config.Environment;
 import com.app.vaxms_server.config.PartnerInfo;
 import com.app.vaxms_server.constant.Execute;
@@ -27,7 +26,6 @@ public abstract class AbstractProcess<T, V> {
         return new GsonBuilder()
                 .disableHtmlEscaping()
                 .create();
-        }
     }
 
     public abstract V execute(T request) throws MomoException;

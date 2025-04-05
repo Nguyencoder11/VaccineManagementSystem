@@ -118,4 +118,37 @@ public class VNPayService {
          return -1;
       }
    }
+
+   public int orderReturnByUrl(String input) {
+      Map<String, String> fields = new HashMap<>();
+
+      // Tách từng tham số và thêm vào HashMap
+      String[] pairs = input.split("&");
+      for (String pair : pairs) {
+         String[] keyValue = pair.split("=");
+         if (keyValue.length == 2) {
+            String key = keyValue[0];
+            String value = keyValue[1];
+            fields.put(key, value);
+         }
+      }
+
+      String vnp_SecureHash = fields.get("vnp_SecureHash");
+      if (fields.containsKey("vnp_SecureHashType")) {
+         fields.remove("vnp_SecureHashType");
+      }
+      if (fields.containsKey("vnp_SecureHash")) {
+         fields.remove("vnp_SecureHash");
+      }
+      String signValue = VNPayConfig.hashAllFields(fields);
+      if (signValue.equals(vnp_SecureHash)) {
+         if ("00".equals(fields.get("vnp_TransactionStatus"))) {
+            return 1;
+         } else {
+            return 0;
+         }
+      } else {
+         return -1;
+      }
+   }
 }

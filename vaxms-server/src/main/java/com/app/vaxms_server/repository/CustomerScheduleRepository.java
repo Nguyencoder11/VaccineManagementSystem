@@ -39,5 +39,5 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
 
     @Query()
     List<CustomerSchedule> findByInjectDate(@Param("injectDate")LocalDate injectDate);
-    long countByVaccineScheduleTime(Long vaccineScheduleTimeId);
+    long countByVaccineScheduleTimeId(Long vaccineScheduleTimeId);
 }

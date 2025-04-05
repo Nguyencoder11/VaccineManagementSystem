@@ -16,6 +16,6 @@ public interface VaccineInventoryRepository extends JpaRepository<VaccineInvento
     Optional<VaccineInventory> findByVaccine(Vaccine vaccine);
 
     @Query()
-    Optional<VaccineInventory> fingByVaccineId(Long vaccineId);
+    Optional<VaccineInventory> findByVaccineId(Long vaccineId);
     Page<VaccineInventory> findAll(Specification<VaccineInventory> spec, Pageable pageable);
 }

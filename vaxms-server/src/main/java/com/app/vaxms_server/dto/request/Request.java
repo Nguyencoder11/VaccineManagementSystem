@@ -13,7 +13,7 @@ public class Request {
         this.startTime = System.currentTimeMillis();
     }
 
-    public Request(String partnerCode, String orderId, String requestId, Language language, long startTime) {
+    public Request(String partnerCode, String orderId, String requestId, Language language) {
         this.partnerCode = partnerCode;
         this.orderId = orderId;
         this.requestId = requestId;
