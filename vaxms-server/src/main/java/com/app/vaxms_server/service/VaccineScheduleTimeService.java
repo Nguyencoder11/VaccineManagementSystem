@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +34,10 @@ public class VaccineScheduleTimeService {
         Time endTime = dto.getEndTime();
         Integer numHour = dto.getNumHour();
         Integer maxPeople = dto.getMaxPeople();
-        if(startTime.getMinutes() != 0 || endTime.getMinutes() != 0){
+
+        LocalTime startLocalTime = startTime.toLocalTime();
+        LocalTime endLocalTime = endTime.toLocalTime();
+        if(startLocalTime.getMinute() != 0 || endLocalTime.getMinute() != 0){
             throw new MessageException("Phải dùng giờ chẵn để thực hiện");
         }
 
@@ -94,8 +98,8 @@ public class VaccineScheduleTimeService {
 
             VaccineScheduleTime vaccineScheduleTime = new VaccineScheduleTime();
             vaccineScheduleTime.setVaccineSchedule(vaccineSchedule);
-            vaccineScheduleTime.setEnd(new Time(slotEndTimeInMillis));
-            vaccineScheduleTime.setStart(new Time(currentTimeMillis));
+            vaccineScheduleTime.setTimeEnd(new Time(slotEndTimeInMillis));
+            vaccineScheduleTime.setTimeStart(new Time(currentTimeMillis));
             vaccineScheduleTime.setInjectDate(dto.getDate());
             vaccineScheduleTime.setLimitPeople(peopleDistribution.get(i));
             list.add(vaccineScheduleTime);
@@ -135,8 +139,8 @@ public class VaccineScheduleTimeService {
 
     public VaccineScheduleTime update(VaccineScheduleTime vaccineScheduleTime) {
         VaccineScheduleTime ex = vaccineScheduleTimeRepository.findById(vaccineScheduleTime.getId()).get();
-        ex.setStart(vaccineScheduleTime.getStart());
-        ex.setEnd(vaccineScheduleTime.getEnd());
+        ex.setTimeStart(vaccineScheduleTime.getTimeStart());
+        ex.setTimeEnd(vaccineScheduleTime.getTimeEnd());
         ex.setLimitPeople(vaccineScheduleTime.getLimitPeople());
         vaccineScheduleTimeRepository.save(ex);
         return ex;

@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
-    @Query()
+    @Query("select a from Authority a where a.name = ?1")
     Authority findByName(String name);
 
-    @Query()
+    @Query("select a from Authority a")
     List<Authority> findAll();
 }

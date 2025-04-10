@@ -11,17 +11,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-@Data
-@AllArgsConstructor
 @Getter
+@Data
 public class CustomerUserDetails implements UserDetails {
-    private User user;
+    protected User user;
+
+    public CustomerUserDetails(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String rolestr = user.getAuthority().getName();
-        System.out.println("rolelist: " + rolestr);
-        return Collections.singleton(new SimpleGrantedAuthority(rolestr));
+        if(user.getAuthority() != null) {
+            String rolestr = user.getAuthority().getName();
+            System.out.println("rolelist: " + rolestr);
+            return Collections.singleton(new SimpleGrantedAuthority(rolestr));
+        }
+        return Collections.emptyList();
     }
 
     @Override

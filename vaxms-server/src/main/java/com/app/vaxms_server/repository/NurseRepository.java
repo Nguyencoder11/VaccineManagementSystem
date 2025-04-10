@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NurseRepository extends JpaRepository<Nurse, Long> {
-    @Query()
+    @Query("SELECT n FROM Nurse n " +
+            "WHERE (:q IS NULL OR LOWER(n.fullName) LIKE LOWER(CONCAT('%', :q, '%')) " +
+            "OR LOWER(n.user.phoneNumber) LIKE LOWER(CONCAT('%', :q, '%')) " +
+            "OR LOWER(n.user.email) LIKE LOWER(CONCAT('%', :q, '%')))")
     public Page<Nurse> getNurse(@Param("q") String q, Pageable pageable);
 }

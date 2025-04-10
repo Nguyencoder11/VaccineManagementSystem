@@ -3,6 +3,8 @@ package com.app.vaxms_server.jwt;
 import com.app.vaxms_server.dto.CustomerUserDetails;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,11 +18,11 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
 public class JwtTokenProvider {
     private final String JWT_SECRET = "abcdefgh";
     private static final String AUTHORITIES_KEY = "roles";
     private final long JWT_EXPIRATION_TIME = 604800000L;
+    private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     // Create jwt from user info
     public String generateToken(CustomerUserDetails userDetails){
@@ -32,14 +34,14 @@ public class JwtTokenProvider {
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-                .claim("roles", userDetails.getAuthorities().toString())
+                .claim(AUTHORITIES_KEY, userDetails.getAuthorities().toString())
                 .compact();
     }
 
     // Get user info from jwt
     public Long getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(JWT_SECRET.getBytes())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -50,7 +52,10 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(JWT_SECRET).build().parseClaimsJws(authToken);
+            Jwts.parserBuilder()
+                    .setSigningKey(JWT_SECRET.getBytes())
+                    .build()
+                    .parseClaimsJws(authToken);
         } catch (MalformedJwtException ex) {
             log.error("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
@@ -67,15 +72,16 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = null;
         try {
-            claims = Jwts.parser()
-                    .setSigningKey(JWT_SECRET)
+            claims = Jwts.parserBuilder()
+                    .setSigningKey(JWT_SECRET.getBytes())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String author = claims.get(AUTHORITIES_KEY).toString().substring(1, claims.get(AUTHORITIES_KEY).toString().length() - 1);
+        String author = claims.get(AUTHORITIES_KEY).toString()
+                .substring(1, claims.get(AUTHORITIES_KEY).toString().length() - 1);
         System.out.println("role: " + author);
         Collection<? extends GrantedAuthority> authorities = Arrays
                 .stream(author.split(","))

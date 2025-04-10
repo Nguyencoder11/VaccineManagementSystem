@@ -6,6 +6,7 @@ import com.app.vaxms_server.entity.User;
 import com.app.vaxms_server.exception.MessageException;
 import com.app.vaxms_server.repository.CustomerProfileRepository;
 import com.app.vaxms_server.utils.UserUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,7 @@ public class CustomerProfileService {
         return customerProfile;
     }
 
-    public Page<CustomerProfileDto> gutCustomers(String q, Pageable pageable) {
+    public Page<CustomerProfileDto> getCustomers(String q, Pageable pageable) {
         Page<CustomerProfile> customers = customerProfileRepository.getCustomerProfile(q, pageable);
         return customers.map(this::mapToDTO);
     }

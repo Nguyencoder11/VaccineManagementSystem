@@ -332,8 +332,8 @@ public class CustomerScheduleService {
     private VaccineScheduleTime createVaccineScheduleTime(VaccineSchedule vaccineSchedule, String startTime, String endTime) {
         VaccineScheduleTime scheduleTime = new VaccineScheduleTime();
         scheduleTime.setInjectDate(new Date(System.currentTimeMillis()));
-        scheduleTime.setStart(Time.valueOf(startTime));
-        scheduleTime.setEnd(Time.valueOf(endTime));
+        scheduleTime.setTimeStart(Time.valueOf(startTime));
+        scheduleTime.setTimeEnd(Time.valueOf(endTime));
         scheduleTime.setLimitPeople(100);
         scheduleTime.setVaccineSchedule(vaccineSchedule);
         return vaccineScheduleTimeRepository.save(scheduleTime);
@@ -360,8 +360,8 @@ public class CustomerScheduleService {
 
         emailBody.append("Thông tin lịch tiêm:\n")
                 .append("Ngày tiêm: ").append(vaccineScheduleTime.getInjectDate()).append("\n")
-                .append("Thời gian: Từ ").append(vaccineScheduleTime.getStart())
-                .append(" đến ").append(vaccineScheduleTime.getEnd()).append("\n")
+                .append("Thời gian: Từ ").append(vaccineScheduleTime.getTimeStart())
+                .append(" đến ").append(vaccineScheduleTime.getTimeEnd()).append("\n")
                 .append("Trạng thái: Đang chờ xác nhận\n\n")
                 .append("Vui lòng đăng nhập để xem chi tiết lịch tiêm.");
 

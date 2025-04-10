@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
-    @Query()
+    @Query("select v from Vaccine v where v.vaccineType.id = ?1")
     List<Vaccine> findByType(Long typeId);
 
     Optional<Vaccine> findById(Long id);
@@ -21,6 +21,6 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
 
     Page<Vaccine> findAll(Specification<Vaccine> spec, Pageable pageable);
 
-    @Query()
+    @Query("select v from Vaccine v where v.name like ?1 ")
     Page<Vaccine> findByParam(String search, Pageable pageable);
 }

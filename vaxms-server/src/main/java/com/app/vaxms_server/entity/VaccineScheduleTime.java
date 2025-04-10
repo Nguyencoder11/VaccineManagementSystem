@@ -27,11 +27,11 @@ public class VaccineScheduleTime {
 
     @JsonFormat(pattern = "HH:mm")
     @JsonDeserialize(using = SqlTimeSerializer.class)
-    Time start;
+    Time timeStart;
 
     @JsonFormat(pattern = "HH:mm")
     @JsonDeserialize(using = SqlTimeSerializer.class)
-    Time end;
+    Time timeEnd;
 
     Integer limitPeople;
 

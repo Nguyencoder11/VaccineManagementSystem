@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
-    @Query()
+    @Query("select f from Feedback f where f.customerSchedule.user.id = ?1")
     List<Feedback> findByUser(Long userId);
 }

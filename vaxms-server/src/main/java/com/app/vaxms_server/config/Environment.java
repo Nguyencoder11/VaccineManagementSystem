@@ -11,7 +11,7 @@ public class Environment {
     private String target;
 
     public Environment(MoMoEndpoint endpoints, PartnerInfo partnerInfo, EnvTarget target) {
-        this(endpoints, partnerInfo, target.string());
+        this(endpoints, partnerInfo, target.getTarget());
     }
 
     public Environment(MoMoEndpoint momoEndpoint, PartnerInfo partnerInfo, String target) {

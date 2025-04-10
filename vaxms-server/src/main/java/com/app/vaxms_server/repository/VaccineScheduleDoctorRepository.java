@@ -14,9 +14,9 @@ import java.util.List;
 public interface VaccineScheduleDoctorRepository extends JpaRepository<VaccineScheduleDoctor, Long> {
     @Modifying
     @Transactional
-    @Query()
+    @Query("delete from VaccineScheduleDoctor p where p.vaccineSchedule.id = ?1 and p.injectDate = ?2")
     int deleteByVaccineSchedule(Long vaccineScheduleId, Date date);
 
-    @Query()
+    @Query("select v from VaccineScheduleDoctor v where v.vaccineSchedule.id = ?1")
     List<VaccineScheduleDoctor> findBySchedule(Long vaccineScheduleId);
 }

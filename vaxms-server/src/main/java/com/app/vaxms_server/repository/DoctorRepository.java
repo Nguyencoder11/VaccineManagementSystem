@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    @Query()
+    @Query("SELECT d FROM Doctor d " +
+            "WHERE (:q IS NULL OR LOWER(d.fullName) LIKE LOWER(CONCAT('%', :q, '%')) " +
+            "OR LOWER(d.user.phoneNumber) LIKE LOWER(CONCAT('%', :q, '%')) " +
+            "OR LOWER(d.user.email) LIKE LOWER(CONCAT('%', :q, '%')))")
     Page<Doctor> getDoctor(@Param("q") String q, Pageable pageable);
 }

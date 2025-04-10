@@ -17,27 +17,29 @@ import java.util.List;
 
 @Repository
 public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedule, Long> {
-    @Query()
+    @Query("select c from CustomerSchedule c where c.user.id = ?1 and c.vaccineScheduleTime.vaccineSchedule.vaccine.name like ?2 and " +
+            "c.vaccineScheduleTime.injectDate >= ?3 and c.vaccineScheduleTime.injectDate <= ?4")
     Page<CustomerSchedule> findByUser(Long userId, String search, Date from, Date to, Pageable pageable);
 
-    @Query()
+    @Query(value = "select count(cs.id) from customer_schedule cs WHERE cs.vaccine_schedule_id = ?1 and cs.status != 'cancelled'", nativeQuery = true)
     Long countRegis(Long vaccineScheduleId);
 
     Page<CustomerSchedule> findAll(Specification<CustomerSchedule> spec, Pageable pageable);
 
-    @Query()
+    @Query("select count(c.id) from CustomerSchedule c where c.vaccineScheduleTime.id = ?1")
     Long countBySchedule(Long id);
 
-    @Query()
+    @Query("SELECT c FROM CustomerSchedule c WHERE c.createdDate > ?1 and c.customerSchedulePay = ?2")
     List<CustomerSchedule> findByCreatedDateAfter(Timestamp createdDate, CustomerSchedulePay customerSchedulePay);
 
-    @Query()
+    @Query("select c from CustomerSchedule c where c.vaccineScheduleTime.vaccineSchedule.id = ?1")
     List<CustomerSchedule> findByVaccineSchedule(Long id);
 
-    @Query()
+    @Query(value = "select c.* from customer_schedule c inner join vaccine_schedule_time vt on vt.id = c.vaccine_schedule_time_id\n" +
+            "where vt.vaccine_schedule_id  = ?1 and vt.inject_date = DATE_SUB(?2, INTERVAL ?3 MONTH)", nativeQuery = true)
     List<CustomerSchedule> findByVaccineScheduleAndDate(Long id, Date date, Integer numMonth);
 
-    @Query()
+    @Query("SELECT c FROM CustomerSchedule c WHERE c.vaccineScheduleTime.injectDate = :injectDate")
     List<CustomerSchedule> findByInjectDate(@Param("injectDate")LocalDate injectDate);
     long countByVaccineScheduleTimeId(Long vaccineScheduleTimeId);
 }

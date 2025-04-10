@@ -1,6 +1,6 @@
 package com.app.vaxms_server.controller;
 
-import com.app.vaxms_server.service.AgeGroupService;
+import com.app.vaxms_server.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/age-group")
+@RequestMapping("/api/manufacturer")
 @CrossOrigin
-public class AgeGroupController {
+public class ManufacturerController {
     @Autowired
-    private AgeGroupService ageGroupService;
+    private ManufacturerService manufacturerService;
 
     @PostMapping("/find-all")
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(ageGroupService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(manufacturerService.getAll(), HttpStatus.OK);
     }
 }

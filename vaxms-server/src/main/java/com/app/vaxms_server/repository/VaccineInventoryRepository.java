@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface VaccineInventoryRepository extends JpaRepository<VaccineInventory, Long> {
     Optional<VaccineInventory> findByVaccine(Vaccine vaccine);
 
-    @Query()
+    @Query("select vi from VaccineInventory vi  join  Vaccine v on v.id = vi.vaccine.id where v.id = ?1")
     Optional<VaccineInventory> findByVaccineId(Long vaccineId);
     Page<VaccineInventory> findAll(Specification<VaccineInventory> spec, Pageable pageable);
 }
