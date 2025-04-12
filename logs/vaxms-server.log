@@ -66,3 +66,16 @@
 2025-04-13T00:40:25.154+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-04-13T00:40:25.155+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-04-13T00:40:25.157+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-13T00:41:06.075+07:00  INFO 19224 --- [vaxms-server] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2025-04-13T00:43:52.347+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-1] c.a.v.jwt.JwtAuthenticationFilter        : JWT Token: null
+2025-04-13T00:43:52.341+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-2] c.a.v.jwt.JwtAuthenticationFilter        : JWT Token: null
+2025-04-13T00:43:52.575+07:00 ERROR 19224 --- [vaxms-server] [http-nio-8080-exec-2] c.app.vaxms_server.jwt.JwtTokenProvider  : Invalid JWT token
+2025-04-13T00:43:52.577+07:00  WARN 19224 --- [vaxms-server] [http-nio-8080-exec-2] c.a.v.jwt.JwtAuthenticationFilter        : JWT invalid or missing
+2025-04-13T00:43:52.575+07:00 ERROR 19224 --- [vaxms-server] [http-nio-8080-exec-1] c.app.vaxms_server.jwt.JwtTokenProvider  : Invalid JWT token
+2025-04-13T00:43:52.577+07:00  WARN 19224 --- [vaxms-server] [http-nio-8080-exec-1] c.a.v.jwt.JwtAuthenticationFilter        : JWT invalid or missing
+2025-04-13T00:43:52.674+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-4] c.a.v.jwt.JwtAuthenticationFilter        : JWT Token: null
+2025-04-13T00:43:52.680+07:00 ERROR 19224 --- [vaxms-server] [http-nio-8080-exec-4] c.app.vaxms_server.jwt.JwtTokenProvider  : Invalid JWT token
+2025-04-13T00:43:52.680+07:00  WARN 19224 --- [vaxms-server] [http-nio-8080-exec-4] c.a.v.jwt.JwtAuthenticationFilter        : JWT invalid or missing
+2025-04-13T00:43:52.831+07:00  INFO 19224 --- [vaxms-server] [http-nio-8080-exec-7] c.a.v.jwt.JwtAuthenticationFilter        : JWT Token: null
+2025-04-13T00:43:52.834+07:00 ERROR 19224 --- [vaxms-server] [http-nio-8080-exec-7] c.app.vaxms_server.jwt.JwtTokenProvider  : Invalid JWT token
+2025-04-13T00:43:52.835+07:00  WARN 19224 --- [vaxms-server] [http-nio-8080-exec-7] c.a.v.jwt.JwtAuthenticationFilter        : JWT invalid or missing
