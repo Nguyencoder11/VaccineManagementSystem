@@ -1,10 +1,10 @@
 package com.app.vaxms_server.vnpay;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -13,10 +13,10 @@ import java.util.*;
 
 @Component
 public class VNPayConfig {
-    public static String vnp_PayUrl = "";
-    public static String vnp_TmnCode = "";
-    public static String vnp_HashSecret = "";
-    public static String vnp_apiUrl = "";
+    public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+    public static String vnp_TmnCode = "APPINCW6";
+    public static String vnp_HashSecret = "7B483AQNUBBZP8OXQ4O43EIAF34UVJDL";
+    public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     public static String md5(String message) {
         String digest = null;
@@ -113,7 +113,7 @@ public class VNPayConfig {
     public static String getIpAddress(HttpServletRequest request) {
         String ipAddress;
         try {
-            ipAddress = request.getHeader("x-forwarded-for");
+            ipAddress = request.getHeader("X-FORWARDED-FOR");
             if(ipAddress == null) {
                 ipAddress = request.getLocalAddr();
             }

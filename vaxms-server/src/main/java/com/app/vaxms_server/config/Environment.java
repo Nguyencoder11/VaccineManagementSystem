@@ -11,7 +11,7 @@ public class Environment {
     private String target;
 
     public Environment(MoMoEndpoint endpoints, PartnerInfo partnerInfo, EnvTarget target) {
-        this(endpoints, partnerInfo, target.getTarget());
+        this(endpoints, partnerInfo, target.string());
     }
 
     public Environment(MoMoEndpoint momoEndpoint, PartnerInfo partnerInfo, String target) {
@@ -134,7 +134,7 @@ public class Environment {
             this.target = target;
         }
 
-        public String getTarget() {
+        public String string() {
             return this.target;
         }
     }

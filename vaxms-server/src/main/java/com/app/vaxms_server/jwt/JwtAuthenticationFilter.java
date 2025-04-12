@@ -55,17 +55,26 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         try {
             // Get jwt from request
             String jwt = getJwtFromRequest((HttpServletRequest) request);
+            if(jwt == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+            log.info("JWT Token: {}", jwt);
             if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 // Get user id from jwt string
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
+                log.info("User ID from JWT: {}", userId);
                 // Get user info from id
                 UserDetails userDetails = new CustomerUserDetails(userRepository.findById(userId).get());
+                log.info("User Details: {}", userDetails);
                 System.out.println("user by access token-----: " + userDetails);
                 if(userDetails != null) {
                     // If user is valid, set infor for Security Context
                     Authentication authentications = getAuthentication(jwt, userId);
                     SecurityContextHolder.getContext().setAuthentication(authentications);
                 }
+            } else {
+                log.warn("JWT invalid or missing");
             }
         } catch (Exception ex) {
             log.error("failed on set user authentication", ex);
@@ -80,7 +89,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         System.out.println("role: " + author);
         Collection<? extends GrantedAuthority> authorities = Arrays
                 .stream(author.split(","))
-                .filter(auth -> auth.trim().isEmpty())
+                .filter(auth -> !auth.trim().isEmpty())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 

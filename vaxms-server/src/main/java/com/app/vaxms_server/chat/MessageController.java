@@ -59,7 +59,10 @@ public class MessageController {
     }
 
     @MessageMapping("/file/{id}/{filename}")
-    public void sendFile(SimpMessageHeaderAccessor sha, @Payload String message, @DestinationVariable String id, @DestinationVariable String filename) {
+    public void sendFile(SimpMessageHeaderAccessor sha,
+                         @Payload String message,
+                         @DestinationVariable String id,
+                         @DestinationVariable String filename) {
         User receiver = null;
         if(Long.valueOf(id) > 0) {
             receiver = userRepository.findById(Long.valueOf(id)).get();

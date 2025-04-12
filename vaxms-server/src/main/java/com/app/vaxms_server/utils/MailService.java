@@ -1,7 +1,5 @@
 package com.app.vaxms_server.utils;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.*;
+import jakarta.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
 @Service
@@ -40,7 +40,6 @@ public class MailService {
                 subject,
                 content
         );
-
 
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();

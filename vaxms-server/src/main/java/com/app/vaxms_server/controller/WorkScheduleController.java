@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/work_schedules")
+@RequestMapping("/api/work-schedules")
 public class WorkScheduleController {
     @Autowired
     private WorkScheduleService workScheduleService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<WorkSchedule> createSchedule(@RequestBody WorkSchedule workSchedule) {
         WorkSchedule createSchedule = workScheduleService.createSchedule(workSchedule);
         return ResponseEntity.ok(createSchedule);

@@ -1,6 +1,6 @@
 package com.app.vaxms_server.constant;
 
-import com.nimbusds.jose.shaded.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName;
 
 public enum RequestType {
     /**

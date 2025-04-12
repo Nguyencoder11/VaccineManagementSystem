@@ -63,7 +63,7 @@ const customerRoutes = [
 const adminRoutes = [
     { path: "/admin/index", component: homeAdmin, layout: layoutAdmin },
     { path: "/admin/user", component: userAdmin, layout: layoutAdmin },
-    { path: "/admin/nhanvien.js", component: nhanvienAdmin, layout: layoutAdmin },
+    { path: "/admin/employees", component: nhanvienAdmin, layout: layoutAdmin },
     {
         path: "/admin/vaccine-schedule",
         component: lichTiemChungAdmin,

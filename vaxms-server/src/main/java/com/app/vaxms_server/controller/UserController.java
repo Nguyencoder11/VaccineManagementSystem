@@ -112,7 +112,7 @@ public class UserController {
         return new ResponseEntity<>(userUtils.getUserWithAuthority(), HttpStatus.OK);
     }
 
-    @PostMapping("/all/update-infor")
+    @PostMapping("/all/update-info")
     public void updateInfo(@RequestBody UserUpdate userUpdate){
         userService.updateInfo(userUpdate);
     }
