@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JwtAuthenticationFilter extends GenericFilterBean {
     private final JwtTokenProvider tokenProvider;
-
     private final UserRepository userRepository;
 
     public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, UserRepository userRepository) {
@@ -52,6 +51,14 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        // Bo qua endpoint cua swagger
+        String path = ((HttpServletRequest) request).getRequestURI();
+        if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")) {
+           log.info("Bypassing JWT authentication for Swagger endpoint: {}", path);
+           filterChain.doFilter(request, response);
+           return;
+        }
+
         try {
             // Get jwt from request
             String jwt = getJwtFromRequest((HttpServletRequest) request);
