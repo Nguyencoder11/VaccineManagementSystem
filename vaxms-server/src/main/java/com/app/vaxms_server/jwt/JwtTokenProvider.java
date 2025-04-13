@@ -42,7 +42,7 @@ public class JwtTokenProvider {
                 .setSubject(Long.toString(userDetails.getUser().getId()))
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET.getBytes(StandardCharsets.UTF_8))
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
                 .claim(AUTHORITIES_KEY, userDetails.getAuthorities().toString())
                 .compact();
     }
@@ -50,7 +50,7 @@ public class JwtTokenProvider {
     // Get user info from jwt
     public Long getUserIdFromJWT(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8))
+                .setSigningKey(JWT_SECRET)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -62,7 +62,7 @@ public class JwtTokenProvider {
     public boolean validateToken(String authToken) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8))
+                    .setSigningKey(JWT_SECRET)
                     .build()
                     .parseClaimsJws(authToken);
             return true;
