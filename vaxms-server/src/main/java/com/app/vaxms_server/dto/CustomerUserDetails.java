@@ -12,22 +12,16 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Getter
+@AllArgsConstructor
 @Data
 public class CustomerUserDetails implements UserDetails {
-    protected User user;
-
-    public CustomerUserDetails(User user) {
-        this.user = user;
-    }
+    private User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(user.getAuthority() != null) {
-            String rolestr = user.getAuthority().getName();
-            System.out.println("rolelist: " + rolestr);
-            return Collections.singleton(new SimpleGrantedAuthority(rolestr));
-        }
-        return Collections.emptyList();
+        String rolestr = user.getAuthority().getName();
+        System.out.println("rolelist: " + rolestr);
+        return Collections.singleton(new SimpleGrantedAuthority(rolestr));
     }
 
     @Override

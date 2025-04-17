@@ -17,7 +17,7 @@ public class GoogleOAuth2Service {
         try {
             JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jsonFactory)
-                    .setAudience(Collections.singletonList("663646080535-l004tgn5o5cpspqdglrl3ckgjr3u8nbf.apps.googleusercontent.com"))
+                    .setAudience(Collections.singletonList("1036430779393-2bep1gc6igqjphdje5kb19fef6egh11a.apps.googleusercontent.com"))
                     .build();
             System.out.println(verifier);
             GoogleIdToken idToken = verifier.verify(idTokenString);

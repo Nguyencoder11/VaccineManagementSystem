@@ -10,13 +10,14 @@ import java.util.Properties;
 @Configuration
 public class MailSenderConfig {
     final static String username = "lenhnguyen10a22003@gmail.com";
-    final static String password = "Llnguyen1103";
+    final static String password = "dnlerduygwlalmaj";
 
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
+
         mailSender.setUsername(username);
         mailSender.setPassword(password);
 

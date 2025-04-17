@@ -27,9 +27,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -43,6 +45,7 @@ public class VaccineService {
     private final VaccineTypeRepository vaccineTypeRepository;
     private final VaccineInventoryRepository vaccineInventoryRepository;
     private final CenterRepository centerRepository;
+    private final VaccineScheduleRepository vaccineScheduleRepository;
 
     public List<Vaccine> findAll() {
         return vaccineRepository.findAll();
@@ -125,6 +128,7 @@ public class VaccineService {
         if (optionalAgeGroup.isEmpty()) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhóm tuổi không tồn tại");
         }
+
         Vaccine vaccine = new Vaccine();
         vaccine.setName(requestBody.getName());
         vaccine.setPrice(requestBody.getPrice());
@@ -139,70 +143,58 @@ public class VaccineService {
         vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineRepository.save(vaccine);
 
-        VaccineInventory vaccineInventory = new VaccineInventory();
-        vaccineInventory.setVaccine(vaccine);
-        vaccineInventory.setQuantity(0);
-        vaccineInventory.setCenter(getCenter("Ha Noi"));
-        vaccineInventory.setStatus("Đang sử dụng");
-        vaccineInventoryRepository.save(vaccineInventory);
+        // Tạo VaccineInventory và sử dụng phương thức getCenter
+//        VaccineInventory vaccineInventory = new VaccineInventory();
+//        vaccineInventory.setVaccine(vaccine);
+//        vaccineInventory.setQuantity(0);
+//        vaccineInventory.setCenter(getCenter("Ha Noi"));
+//        vaccineInventory.setStatus("Đang sử dụng");
+//        vaccineInventoryRepository.save(vaccineInventory);
 
         return modelMapper.map(vaccine, CreateVaccineResponse.class);
     }
 
     public UpdateVaccineResponse updateVaccine(UpdateVaccineRequest requestBody) {
+        // Kiểm tra thông tin đầu vào
         if (ObjectUtils.isEmpty(requestBody)) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Thông tin cập nhật không được để trống");
         }
         if (StringUtils.isEmpty(requestBody.getName())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập tên vaccine");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Tên vaccine không được để trống");
         }
         if (ObjectUtils.isEmpty(requestBody.getPrice())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập giá vaccine");
-        }
-        if (ObjectUtils.isEmpty(requestBody.getVaccineTypeId())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Chọn loại vaccine");
-        }
-        if (ObjectUtils.isEmpty(requestBody.getManufacturerId())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Chọn nhà sản xuất");
-        }
-        if (ObjectUtils.isEmpty(requestBody.getAgeGroupId())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Chọn nhóm tuổi");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Giá vaccine không được để trống");
         }
         if (ObjectUtils.isEmpty(requestBody.getInventory())) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập số lượng vaccine");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số lượng vaccine không được để trống");
         }
         if (requestBody.getInventory() < 0) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số lượng vaccine phải là số dương");
         }
-        Optional<VaccineType> optionalVaccineType = vaccineTypeRepository.findById(requestBody.getVaccineTypeId());
-        if (optionalVaccineType.isEmpty()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Loại vaccine không tồn tại");
-        }
-        Optional<AgeGroup> optionalAgeGroup = ageGroupRepository.findById(requestBody.getAgeGroupId());
-        if (optionalAgeGroup.isEmpty()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhóm tuổi không tồn tại");
-        }
-        Optional<Manufacturer> optionalManufacturer = manufacturerRepository.findById(requestBody.getManufacturerId());
-        if (optionalManufacturer.isEmpty()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhà sản xuất không tồn tại");
-        }
+
+        // Tìm vaccine theo ID
         Optional<Vaccine> optionalVaccine = vaccineRepository.findById(requestBody.getId());
         if (optionalVaccine.isEmpty()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Vaccine không tồn tại");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Vaccine không tồn tại");
         }
+
+        // Cập nhật thông tin vaccine
         Vaccine vaccine = optionalVaccine.get();
         vaccine.setName(requestBody.getName());
         vaccine.setPrice(requestBody.getPrice());
-        vaccine.setInventory(requestBody.getInventory());
         vaccine.setImage(requestBody.getImage());
         vaccine.setDescription(requestBody.getDescription());
         vaccine.setStatus(requestBody.getStatus());
-        vaccine.setVaccineType(optionalVaccineType.get());
-        vaccine.setManufacturer(optionalManufacturer.get());
-        vaccine.setAgeGroup(optionalAgeGroup.get());
-
         vaccineRepository.save(vaccine);
 
+        // Đồng bộ giá vaccine trong các lịch tiêm liên quan
+        List<VaccineSchedule> schedules = vaccineScheduleRepository.findByVaccineId(vaccine.getId());
+        for (VaccineSchedule schedule : schedules) {
+            schedule.setPrice(BigDecimal.valueOf(requestBody.getPrice()));
+            vaccineScheduleRepository.save(schedule);
+        }
+
+        // Trả về thông tin vaccine sau khi cập nhật
         return modelMapper.map(vaccine, UpdateVaccineResponse.class);
     }
 
@@ -215,17 +207,15 @@ public class VaccineService {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Vaccine không tồn tại");
         }
         Vaccine vaccine = optionalVaccine.get();
-
         if (ObjectUtils.equals(vaccine.getStatus(), "DELETE")) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Vaccine đã xóa rồi");
         }
-
         vaccine.setStatus("DELETE");
         try {
-            vaccineRepository.save(vaccine);
+            vaccineRepository.deleteById(requestBody.getId());
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MessageException(500, "Vaccine đã được sử dụng, không thể xóa");
         }
     }
 
@@ -423,6 +413,7 @@ public class VaccineService {
         if (optionalCenter.isEmpty()) {
             Center newCenter = new Center();
             newCenter.setCity(city);
+            newCenter.setCenterName(city);
             newCenter.setCreatedDate(new Timestamp(System.currentTimeMillis()));
             centerRepository.save(newCenter);
             return newCenter;

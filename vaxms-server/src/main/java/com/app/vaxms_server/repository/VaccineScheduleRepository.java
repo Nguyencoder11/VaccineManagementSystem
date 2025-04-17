@@ -70,4 +70,16 @@ public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule
             @Param("status") String status,
             Pageable pageable
     );
+
+    @Query(value = "select * from vaccine_schedule v " +
+            "inner join vaccine vc on vc.id = v.vaccine_id where vc.name like ?3 and " +
+            " DATE(v.start_date) >= ?1 and DATE(v.end_date) <= ?2 ", nativeQuery = true)
+    public Page<VaccineSchedule> findByDateAndParam(Date from , Date to, String search, Pageable pageable);
+
+    @Query(value = "select * from vaccine_schedule v " +
+            "inner join vaccine vc on vc.id = v.vaccine_id where vc.name like ?1 ", nativeQuery = true)
+    Page<VaccineSchedule> findByParam(String s, Pageable pageable);
+
+    @Query("SELECT v FROM VaccineSchedule v WHERE v.vaccine.id = :vaccineId")
+    List<VaccineSchedule> findByVaccineId(@Param("vaccineId") Long vaccineId);
 }

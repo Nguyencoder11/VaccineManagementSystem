@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -31,6 +32,8 @@ public class VaccineSchedule {
     Timestamp createdDate;
 
     Long idPreSchedule;
+
+    BigDecimal price;
 
     String description;
 

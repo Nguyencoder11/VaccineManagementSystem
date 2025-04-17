@@ -1,13 +1,22 @@
 package com.app.vaxms_server.vnpay;
 
-import org.springframework.stereotype.Service;
-
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
+
+import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class VNPayService {
@@ -90,7 +99,7 @@ public class VNPayService {
 
          try {
             fieldName = URLEncoder.encode((String) params.nextElement(), StandardCharsets.US_ASCII.toString());
-            fieldValue = URLEncoder.encode((String) request.getParameter(fieldName), StandardCharsets.US_ASCII.toString());
+            fieldValue = URLEncoder.encode(request.getParameter(fieldName), StandardCharsets.US_ASCII.toString());
          } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
          }

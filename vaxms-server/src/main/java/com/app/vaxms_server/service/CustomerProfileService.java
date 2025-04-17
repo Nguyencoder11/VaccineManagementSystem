@@ -6,7 +6,6 @@ import com.app.vaxms_server.entity.User;
 import com.app.vaxms_server.exception.MessageException;
 import com.app.vaxms_server.repository.CustomerProfileRepository;
 import com.app.vaxms_server.utils.UserUtils;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,0 +1,227 @@
+/* Tổng thể trang */
+.tablediv {
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .headertable {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .divcontenttable {
+      margin-top: 15px;
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+  
+        thead {
+          background: #f8f9fa;
+  
+          th {
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+          }
+        }
+  
+        tbody {
+          tr {
+            &:hover {
+              background: #f1f1f1;
+            }
+  
+            td {
+              padding: 10px;
+              border-bottom: 1px solid #ddd;
+  
+              .btn {
+                padding: 5px 10px;
+                font-size: 0.9rem;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+  
+                i {
+                  margin-right: 5px;
+                }
+              }
+  
+              .btn-warning {
+                background-color: #ffc107;
+                color: #fff;
+  
+                &:hover {
+                  background-color: #e0a800;
+                }
+              }
+  
+              .btn-danger {
+                background-color: #dc3545;
+                color: #fff;
+  
+                &:hover {
+                  background-color: #bd2130;
+                }
+              }
+  
+              .btn-primary {
+                background-color: #28a745;
+                color: #fff;
+  
+                &:hover {
+                  background-color: #218838;
+                }
+              }
+  
+              .fa-lock {
+                color: #fff;
+              }
+  
+              .fa-unlock {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Nút Khóa/Mở Khóa */
+  .sticky-col {
+    .btn-primary {
+      background-color: #28a745; /* Màu xanh lá cây */
+      border-color: #28a745;
+      color: white;
+  
+      &:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+    }
+  
+    .btn-danger {
+      background-color: #dc3545; /* Màu đỏ */
+      border-color: #dc3545;
+      color: white;
+  
+      &:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+      }
+    }
+  }
+  
+  /* Header */
+  .row {
+    margin-bottom: 20px;
+  
+    .form-control {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+  
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+    }
+  
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+  
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+  
+  /* Modal */
+  .modal-content {
+    border-radius: 10px;
+  
+    .modal-header {
+      background-color: #007bff;
+      color: white;
+      border-radius: 10px 10px 0 0;
+  
+      .btn-close {
+        color: white;
+        opacity: 1;
+      }
+    }
+  
+    .modal-body {
+      padding: 20px;
+  
+      .form-control {
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+  
+        &:focus {
+          border-color: #007bff;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      }
+  
+      .lb-form {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+      }
+  
+      .btn {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+  
+        &.btn-warning {
+          background-color: #ffc107;
+          color: #fff;
+  
+          &:hover {
+            background-color: #e0a800;
+          }
+        }
+  
+        &.btn-primary {
+          background-color: #007bff;
+          color: white;
+  
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Responsive Table */
+  @media (max-width: 768px) {
+    .tablediv {
+      .divcontenttable {
+        overflow-x: auto;
+      }
+    }
+  }
+  

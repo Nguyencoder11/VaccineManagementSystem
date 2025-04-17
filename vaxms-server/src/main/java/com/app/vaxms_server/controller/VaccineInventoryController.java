@@ -1,5 +1,6 @@
 package com.app.vaxms_server.controller;
 
+import com.app.vaxms_server.dto.request.DeleteVaccineInventoryRequest;
 import com.app.vaxms_server.dto.request.DeleteVaccineRequest;
 import com.app.vaxms_server.dto.request.DetailVaccineRequest;
 import com.app.vaxms_server.dto.request.ListVaccineInventoryRequest;
@@ -17,7 +18,7 @@ import java.io.IOException;
 @CrossOrigin
 @RequiredArgsConstructor
 public class VaccineInventoryController {
-    private VaccineInventoryService vaccineInventoryService;
+    private final VaccineInventoryService vaccineInventoryService;
 
     @PostMapping("/import")
     public void importVaccineInventory(MultipartFile file) throws IOException {
@@ -30,7 +31,7 @@ public class VaccineInventoryController {
     }
 
     @PostMapping("/delete")
-    public boolean deleteVaccineInventory(@RequestBody DeleteVaccineRequest request) {
+    public boolean deleteVaccineInventory(@RequestBody DeleteVaccineInventoryRequest request) {
         return vaccineInventoryService.deleteVaccine(request);
     }
 

@@ -3,15 +3,18 @@ import { VaccineScheduleApi } from "../../../../services/staff/VaccineSchedule.a
 import { CustomerScheduleApi } from "../../../../services/staff/CustomerSchedule.api";
 import { AppNotification } from "../../../../components/AppNotification";
 import dayjs from "dayjs";
-import { Button, Form, Input, Modal, Pagination, Popconfirm, Select, Table, Tag } from "antd";
+import { Button, Form, Input, Modal, Pagination, Popconfirm, Select, Table, Tag, DatePicker } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useParams } from "react-router-dom";
 import ModalUpdateCustomerSchedule from "./ModalUpdateCustomerShedule";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+
 import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 export const CustomerScheduleViewDetail = () => {
+    const { RangePicker } = DatePicker;
     const nav = useNavigate();
     const { state } = useLocation();
     const location = useLocation();
@@ -88,26 +91,44 @@ export const CustomerScheduleViewDetail = () => {
             ...item, stt: (currentPage - 1) * pageSize + index + 1,
         }));
     };
-    const handleApprove = (id, status) => {
-        CustomerScheduleApi.approveCustomerSchedule({
-            customerScheduleId: id, status: status,
-        })
-            .then((res) => {
-                handleCustomerSchedules(formSearch);
-                if (status === "confirmed") {
-                    AppNotification.success("Duyệt thành công");
-                } else {
-                    AppNotification.success("Từ chối thành công");
-                }
 
+    const [isRefundClicked, setIsRefundClicked] = useState({});
+    const handleApprove = (id, status, record) => {
+        if (status === "cancelled") {
+            setIsRefundClicked((prev) => ({ ...prev, [id]: true })); // Đánh dấu nút đã nhấn
+
+            CustomerScheduleApi.approveCustomerSchedule({
+                customerScheduleId: id,
+                status: status,
             })
-            .catch((err) => {
-                const errorMessage = err.response.data.defaultMessage || null;
-                if (errorMessage) {
+                .then((res) => {
+                    handleCustomerSchedules(formSearch);
+
+                    AppNotification.success(
+                        "Thông báo hoàn tiền sẽ được gửi đến khách hàng qua email."
+                    );
+                })
+                .catch((err) => {
+                    const errorMessage = err.response?.data?.defaultMessage || "Đã xảy ra lỗi";
                     AppNotification.error(errorMessage);
-                }
-            });
-        handleCustomerSchedules(formSearch);
+                });
+        } else {
+            CustomerScheduleApi.approveCustomerSchedule({
+                customerScheduleId: id,
+                status: status,
+            })
+                .then((res) => {
+                    handleCustomerSchedules(formSearch);
+
+                    if (status === "confirmed") {
+                        AppNotification.success("Duyệt lịch thành công.");
+                    }
+                })
+                .catch((err) => {
+                    const errorMessage = err.response?.data?.defaultMessage || "Đã xảy ra lỗi";
+                    AppNotification.error(errorMessage);
+                });
+        }
     };
     const onPageChange = (page, pageSize) => {
         setCurrentPage(page);
@@ -155,18 +176,24 @@ export const CustomerScheduleViewDetail = () => {
     const handleHealthStatusChange = (id, field, value) => {
         const customer = customerSchedules.find(item => item.id === id);
 
+        // Kiểm tra nếu giá trị không thay đổi thì không cần cập nhật
+        if (customer[field] === value) {
+            cancelEditing(field); // Thoát chế độ chỉnh sửa
+            return;
+        }
+
         const updateData = {
             id: id,
             healthStatusBefore: customer.healthStatusBefore, // Giữ nguyên giá trị hiện tại
             healthStatusAfter: customer.healthStatusAfter,   // Giữ nguyên giá trị hiện tại
-            [field]: value // Chỉ cập nhật trường được chỉnh sửa
+            [field]: value // Cập nhật trường được chỉnh sửa
         };
 
         CustomerScheduleApi.UpdateCustomerSchedule(updateData)
             .then((res) => {
                 setCustomerSchedules(prev =>
                     prev.map(item =>
-                        item.id === id ? { ...item, healthStatusBefore: res.data.healthStatusBefore, healthStatusAfter: res.data.healthStatusAfter } : item
+                        item.id === id ? { ...item, [field]: res.data[field] } : item
                     )
                 );
                 AppNotification.success("Cập nhật thành công");
@@ -174,6 +201,9 @@ export const CustomerScheduleViewDetail = () => {
             .catch((err) => {
                 const errorMessage = err.response?.data?.defaultMessage || "Cập nhật thất bại";
                 AppNotification.error(errorMessage);
+            })
+            .finally(() => {
+                cancelEditing(field); // Thoát chế độ chỉnh sửa
             });
     };
 
@@ -217,7 +247,7 @@ export const CustomerScheduleViewDetail = () => {
             VaccineScheduleApi.vaccineSchedules().then(res => {
                 // Tìm lịch tiêm cụ thể từ danh sách
                 const schedule = res.data.find(item => item.id === state);
-                
+
                 if (schedule) {
                     const canRegister = !schedule.endDate || dayjs(schedule.endDate).isAfter(dayjs());
                     setCanRegisterCustomer(canRegister);
@@ -226,6 +256,93 @@ export const CustomerScheduleViewDetail = () => {
         }
     }, [state]);
     const [canRegisterCustomer, setCanRegisterCustomer] = useState(true);
+    const renderHealthStatus = (text, record, field, editingField) => {
+        // If the field is in editing mode
+        if (editingRows[editingField] === record.id) {
+            return (
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <Input
+                        defaultValue={text}
+                        onPressEnter={(e) => {
+                            handleHealthStatusChange(record.id, field, e.target.value);
+                            cancelEditing(editingField);
+                        }}
+                        onBlur={(e) => {
+                            handleHealthStatusChange(record.id, field, e.target.value);
+                            cancelEditing(editingField);
+                        }}
+                        autoFocus
+                    />
+                    <Button
+                        type="primary"
+                        onClick={() => cancelEditing(editingField)}
+                        style={{
+                            padding: "5px",
+                            backgroundColor: "#d9d9d9",
+                            borderColor: "#d9d9d9",
+                        }}
+                    >
+                        Hủy
+                    </Button>
+                </div>
+            );
+        }
+
+        // Normal display mode
+        return (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div
+                    style={{
+                        width: "180px", // Fixed width
+                        maxHeight: "60px", // Limit height for scrolling
+                        overflowY: "auto", // Enable vertical scroll
+                        border: "1px solid #ddd", // Optional styling
+                        borderRadius: "4px",
+                        padding: "5px",
+                        background: "#f9f9f9",
+                    }}
+                    title={text} // Tooltip to show full content on hover
+                >
+                    {text}
+                </div>
+                <Button
+                    type="text"
+                    icon={<FontAwesomeIcon icon={faEdit} />}
+                    onClick={() => startEditing(editingField, record.id)}
+                    style={{
+                        padding: "5px",
+                        backgroundColor: "#fff",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                    }}
+                />
+            </div>
+        );
+    };
+
+    const handleDateFilter = (dates) => {
+        console.log('Raw dates:', dates); // Log nguyên dates để kiểm tra
+
+        if (!dates || !dates[0] || !dates[1]) {
+            setFormSearch({
+                ...formSearch,
+                startDate: null,
+                endDate: null,
+            });
+            return;
+        }
+
+        if (dayjs(dates[0]).isAfter(dayjs(dates[1]))) {
+            AppNotification.error("Ngày bắt đầu không thể lớn hơn ngày kết thúc!");
+            return;
+        }
+
+        setFormSearch({
+            ...formSearch,
+            startDate: dayjs(dates[0]).format("YYYY-MM-DD"),
+            endDate: dayjs(dates[1]).format("YYYY-MM-DD"),
+        });
+    };
 
 
     const columns = [{
@@ -238,21 +355,27 @@ export const CustomerScheduleViewDetail = () => {
     }, {
         title: "Tên khách hàng", dataIndex: "fullName", key: "fullName",
     },
+    {
+        title: "Ngày Tiêm",
+        dataIndex: "injectDate",
+        key: "injectDate",
+        render: (_, record) => record.vaccineScheduleTime?.injectDate
+    },
 
     {
         title: "Trạng thái thanh toán",
         dataIndex: "payStatus",
         key: "payStatus",
         render: (payStatus) => (
-          <div>
-            {payStatus ? (
-              <span style={{ color: "green" }}>Đã thanh toán</span>
-            ) : (
-              <span style={{ color: "red" }}>Chưa thanh toán</span>
-            )}
-          </div>
+            <div>
+                {payStatus ? (
+                    <span style={{ color: "green" }}>Đã thanh toán</span>
+                ) : (
+                    <span style={{ color: "red" }}>Chưa thanh toán</span>
+                )}
+            </div>
         ),
-      }, {
+    }, {
         title: "Trạng Thái", dataIndex: "status", key: "status", align: "center", render: (text) => {
             return (<Tag
                 color={text === "confirmed" ? "green" : text === "pending" ? "gold" : text === "cancelled" ? "red" : text === "injected" ? "blue" : text === "not_injected" ? "purple" : "default"}
@@ -264,120 +387,98 @@ export const CustomerScheduleViewDetail = () => {
         title: "Tình trạng sức khỏe trước tiêm",
         dataIndex: "healthStatusBefore",
         key: "healthStatusBefore",
-        align: "center",
-        render: (text, record) => {
-            // If this row is in editing mode for healthStatusBefore
-            if (editingRows.healthStatusBefore === record.id) {
-                return (
-                    <div>
-                        <Input
-                            defaultValue={text}
-                            onPressEnter={(e) => {
-                                handleHealthStatusChange(record.id, 'healthStatusBefore', e.target.value);
-                                cancelEditing('healthStatusBefore');
-                            }}
-                            onBlur={(e) => {
-                                handleHealthStatusChange(record.id, 'healthStatusBefore', e.target.value);
-                                cancelEditing('healthStatusBefore');
-                            }}
-                            autoFocus
-                        />
-                    </div>
-                );
-            }
-
-            // Normal view with edit icon
-            return (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {text}
-                    <Button
-                        type="text"
-                        icon={<FontAwesomeIcon icon={faEdit} />}
-                        onClick={() => startEditing('healthStatusBefore', record.id)}
-                    />
-                </div>
-            );
-        }
+        render: (text, record) =>
+            renderHealthStatus(text, record, "healthStatusBefore", "healthStatusBefore"),
     },
     {
         title: "Tình trạng sức khỏe sau tiêm",
         dataIndex: "healthStatusAfter",
         key: "healthStatusAfter",
-        align: "center",
-        render: (text, record) => {
-            // If this row is in editing mode for healthStatusAfter
-            if (editingRows.healthStatusAfter === record.id) {
-                return (
-                    <div>
-                        <Input
-                            defaultValue={text}
-                            onPressEnter={(e) => {
-                                handleHealthStatusChange(record.id, 'healthStatusAfter', e.target.value);
-                                cancelEditing('healthStatusAfter');
-                            }}
-                            onBlur={(e) => {
-                                handleHealthStatusChange(record.id, 'healthStatusAfter', e.target.value);
-                                cancelEditing('healthStatusAfter');
-                            }}
-                            autoFocus
-                        />
-                    </div>
-                );
-            }
-
-            // Normal view with edit icon
-            return (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {text}
-                    <Button
-                        type="text"
-                        icon={<FontAwesomeIcon icon={faEdit} />}
-                        onClick={() => startEditing('healthStatusAfter', record.id)}
-                    />
-                </div>
-            );
-        }
+        render: (text, record) =>
+            renderHealthStatus(text, record, "healthStatusAfter", "healthStatusAfter"),
     }, {
         title: "Hành động",
         dataIndex: "hanhDong",
         key: "hanhDong",
         align: "center",
-        render: (text, record) => (
-            record.status === "pending" ? (
-                <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        render: (text, record) => {
+            // 1. Hiện nút hoàn tiền khi đã thanh toán và trạng thái là "cancelled"
+            if (record.payStatus && record.status === "cancelled" && !isRefundClicked[record.id]) {
+                return (
                     <Popconfirm
                         title="Thông báo"
-                        description="Bạn có chắc chắn muốn từ chối không?"
+                        description="Bạn có chắc chắn muốn duyệt để gửi email hoàn tiền không?"
                         onConfirm={() => handleApprove(record.id, "cancelled")}
                         okText="Có"
                         cancelText="Không"
                     >
                         <Button
                             type="primary"
-                            title="Từ chối"
-                            style={{ backgroundColor: "red", borderColor: "red" }}
+                            title="Hoàn tiền"
+                            style={{
+                                backgroundColor: "#28a745", // Màu xanh lá cây tượng trưng cho hoàn tiền
+                                borderColor: "#28a745",
+                                borderRadius: "50%", // Làm nút hình tròn
+                                width: "40px", // Chiều rộng cố định
+                                height: "40px", // Chiều cao cố định
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
                         >
-                            <FontAwesomeIcon icon={faRemove} />
+                            <FontAwesomeIcon
+                                icon={faDollarSign} // Biểu tượng hình đô la
+                                style={{
+                                    color: "#fff", // Màu trắng
+                                    fontSize: "16px", // Kích thước biểu tượng
+                                }}
+                            />
                         </Button>
                     </Popconfirm>
-                    <Popconfirm
-                        title="Thông báo"
-                        description="Bạn có chắc chắn muốn duyệt không?"
-                        onConfirm={() => handleApprove(record.id, "confirmed")}
-                        okText="Có"
-                        cancelText="Không"
-                    >
-                        <Button
-                            type="primary"
-                            title="Duyệt"
-                            style={{ backgroundColor: "green", borderColor: "green" }}
+                );
+            }
+
+            // 2. Hiện nút duyệt khi trạng thái là "pending" và chưa thanh toán
+            if (record.status === "pending" && record.payStatus) {
+                return (
+                    <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+                        <Popconfirm
+                            title="Thông báo"
+                            description="Bạn có chắc chắn muốn từ chối không?"
+                            onConfirm={() => handleApprove(record.id, "cancelled")}
+                            okText="Có"
+                            cancelText="Không"
                         >
-                            <FontAwesomeIcon icon={faCheck} />
-                        </Button>
-                    </Popconfirm>
-                </div>
-            ) : null  // Không hiển thị gì khi không phải trạng thái pending
-        )
+                            <Button
+                                type="primary"
+                                title="Từ chối"
+                                style={{ backgroundColor: "red", borderColor: "red" }}
+                            >
+                                <FontAwesomeIcon icon={faRemove} />
+                            </Button>
+                        </Popconfirm>
+                        <Popconfirm
+                            title="Thông báo"
+                            description="Bạn có chắc chắn muốn duyệt không?"
+                            onConfirm={() => handleApprove(record.id, "confirmed")}
+                            okText="Có"
+                            cancelText="Không"
+                        >
+                            <Button
+                                type="primary"
+                                title="Duyệt"
+                                style={{ backgroundColor: "green", borderColor: "green" }}
+                            >
+                                <FontAwesomeIcon icon={faCheck} />
+                            </Button>
+                        </Popconfirm>
+                    </div>
+                );
+            }
+
+            // 3. Trường hợp còn lại không hiển thị gì
+            return null;
+        }
     }
     ];
 
@@ -392,9 +493,11 @@ export const CustomerScheduleViewDetail = () => {
             ...prev, [name]: value,
         }));
     };
-    const statusOptions = [{ label: "Tất cả", value: "" }, {
+    const statusOptions = [{ label: "Trạng Thái", value: "" }, {
         label: "Chưa đủ điều kiện",
-        value: "pending"
+        value: "pending",
+        label: "Huỷ Tiêm",
+        value: "cancelled"
     }, { label: "Đủ điều kiện", value: "confirmed" },];
     return (<React.Fragment>
         <div style={{ marginBottom: "20px" }}>
@@ -411,7 +514,11 @@ export const CustomerScheduleViewDetail = () => {
         )}
         <div
             style={{
-                marginTop: 20, marginBottom: 20, display: "flex", alignItems: "center",
+                marginTop: 20,
+                marginBottom: 20,
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
             }}
         >
             <Input
@@ -422,10 +529,21 @@ export const CustomerScheduleViewDetail = () => {
                 }}
             />
 
+            <RangePicker
+                style={{ width: "60%" }}
+                placeholder={["Start Date", "End Date"]}
+                format="YYYY-MM-DD"
+                onChange={(dates) => handleDateFilter(dates)}
+            />
+
             <Select
                 showSearch
                 style={{
-                    width: 170, marginLeft: "auto", display: "flex", alignItems: "center", marginRight: 30,
+                    width: 170,
+                    marginLeft: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                    marginRight: 30,
                 }}
                 optionFilterProp="children"
                 onChange={(value) => {
@@ -434,11 +552,14 @@ export const CustomerScheduleViewDetail = () => {
                 filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
                 value={formSearch?.status}
             >
-                {statusOptions.map((status) => (<Option key={status.value} value={status.value}>
-                    {status.label}
-                </Option>))}
+                {statusOptions.map((status) => (
+                    <Option key={status.value} value={status.value}>
+                        {status.label}
+                    </Option>
+                ))}
             </Select>
         </div>
+
         <>
             <Table
                 columns={columns}

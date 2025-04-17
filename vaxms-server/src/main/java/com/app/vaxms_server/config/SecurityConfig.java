@@ -45,7 +45,12 @@ public class SecurityConfig {
                         // Public endpoints
 //                        .requestMatchers("**").permitAll()
                         .requestMatchers("/api/*/public/**").permitAll()
+                        .requestMatchers("/news/**", "/vaccine-type/**").permitAll()
+                        .requestMatchers("/api/vaccine-type/find-primary").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/api/user/login/email").permitAll()
+                        .requestMatchers("/hello/info", "/hello/**").permitAll()
+
                         // Role-based endpoints
                         .requestMatchers("/api/*/admin/**").hasAuthority(Contains.ROLE_ADMIN)
                         .requestMatchers("/api/*/doctor/**").hasAuthority(Contains.ROLE_DOCTOR)
@@ -62,7 +67,6 @@ public class SecurityConfig {
                         // All other requests require authentication
                         .anyRequest().authenticated()
                 );
-//                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider, userRepository), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

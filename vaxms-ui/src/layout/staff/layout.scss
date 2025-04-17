@@ -21,10 +21,10 @@ $box-shadow-color: rgba(0, 0, 0, 0.1); // Đổ bóng nhẹ
 
 // Base Styles
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* Đảm bảo border và padding được tính trong kích thước phần tử */
-}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Đảm bảo border và padding được tính trong kích thước phần tử */
+  }
 body {
   font-family: 'Arial', sans-serif;
   background-color: $secondary-color;
@@ -70,23 +70,23 @@ a {
     }
     .name-status {
       display: flex;
-      align-items: center;
+      align-items: center; 
       flex-direction: column;
       gap: 10px; // Khoảng cách giữa Staff và trạng thái Online
-
+  
       h4 {
         font-size: 20px;
         color: #fff;
         font-weight: bold;
         margin: 0; // Xóa margin để không bị khoảng cách thừa
       }
-
+  
       .online-status {
         font-size: 16px;
         color: $success-color;
         display: flex;
         align-items: center;
-
+  
         i {
           font-size: 10px;
           margin-right: 3px;
@@ -94,7 +94,7 @@ a {
       }
     }
   }
-
+  
   .listmenumain {
     padding: 20px;
 
@@ -122,18 +122,18 @@ a {
 
 // Header
 .header {
-  position: fixed; /* Giữ cố định */
-  top: 0; /* Đặt ở trên cùng */
-  left: 260px; /* Dịch ngang tương ứng với chiều rộng sidebar */
-  width: calc(100% - 260px); /* Chiếm toàn bộ chiều ngang trừ sidebar */
-  height: 70px; /* Giữ nguyên chiều cao */
-  background-color: $background-light; /* Màu nền */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  z-index: 1000; /* Đặt lên trên các thành phần khác */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+    position: fixed; /* Giữ cố định */
+    top: 0; /* Đặt ở trên cùng */
+    left: 260px; /* Dịch ngang tương ứng với chiều rộng sidebar */
+    width: calc(100% - 260px); /* Chiếm toàn bộ chiều ngang trừ sidebar */
+    height: 70px; /* Giữ nguyên chiều cao */
+    background-color: $background-light; /* Màu nền */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000; /* Đặt lên trên các thành phần khác */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng */
 
   .header-left h2 {
     color: $text-color;
@@ -191,7 +191,7 @@ a {
     box-shadow: 0 4px 6px $box-shadow-color;
 
     .table-section {
-
+        
       margin-top: 20px;
       background-color: $card-background;
       border-radius: 8px;
@@ -237,4 +237,30 @@ a {
   .contentadminweb {
     margin-left: 200px;
   }
+}
+.headpageadmin {
+  background-color: #c29311ed;
+  color: #fff;
+  padding: 5px 20px;
+}
+.lbadd-admin {
+  font-weight: 500;
+  margin-top: 15px;
+  display: block;
+  margin-bottom: 3px;
+}
+.headvcine{
+  position: relative;
+}
+.btnaddvaccine{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.imgtable{
+  width: 150px;
+}
+.lb-forms{
+  margin-top: 15px;
+  margin-bottom: 7px;
 }

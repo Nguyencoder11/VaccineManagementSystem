@@ -35,8 +35,9 @@ public class VaccineScheduleController {
     public ResponseEntity<?> getAll(
             @RequestParam(value = "from", required = false)Date from,
             @RequestParam(value = "to", required = false)Date to,
+            @RequestParam(required = false) String search,
             Pageable pageable) {
-        Page<VaccineSchedule> result = vaccineScheduleService.vaccineSchedules(from, to, pageable);
+        Page<VaccineSchedule> result = vaccineScheduleService.vaccineSchedules(from, to, search, pageable);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

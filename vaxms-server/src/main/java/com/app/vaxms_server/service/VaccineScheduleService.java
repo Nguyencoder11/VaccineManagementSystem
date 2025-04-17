@@ -56,6 +56,17 @@ public class VaccineScheduleService {
         if(vaccine.getInventory() < vaccineSchedule.getLimitPeople()) {
             throw new MessageException("Vaccine không đủ số lượng, chỉ còn " + vaccine.getInventory());
         }
+        if(vaccineSchedule.getStartDate().after(vaccineSchedule.getEndDate())){
+            throw new MessageException("Ngày bắt đầu không được sau ngày kết thúc");
+        }
+        if(vaccineSchedule.getStartDate().before(new java.util.Date(System.currentTimeMillis()))){
+            throw new MessageException("Ngày bắt đầu phải sau ngày hiện tại");
+        }
+        Long range = vaccineSchedule.getEndDate().getTime() - vaccineSchedule.getStartDate().getTime();
+        Long numDay = range / (1000L * 60L * 60L * 24L);
+        if(numDay > 7){
+            throw new MessageException("Khoảng cách không được quá 7 ngày");
+        }
         vaccineSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineSchedule.setUser(userUtils.getUserWithAuthority());
         vaccineScheduleRepository.save(vaccineSchedule);
@@ -131,8 +142,19 @@ public class VaccineScheduleService {
             throw new MessageException("Id không được null");
         }
         Optional<VaccineSchedule> exist = vaccineScheduleRepository.findById(vaccineSchedule.getId());
-        if(exist.isPresent()) {
+        if(exist.isEmpty()) {
             throw new MessageException("Không tìm thấy lích tiêm có id: " + vaccineSchedule.getId());
+        }
+        if(vaccineSchedule.getStartDate().after(vaccineSchedule.getEndDate())){
+            throw new MessageException("Ngày bắt đầu không được sau ngày kết thúc");
+        }
+        if(vaccineSchedule.getStartDate().before(new java.util.Date(System.currentTimeMillis()))){
+            throw new MessageException("Ngày bắt đầu phải sau ngày hiện tại");
+        }
+        Long range = vaccineSchedule.getEndDate().getTime() - vaccineSchedule.getStartDate().getTime();
+        Long numDay = range / (1000L * 60L * 60L * 24L);
+        if(numDay > 7){
+            throw new MessageException("Khoảng cách không được quá 7 ngày");
         }
         Long num = vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId());
         if(num == null) {
@@ -169,12 +191,16 @@ public class VaccineScheduleService {
      * api này dùng để lấy danh sách lịch tiêm vaccine, truyền vào ngày bắt đầu và kết thúc
      * nếu không truyền ngày bd hoặc kt thì lấy mặc định tất cả
      * */
-    public Page<VaccineSchedule> vaccineSchedules(Date from, Date to, Pageable pageable) {
+    public Page<VaccineSchedule> vaccineSchedules(Date from, Date to, String search, Pageable pageable) {
         Page<VaccineSchedule> page = null;
+        if(search == null) {
+            search = "";
+        }
+        search = "%" + search + "%";
         if(from == null || to == null) {
-            page = vaccineScheduleRepository.findAll(pageable);
+            page = vaccineScheduleRepository.findByParam(search, pageable);
         } else {
-            page = vaccineScheduleRepository.findByDate(from, to, pageable);
+            page = vaccineScheduleRepository.findByDateAndParam(from, to, search, pageable);
         }
         return page;
     }
@@ -239,7 +265,13 @@ public class VaccineScheduleService {
             LocalDate toDate,
             String status,
             Pageable pageable) {
+
         log.info("Service Layer - fromDate: {}, toDate: {}, status: {}", fromDate, toDate, status);
+
+        if (fromDate != null && toDate != null && fromDate.isAfter(toDate)) {
+           throw new IllegalArgumentException("Ngày bắt đầu không thể lớn hơn ngày kết thúc");
+        }
+
         return vaccineScheduleRepository.findAdvancedSearch(
             vaccineName,
             centerName,

@@ -1,10 +1,7 @@
 package com.app.vaxms_server.processor;
 
 import com.app.vaxms_server.config.Environment;
-import com.app.vaxms_server.constant.Encoder;
-import com.app.vaxms_server.constant.LogUtils;
-import com.app.vaxms_server.constant.MomoException;
-import com.app.vaxms_server.constant.Parameter;
+import com.app.vaxms_server.constant.*;
 import com.app.vaxms_server.dto.request.DeleteTokenRequest;
 import com.app.vaxms_server.dto.response.DeleteTokenResponse;
 import com.app.vaxms_server.dto.response.HttpResponse;
@@ -71,6 +68,16 @@ public class DeleteToken extends AbstractProcess<DeleteTokenRequest, DeleteToken
 
             String signRequest = Encoder.signHmacSHA256(requestRawData, partnerInfo.getSecretKey());
             LogUtils.debug("[DeleteTokenRequest] rawData: " + requestRawData + ", [Signature] -> " + signRequest);
+
+            return new DeleteTokenRequest(
+                    partnerInfo.getPartnerCode(),
+                    orderId,
+                    requestId,
+                    Language.EN,
+                    partnerClientId,
+                    token,
+                    signRequest
+            );
 
         } catch (Exception e) {
             LogUtils.error("[DeleteTokenRequest] "+ e);

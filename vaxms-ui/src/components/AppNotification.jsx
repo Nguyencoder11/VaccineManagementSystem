@@ -1,14 +1,15 @@
 import React from 'react';
 import { notification } from 'antd';
 
-const openNotificationWithIcon = (type, title, description, confirmBtn, onClick)=> {
+const openNotificationWithIcon = function(type, title, description, confirmBtn, onClick) {
+
     const handleOnClickBtn = () => {
         onClick();
         notification.destroy();
     }
 
     const btn = (
-      <span onClick={handleOnClickBtn}>{confirmBtn}</span>
+        <span onClick={handleOnClickBtn}>{confirmBtn}</span>
     );
 
     const notice = notification[type]({
@@ -22,19 +23,19 @@ const openNotificationWithIcon = (type, title, description, confirmBtn, onClick)
             {notice}
         </>
     )
-}
+};
 
 export const AppNotification = {
-    success: (title, description, confirmBtn, onClick) => {
-        openNotificationWithIcon("success", title, description, confirmBtn, onClick);
+    success: function(title, description, confirmBtn, onClick) {
+        openNotificationWithIcon('success', title, description, confirmBtn, onClick);
     },
-    info: (title, description, confirmBtn, onClick) => {
-        openNotificationWithIcon("info", title, description, confirmBtn, onClick);
+    info: function(title, description, confirmBtn, onClick) {
+        openNotificationWithIcon('info', title, description, confirmBtn, onClick);
     },
-    warning: (title, description, confirmBtn, onClick) => {
-        openNotificationWithIcon("warning", title, description, confirmBtn, onClick);
+    warning: function(title, description, confirmBtn, onClick) {
+        openNotificationWithIcon('warning', title, description, confirmBtn, onClick);
     },
-    error: (title, description, confirmBtn, onClick) => {
-        openNotificationWithIcon("error", title, description, confirmBtn, onClick);
+    error: function(title, description, confirmBtn, onClick) {
+        openNotificationWithIcon('error', title, description, confirmBtn, onClick);
     },
 }

@@ -24,7 +24,7 @@ public class DoctorController {
 
     @GetMapping("/public/find-all")
     public ResponseEntity<?> findAll() {
-        List<Doctor> result = doctorRepository.findAll();
+        List<Doctor> result = doctorService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class DoctorController {
     /* Delete a doctor */
     @DeleteMapping("/admin/delete/{id}")
     public ResponseEntity<Void> deleteDoctor(@PathVariable("id") Long id) {
-        doctorRepository.deleteById(id);
+        doctorService.deleteDoctor(id);
         return ResponseEntity.ok().build();
     }
 }

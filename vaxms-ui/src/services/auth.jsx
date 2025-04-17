@@ -8,7 +8,7 @@ async function handleChangePass(event) {
     event.preventDefault();
     if(event.target.elements.newpass.value != event.target.elements.renewpass.value){
         toast.error("Mật khẩu mới không trùng khớp");
-        return;
+        return; 
     }
     const payload = {
         oldPass: event.target.elements.currentpass.value,

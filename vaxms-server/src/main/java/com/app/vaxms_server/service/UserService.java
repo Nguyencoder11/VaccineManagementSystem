@@ -119,7 +119,7 @@ public class UserService {
 
     public Boolean checkUser(Optional<User> users) {
         if(users.isPresent() == false) {
-            throw new MessageException("Không tìm thấy tài khoản", 400);
+            throw new MessageException("Không tìm thấy tài khoản", 404);
         } else if(users.get().getActivationKey() != null && users.get().getActived() == false) {
             throw new MessageException("Tài khoản chưa được kích hoạt", 300);
         } else if(users.get().getActived() == false && users.get().getActivationKey() == null) {
@@ -187,7 +187,7 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
                    logger.severe("Không tìm thấy user với email: " + email);
-                   return new MessageException("Email không tồn tại", 400);
+                   return new MessageException("Email không tồn tại", 404);
                 });
 
         logger.info("User tìm thấy: " + user.getEmail());
@@ -249,6 +249,7 @@ public class UserService {
 
     public void updateInfo(UserUpdate userUpdate) {
         User user = userUtils.getUserWithAuthority();
+
         userRepository.save(user);
     }
 

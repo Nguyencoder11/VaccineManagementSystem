@@ -1,0 +1,89 @@
+/* ModalHandle.css */
+
+/* Modal chung */
+.custom-modal .ant-modal-content {
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .custom-modal .ant-modal-header {
+    background: #4caf50;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .custom-modal .modal-title {
+    font-weight: bold;
+    color: white;
+    margin: 0;
+  }
+  
+  .custom-modal .ant-modal-body {
+    padding: 20px;
+  }
+  
+  /* Form chung */
+  .custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .custom-form-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom-input {
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  /* Nút */
+  .custom-modal .ant-btn {
+    border-radius: 5px;
+    height: 40px;
+  }
+  
+  .custom-modal .button-add-promotion {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    transition: 0.3s;
+  }
+  
+  .custom-modal .button-add-promotion:hover {
+    background-color: #388e3c;
+    color: white;
+  }
+  
+  /* Ảnh upload */
+  .custom-upload-container img {
+    width: 100%;
+    max-width: 150px;
+    margin-top: 20px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  
+  /* Popconfirm */
+  .custom-modal .ant-popover {
+    border-radius: 10px;
+  }
+  
+  /* Các thành phần khác */
+  .ant-select {
+    border-radius: 8px !important;
+  }
+  
+  .ant-textarea {
+    border-radius: 8px !important;
+  }
+  

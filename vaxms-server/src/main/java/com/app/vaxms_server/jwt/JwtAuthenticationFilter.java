@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     public String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
+        log.info("Authorization Header: {}" , bearerToken);
         // Check if 'header Authorization' contains jwt info, or not?
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
@@ -51,42 +52,52 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String path = httpRequest.getRequestURI();
+
         // Bo qua endpoint cua swagger
-        String path = ((HttpServletRequest) request).getRequestURI();
-        if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")) {
-           log.info("Bypassing JWT authentication for Swagger endpoint: {}", path);
+        if (isPublicEndpoint(path)) {
+           log.info("Bypassing JWT authentication for public endpoint: {}", path);
            filterChain.doFilter(request, response);
            return;
         }
 
         try {
             // Get jwt from request
-            String jwt = getJwtFromRequest((HttpServletRequest) request);
-            if(jwt == null) {
-                filterChain.doFilter(request, response);
-                return;
-            }
+            String jwt = getJwtFromRequest(httpRequest);
             log.info("JWT Token: {}", jwt);
-            if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+
+            if(jwt != null && tokenProvider.validateToken(jwt)) {
                 // Get user id from jwt string
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
                 log.info("User ID from JWT: {}", userId);
+
                 // Get user info from id
                 UserDetails userDetails = new CustomerUserDetails(userRepository.findById(userId).get());
                 log.info("User Details: {}", userDetails);
                 System.out.println("user by access token-----: " + userDetails);
-                if(userDetails != null) {
-                    // If user is valid, set infor for Security Context
-                    Authentication authentications = getAuthentication(jwt, userId);
-                    SecurityContextHolder.getContext().setAuthentication(authentications);
-                }
+
+                Authentication authentication = tokenProvider.getAuthentication(jwt);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.info("Authentication set for user: {}", userDetails.getUsername());
             } else {
-                log.warn("JWT invalid or missing");
+                log.warn("JWT invalid or missing for path: {}", path);
             }
         } catch (Exception ex) {
-            log.error("failed on set user authentication", ex);
+            log.error("Failed to process JWT authentication for path: {} - Error: {}", path, ex.getMessage());
         }
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isPublicEndpoint(String path) {
+        return path.startsWith("/swagger-ui") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/api/user/login/email") ||
+                path.startsWith("/news/") ||
+                path.startsWith("/vaccine-type/") ||
+                path.equals("/api/vaccine-type/find-primary") ||
+                path.matches("/api/.*/public/.*") ||
+                path.startsWith("/hello/");
     }
 
     public Authentication getAuthentication(String token, Long userId) {

@@ -83,6 +83,12 @@ public class CustomerScheduleController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PostMapping("/customer/finish-payment-schedule")
+    public ResponseEntity<?> finishPaymentSchedule(@RequestParam Long id, @RequestBody PaymentRequest paymentRequest) {
+        customerScheduleService.finishPaymentSchedule(id, paymentRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @PostMapping("/customer/change-schedule")
     public ResponseEntity<?> change(@RequestParam Long id, @RequestParam Long timeId) {
         customerScheduleService.change(id, timeId);

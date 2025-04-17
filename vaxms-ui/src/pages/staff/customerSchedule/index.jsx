@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, DatePicker, Input, Pagination, Row, Select, Table } from "antd";
+import { Button, Card, Col, DatePicker, Input, Pagination, Row, Table } from "antd";
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faFilter, faListAlt } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { VaccineScheduleApi } from "../../../services/staff/VaccineSchedule.api";
 
 const { RangePicker } = DatePicker;
-const { Option } = Select;
 
 const sizeOptions = [10, 20, 50, 100];
 
@@ -22,11 +21,9 @@ export default function CustomerScheduleView() {
     const [formSearch, setFormSearch] = useState({
         vaccineName: "",
         centerName: "",
-        status: "",
         startDate: null,
         endDate: null,
     });
-    
 
     // Fetch vaccine schedule
     const getLichTiemChung = async () => {
@@ -37,7 +34,6 @@ export default function CustomerScheduleView() {
                 size: size,
                 vaccineName: formSearch.vaccineName,
                 centerName: formSearch.centerName,
-                status: formSearch.status,
                 startDate: formSearch.startDate
                     ? dayjs(formSearch.startDate).format("YYYY-MM-DD")
                     : null,
@@ -84,35 +80,13 @@ export default function CustomerScheduleView() {
             alert("Ngày bắt đầu không thể lớn hơn ngày kết thúc!");
             return;
         }
-        console.log("Date values:", {
-            startDate: dates && dates[0] ? dayjs(dates[0]).format("YYYY-MM-DD") : null,
-            endDate: dates && dates[1] ? dayjs(dates[1]).format("YYYY-MM-DD") : null
-        });
-    
-        const newDates = {
-            startDate: dates ? dates[0] : null,
-            endDate: dates ? dates[1] : null,
-        };
-        
-        console.log("Date values being set:", {
-            startDate: newDates.startDate ? dayjs(newDates.startDate).format("YYYY-MM-DD") : null,
-            endDate: newDates.endDate ? dayjs(newDates.endDate).format("YYYY-MM-DD") : null
-        });
-        
+
         setFormSearch({
             ...formSearch,
             startDate: dates ? dates[0] : null,
-            endDate: dates ? dates[1] : null
+            endDate: dates ? dates[1] : null,
         });
     };
-    console.log("Form Search After Date Change:", formSearch);
-
-    const statusOptions = [
-        { label: "Tất cả", value: "" },
-        { label: "Đang diễn ra", value: "ACTIVE" },
-        { label: "Đã kết thúc", value: "INACTIVE" },
-        { label: "Chưa bắt đầu", value: "UPCOMING" }, 
-    ];
 
     const columns = [
         {
@@ -194,21 +168,14 @@ export default function CustomerScheduleView() {
                             onChange={(e) => onFilterChange("centerName", e.target.value)}
                         />
                     </Col>
-                    <Col xs={24} sm={12} md={8}>
-                        <Select
+                    <Col xs={24} sm={24} md={8}>
+                        <RangePicker
                             style={{ width: "100%" }}
-                            placeholder="Trạng thái"
-                            onChange={(value) => onFilterChange("status", value)}
-                        >
-                            {statusOptions.map((status) => (
-                                <Option key={status.value} value={status.value}>
-                                    {status.label}
-                                </Option>
-                            ))}
-                        </Select>
+                            format="YYYY-MM-DD"
+                            onChange={onDateChange}
+                        />
                     </Col>
                 </Row>
-                
             </Card>
 
             <Card style={{ marginTop: "20px" }}>

@@ -1,24 +1,39 @@
 package com.app.vaxms_server.chat;
 
+import com.app.vaxms_server.jwt.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-    String url = "http://localhost:3000";
+    @Value("${url.frontend}")
+    String frontendUrl;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/hello")
-                .setAllowedOrigins(url)
+                .setAllowedOrigins(frontendUrl)
                 .withSockJS();
     }
 
@@ -31,6 +46,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(new UserInterceptor());
+        registration.interceptors(new UserInterceptor() {
+            @Override
+            public Message<?> preSend(Message<?> message, MessageChannel channel) {
+                StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
+                List<String> authHeader = accessor.getNativeHeader("Authorization");
+                if (authHeader != null && !authHeader.isEmpty()) {
+                    String token = authHeader.get(0).replace("Bearer ", "");
+                    if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
+                        Authentication auth = jwtTokenProvider.getAuthentication(token);
+                        SecurityContextHolder.getContext().setAuthentication(auth);
+                    }
+                }
+                return message;
+            }
+        });
     }
 }

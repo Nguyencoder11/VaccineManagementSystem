@@ -51,7 +51,7 @@ public class NurseService {
             Nurse result = nurseRepository.save(nurse);
             return mapToDTO(result);
         } else {
-            throw new MessageException("Bác sĩ không tồn tại ! ");
+            throw new MessageException("Y tá không tồn tại ! ");
         }
     }
 

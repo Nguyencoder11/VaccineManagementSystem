@@ -1,6 +1,7 @@
 package com.app.vaxms_server.config;
 
 import jakarta.servlet.MultipartConfigElement;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +14,12 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    @Value("${url.frontend}")
+    String frontendUrl;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+        registry.addMapping("/**").allowedOrigins(frontendUrl)
                 .allowCredentials(true)
                 .allowedOriginPatterns("http://*", "https://*")
                 .allowedMethods("*")

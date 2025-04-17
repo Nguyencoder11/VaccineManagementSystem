@@ -27,8 +27,8 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
-        username: lenhnguyen10a22003@gmail.com
-        password: dnlerduygwlalmaj
+        username: ${MAIL_SMTP_USERNAME}
+        password: ${MAIL_SMTP_PASSWORD}
         properties:
           mail:
               smtp:
@@ -36,20 +36,35 @@ spring:
                   starttls:
                       enable: true
 
+#    data:
+#      redis:
+#          host: localhost
+#          port: 6379
+#          password:
+#
+#
+#    rabbitmq:
+#        host: localhost
+#        port: 5672
+#        username: guest
+#        password: guest
+
+
 # JWT Config
 jwt:
     secret:  6b8d9e0b7efbb1cb476a1f1b4d3cd5b4a72ecfdfc934d6e889a5b98a781f1234
-    expiration: 3600000
+    expiration: 86400000 # 1 day
 
 # Server Config
-server:
-    port: 8080
+#server:
+#    port: 8080
 
 # Logging Config
 logging:
     level:
         root: info
-        com.vaxms: debug
+        com:
+            vaxms: debug
     file:
         name: logs/vaxms-server.log
 
@@ -62,3 +77,6 @@ springdoc:
         path: /swagger-ui.html
         operations-sorter: alpha
         enabled: true
+
+url:
+    frontend: http://localhost:3000

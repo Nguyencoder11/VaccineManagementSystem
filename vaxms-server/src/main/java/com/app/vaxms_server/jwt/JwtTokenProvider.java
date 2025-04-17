@@ -13,9 +13,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -34,16 +34,17 @@ public class JwtTokenProvider {
     public String generateToken(CustomerUserDetails userDetails){
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + JWT_EXPIRATION_TIME);
-        String authorities = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+//        String authorities = userDetails.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(","));
+        String authority = userDetails.getAuthorities().iterator().next().getAuthority();   // Single role
         // Create json web token string from id of user
         return Jwts.builder()
                 .setSubject(Long.toString(userDetails.getUser().getId()))
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-                .claim(AUTHORITIES_KEY, userDetails.getAuthorities().toString())
+                .claim(AUTHORITIES_KEY, authority)
                 .compact();
     }
 
@@ -61,11 +62,17 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String authToken) {
         try {
+            if(authToken == null || authToken.isBlank()) {
+                return false;
+            }
+
             Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET)
                     .build()
                     .parseClaimsJws(authToken);
             return true;
+        } catch (SecurityException ex) {
+            log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             log.error("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
@@ -83,23 +90,45 @@ public class JwtTokenProvider {
         Claims claims = null;
         try {
             claims = Jwts.parserBuilder()
-                    .setSigningKey(JWT_SECRET.getBytes(StandardCharsets.UTF_8))
+                    .setSigningKey(JWT_SECRET)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String author = claims.get(AUTHORITIES_KEY).toString()
-                .substring(1, claims.get(AUTHORITIES_KEY).toString().length() - 1);
-        System.out.println("role: " + author);
-        Collection<? extends GrantedAuthority> authorities = Arrays
-                .stream(author.split(","))
-                .filter(auth -> !auth.trim().isEmpty())
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+
+//        String author = claims.get(AUTHORITIES_KEY).toString()
+//                .substring(1, claims.get(AUTHORITIES_KEY).toString().length() - 1);
+//        System.out.println("role: " + author);
+//        Collection<? extends GrantedAuthority> authorities =
+//                Arrays.stream(author.split(","))
+//                .filter(auth -> !auth.trim().isEmpty())
+//                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+
+//        String authoritiesStr = claims.get(AUTHORITIES_KEY).toString();
+//        Collection<? extends GrantedAuthority> authorities = authoritiesStr.isEmpty()
+//                ? Collections.emptyList()
+//                : Arrays.stream(authoritiesStr.split(","))
+//                .filter(auth -> !auth.trim().isEmpty())
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+
+        String authority = claims.get(AUTHORITIES_KEY, String.class);
+        Collection<? extends GrantedAuthority> authorities = authority != null
+                ? Collections.singletonList(new SimpleGrantedAuthority(authority))
+                : Collections.emptyList();
 
         User principal = new User(claims.getSubject(), "", authorities);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+    }
+
+    public boolean isTokenValid(String authToken) {
+        if (authToken == null || authToken.trim().isEmpty()) {
+            return false;
+        }
+        return validateToken(authToken);
     }
 }

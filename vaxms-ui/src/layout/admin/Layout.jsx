@@ -1,6 +1,6 @@
 import { handleChangePass } from '../../services/auth';
-import lich from '../../assets/images/lich.png';
-import avatar from '../../assets/images/user.svg';
+import lich from '../../assest/images/lich.png';
+import avatar from '../../assest/images/user.svg';
 import { useState, useEffect } from 'react';
 
 function Header({ children }) {
@@ -24,17 +24,14 @@ function Header({ children }) {
                     </div>
                 </div>
                 <div className="listmenumain">
-                    <a href="#">
+                    <a href="index">
                         <i className="fa fa-home"></i> Trang chủ
                     </a>
                     <a href="user">
                         <i className="fa fa-user"></i> Quản lí quyền
                     </a>
-                    <a href="#">
+                    <a href="danhmuc">
                         <i className="fa fa-list"></i> Danh mục
-                    </a>
-                    <a href="nhanvien">
-                        <i className="fa fa-calendar"></i> Lịch nhân viên
                     </a>
                     <a href="lich-tiem-chung">
                         <i className="fa fa-calendar-check-o"></i> Lịch tiêm chủng

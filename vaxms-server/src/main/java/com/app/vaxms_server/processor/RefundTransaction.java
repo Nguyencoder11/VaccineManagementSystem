@@ -2,7 +2,7 @@ package com.app.vaxms_server.processor;
 
 import com.app.vaxms_server.config.Environment;
 import com.app.vaxms_server.constant.*;
-import com.app.vaxms_server.dto.models.RefundMoMoRequest;
+import com.app.vaxms_server.dto.request.RefundMoMoRequest;
 import com.app.vaxms_server.dto.response.HttpResponse;
 import com.app.vaxms_server.dto.response.RefundMoMoResponse;
 

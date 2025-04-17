@@ -42,4 +42,7 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
     @Query("SELECT c FROM CustomerSchedule c WHERE c.vaccineScheduleTime.injectDate = :injectDate")
     List<CustomerSchedule> findByInjectDate(@Param("injectDate")LocalDate injectDate);
     long countByVaccineScheduleTimeId(Long vaccineScheduleTimeId);
+
+    @Query("select count(c.id) from CustomerSchedule c where c.vaccineScheduleTime.vaccineSchedule.vaccine.id = ?1")
+    Integer countRegisByVaccine(Long vaccineId);
 }

@@ -193,41 +193,52 @@ $border-color: #dcdcdc;
             /* Chat Messages */
             .message {
                 max-width: 70%;
-                word-wrap: break-word;
-                margin: 5px 0;
+                margin: 10px 0;
+                /* Tăng khoảng cách giữa các tin nhắn */
                 padding: 10px 15px;
+                word-wrap: break-word;
                 font-size: 15px;
-                line-height: 1.4;
+                line-height: 1.6;
+                /* Giãn dòng để dễ đọc hơn */
                 @include rounded-corners(18px);
+                overflow-wrap: break-word;
+                /* Ngắt dòng cho những từ quá dài */
+                white-space: pre-wrap;
+                /* Giữ nguyên định dạng xuống dòng */
 
                 &.admin {
-                    align-self: flex-start;
+                    align-self: flex-end;
+                    /* Tin nhắn nhân viên bên phải */
                     background-color: $primary-color;
-                    /* Màu tím chủ đạo */
                     color: white;
-                    /* Màu chữ trắng */
                     border-radius: 18px 18px 0 18px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                    /* Tạo hiệu ứng đổ bóng nhẹ */
                 }
 
                 &.customer {
-                    align-self: flex-end;
+                    align-self: flex-start;
+                    /* Tin nhắn khách hàng bên trái */
                     background-color: $admin-chat-bg;
-                    /* Màu xám nhạt */
                     color: #343a40;
-                    /* Màu chữ đen đậm */
                     border-radius: 18px 18px 18px 0;
-                }
-
-                &.image {
-                    padding: 0;
-                    background: none;
-
-                    img {
-                        max-width: 100%;
-                        @include rounded-corners(10px);
-                    }
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                    /* Tạo hiệu ứng đổ bóng nhẹ */
                 }
             }
+
+            .image {
+                padding: 0;
+                background: none;
+              
+                img {
+                  max-width: 100%;
+                  border-radius: 10px;
+                  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                }
+              }
+              
+
 
             /* Định nghĩa class toàn cục */
             :global(.adminchat) {

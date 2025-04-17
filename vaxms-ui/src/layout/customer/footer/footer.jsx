@@ -1,60 +1,70 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import mastercard from '../../../assest/images/mastercard.png';
+import vnapy from '../../../assest/images/vnpay.png';
 
-function footer(){
-    return(
-        <>
-            <footer class="text-center text-lg-start text-muted" id="footer-web">
-                <div class="container-web">
-                    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                        <div class="me-5 d-none d-lg-block"><span>Theo dõi chúng tôi tại:</span></div>
-                        <div>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
-                            <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
-                        </div>
-                    </section>
-                    <section>
-                        <div class=" text-center text-md-start mt-5">
-                            <div class="row mt-3">
-                                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                                    <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>CÔNG TY CỔ PHẦN VACXIN VIỆT NAM</h6>
-                                    <p>
-                                        Giấy chứng nhận ĐKKD số 0107631488 do sở Kế hoạch và Đầu tư TP. Hà Nội cấp ngày 11/11/2016 <br/>
-                                        Địa chỉ: 180 Trường Chinh, P. Khương Thượng, Q. Đống Đa,Tp. Hà Nội <br/>
-                                        Mail: cskh@vnvc.vn <br/>
-                                        Bản quyền © 2016 thuộc về CÔNG TY CỔ PHẦN VACXIN VIỆT NAM
-                                    </p>
-                                </div>
-                                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                                    <h6 class="text-uppercase fw-bold mb-4">Sản Phẩm</h6>
-                                    <p><a href="#!" class="text-reset">Nguồn gốc rõ ràng</a></p>
-                                    <p><a href="#!" class="text-reset">Được chứng thực bởi bộ y tế</a></p>
-                                    <p><a href="#!" class="text-reset">Giá cả minh bạch</a></p>
-                                </div>
-                                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                                    <h6 class="text-uppercase fw-bold mb-4">Chứng Nhận</h6>
-                                    <p><a href="#!" class="text-reset">Chứng chỉ A</a></p>
-                                    <p><a href="#!" class="text-reset">Chứng chỉ B</a></p>
-                                    <p><a href="#!" class="text-reset">Chứng chỉ C</a></p>
-                                    <p><a href="#!" class="text-reset">Chứng chỉ D</a></p>
-                                </div>
-                                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                                    <h6 class="text-uppercase fw-bold mb-4">Liên Hệ</h6>
-                                    <p><i class="fas fa-home me-3"></i> Hà nội, Việt Nam</p>
-                                    <p><i class="fas fa-envelope me-3"></i> vaccine@gmail.com</p>
-                                    <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                                    <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+
+library.add(fas, fab);
+
+function Footer() {
+    return (
+
+        <footer class="footer"
+            style={{
+                background: '#616161',
+                padding: '30px 0',
+                fontSize: '14px',
+                color: '#ffffff',
+                borderTop: '1px solid #ddd',
+            }}>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Tên Công Ty</h5>
+                        <p>Công Ty VaxmsFpt</p>
+                        <p><strong>Địa chỉ:</strong> TP. HCM, VIET NAM</p>
+                        <p><strong>Liên hệ:</strong> 0967.332.130</p>
+                        <p><strong>Email:</strong> <a href="mailto:vaxms@gmail.com">vaxms@gmail.com</a></p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Vị trí của chúng tôi</h5>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.610010537023!2d106.80730807475265!3d10.841127589311574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1735216542366!5m2!1svi!2s"
+                            width="100%"
+                            height="200"
+                            allowfullscreen=""
+                            loading="lazy">
+
+                        </iframe>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Liên hệ</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="https://www.facebook.com/YourPageName" target="_blank">
+                                    <img src="https://img.icons8.com/fluency/24/facebook-new.png" alt="Facebook" /> Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://zalo.me/0967332130" target="_blank">
+                                    <img src="https://banner2.cleanpng.com/20180907/bub/kisspng-logo-scalable-vector-graphics-clip-art-zalo-zalo-logo-svg-vector-amp-png-transparent-vecto-1713943674787.webp"
+                                        alt="Zalo"
+                                        style={{ width: '23px' }}
+                                    /> Zalo
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </footer>
-
-        </>
+                <div class="text-center mt-3">
+                    <p>&copy; 2024 Công Ty TNHH ABC. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
     );
 }
 
-export default footer;
+export default Footer;

@@ -60,13 +60,13 @@ function DefaultLayout({ children }) {
             <ChatFrame />
 
 
-            {/* Thêm Dialogflow Messenger */}
+            {/* Thêm Dialogflow Messenger
             <df-messenger
                 intent="WELCOME"
                 chat-title="Chăm sóc khách hàng"
                 agent-id="b47d8d40-5fd9-4103-8670-c42e1ae86fbb"
                 language-code="vi"
-            ></df-messenger>
+            ></df-messenger> */}
         </div>
     );
 }

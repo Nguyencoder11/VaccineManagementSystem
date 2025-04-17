@@ -14,7 +14,7 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerProfileDto {
     Long id;
-    String fullname;
+    String fullName;
     Gender gender;
     Date birthDate;
     String phone;

@@ -1,5 +1,6 @@
 package com.app.vaxms_server.service;
 
+import com.app.vaxms_server.dto.request.DeleteVaccineInventoryRequest;
 import com.app.vaxms_server.dto.request.DeleteVaccineRequest;
 import com.app.vaxms_server.dto.request.DetailVaccineRequest;
 import com.app.vaxms_server.dto.request.ListVaccineInventoryRequest;
@@ -192,7 +193,7 @@ public class VaccineInventoryService {
         }
     }
 
-    public boolean deleteVaccine(DeleteVaccineRequest requestBody) {
+    public boolean deleteVaccine(DeleteVaccineInventoryRequest requestBody) {
         if(ObjectUtils.isEmpty(requestBody)) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");
         }

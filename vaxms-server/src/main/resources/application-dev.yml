@@ -31,4 +31,5 @@ spring:
 logging:
   level:
     root: DEBUG
-    com.vaxms: DEBUG
+    com:
+      vaxms: DEBUG

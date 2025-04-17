@@ -1,132 +1,122 @@
 .register-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f8f8f8;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
 
-.register-card {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-}
+    .register-card {
+        display: flex;
+        width: 900px;
+        height: 700px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
 
-.register-card h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+        .register-image {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255, 167, 38, 0.8), rgba(255, 204, 128, 0.8)),
+                url('../../../assest/images/vaxmslogo3.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
 
-.register-card p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
+            h1 {
+                font-size: 28px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
 
-.register-card form {
-  display: flex;
-  flex-direction: column;
-}
+            p {
+                font-size: 16px;
+            }
+        }
 
-.register-card form label {
-  text-align: left;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
+        .register-form {
+            flex: 1;
+            padding: 40px;
 
-.register-card form input {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-}
+            h2 {
+                font-size: 24px;
+                color: #0056b3;
+                margin-bottom: 20px;
+            }
 
-.register-card .register-btn {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-bottom: 15px;
-}
+            .form-group {
+                margin-bottom: 15px;
 
-.register-card .google-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4285F4;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
 
-.register-card .google-btn i {
-  margin-right: 8px;
-}
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
 
-.google-login-btn {
-  background-color: white;
-  border: 1px solid #ccc;
-  color: black;
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
+                .password-wrapper {
+                    position: relative;
+                }
 
-  .google-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
-  }
-}
+                .password-eye-icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    font-size: 18px;
+                }
+            }
 
-/* Ensure the modal is not too tall */
-.modal-dialog {
-  max-width: 400px;
-  /* Width restriction */
-  margin: 1.75rem auto;
-}
+            .register-btn {
+                background: linear-gradient(135deg, #0056b3, #42a5f5);
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                width: 100%;
+                cursor: pointer;
+                transition: 0.3s;
 
-.modal-content {
-  padding: 20px;
-  border-radius: 8px;
-  max-height: 90vh;
-  /* This ensures the modal doesn't exceed 90% of the viewport height */
-  overflow-y: auto;
-  /* Add scroll for longer content if needed */
-}
+                &:hover {
+                    background: linear-gradient(135deg, #42a5f5, #0056b3);
+                    box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+                }
+            }
 
-.register-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: auto;
-  /* Remove fixed height */
-  padding: 20px;
-  background-color: #f7f7f7;
+            .or-divider {
+                text-align: center;
+                margin: 20px 0;
+                color: #aaa;
+            }
 
-  .register-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    /* Keep the width consistent */
-    width: 100%;
-    text-align: center;
-  }
+            .register-footer {
+                margin-top: 20px;
+                font-size: 14px;
+                text-align: center;
+
+                a {
+                    color: #0056b3;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
 }

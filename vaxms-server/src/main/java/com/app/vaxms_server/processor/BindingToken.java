@@ -61,7 +61,7 @@ public class BindingToken extends AbstractProcess<BindingTokenRequest, BindingTo
                     .append(Parameter.REQUEST_ID).append("=").append(requestId)
                     .toString();
 
-            String signRequest = Encoder.signHmacSHA256(requestId, partnerInfo.getSecretKey());
+            String signRequest = Encoder.signHmacSHA256(requestRawData, partnerInfo.getSecretKey());
             LogUtils.debug("[BindingTokenRequest] rawData: " + requestRawData + ", [Signature] -> " + signRequest);
 
             return new BindingTokenRequest(partnerInfo.getPartnerCode(), orderId, requestId, Language.EN, partnerClientId, callbackToken, signRequest);
