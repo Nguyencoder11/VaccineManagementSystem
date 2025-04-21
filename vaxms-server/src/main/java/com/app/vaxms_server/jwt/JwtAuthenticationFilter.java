@@ -11,6 +11,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,13 +26,15 @@ import org.springframework.web.filter.GenericFilterBean;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class JwtAuthenticationFilter extends GenericFilterBean {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider tokenProvider;
     private final UserRepository userRepository;
 
@@ -51,11 +54,13 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String path = httpRequest.getRequestURI();
+    protected void doFilterInternal(HttpServletRequest request,
+                         HttpServletResponse response,
+                         FilterChain filterChain) throws IOException, ServletException {
 
-        // Bo qua endpoint cua swagger
+        String path = request.getRequestURI();
+
+        // Bo qua endpoint duoc public
         if (isPublicEndpoint(path)) {
            log.info("Bypassing JWT authentication for public endpoint: {}", path);
            filterChain.doFilter(request, response);
@@ -64,7 +69,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         try {
             // Get jwt from request
-            String jwt = getJwtFromRequest(httpRequest);
+            String jwt = getJwtFromRequest(request);
             log.info("JWT Token: {}", jwt);
 
             if(jwt != null && tokenProvider.validateToken(jwt)) {
@@ -72,14 +77,19 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
                 log.info("User ID from JWT: {}", userId);
 
-                // Get user info from id
-                UserDetails userDetails = new CustomerUserDetails(userRepository.findById(userId).get());
-                log.info("User Details: {}", userDetails);
-                System.out.println("user by access token-----: " + userDetails);
+                if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                    // Get user info from id
+                    UserDetails userDetails = new CustomerUserDetails(userRepository.findById(userId).get());
+                    log.info("User Details: {}", userDetails);
+                    System.out.println("user by access token-----: " + userDetails);
 
-                Authentication authentication = tokenProvider.getAuthentication(jwt);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                log.info("Authentication set for user: {}", userDetails.getUsername());
+//                    Authentication authentication = tokenProvider.getAuthentication(jwt);
+
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    log.info("Authentication set for user: {}", userDetails.getUsername());
+                }
             } else {
                 log.warn("JWT invalid or missing for path: {}", path);
             }
@@ -91,19 +101,14 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     private boolean isPublicEndpoint(String path) {
         return path.startsWith("/swagger-ui") ||
-                path.startsWith("/v3/api-docs") ||
-                path.startsWith("/api/user/login/email") ||
-                path.startsWith("/news/") ||
-                path.startsWith("/vaccine-type/") ||
-                path.equals("/api/vaccine-type/find-primary") ||
-                path.matches("/api/.*/public/.*") ||
-                path.startsWith("/hello/");
+                path.startsWith("/v3/api-docs/");
     }
 
     public Authentication getAuthentication(String token, Long userId) {
         com.app.vaxms_server.entity.User user = userRepository.findById(userId).get();
 
         String author = user.getAuthority().getName();
+        log.info("role: {}", author);
         System.out.println("role: " + author);
         Collection<? extends GrantedAuthority> authorities = Arrays
                 .stream(author.split(","))

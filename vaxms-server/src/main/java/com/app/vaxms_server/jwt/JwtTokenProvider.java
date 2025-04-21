@@ -2,7 +2,8 @@ package com.app.vaxms_server.jwt;
 
 import com.app.vaxms_server.dto.CustomerUserDetails;
 import io.jsonwebtoken.*;
-import lombok.extern.slf4j.Slf4j;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,33 +32,36 @@ public class JwtTokenProvider {
     private static final String AUTHORITIES_KEY = "roles";
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
+    SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
+    }
+
     // Create jwt from user info
     public String generateToken(CustomerUserDetails userDetails){
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + JWT_EXPIRATION_TIME);
-//        String authorities = userDetails.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(","));
-        String authority = userDetails.getAuthorities().iterator().next().getAuthority();   // Single role
+
+        String authorities = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
         // Create json web token string from id of user
         return Jwts.builder()
                 .setSubject(Long.toString(userDetails.getUser().getId()))
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-                .claim(AUTHORITIES_KEY, authority)
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
     // Get user info from jwt
     public Long getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(JWT_SECRET)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        Date date = claims.getExpiration();
-
+        Claims claims = parseClaims(token);
+//        Date date = claims.getExpiration();
         return Long.parseLong(claims.getSubject());
     }
 
@@ -65,12 +70,10 @@ public class JwtTokenProvider {
             if(authToken == null || authToken.isBlank()) {
                 return false;
             }
+            parseClaims(authToken);
 
-            Jwts.parserBuilder()
-                    .setSigningKey(JWT_SECRET)
-                    .build()
-                    .parseClaimsJws(authToken);
             return true;
+
         } catch (SecurityException ex) {
             log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
@@ -89,46 +92,32 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = null;
         try {
-            claims = Jwts.parserBuilder()
-                    .setSigningKey(JWT_SECRET)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+            claims = parseClaims(token);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        String author = claims.get(AUTHORITIES_KEY).toString()
-//                .substring(1, claims.get(AUTHORITIES_KEY).toString().length() - 1);
-//        System.out.println("role: " + author);
-//        Collection<? extends GrantedAuthority> authorities =
-//                Arrays.stream(author.split(","))
-//                .filter(auth -> !auth.trim().isEmpty())
-//                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
-//                .map(SimpleGrantedAuthority::new)
-//                .collect(Collectors.toList());
+        String roles = claims.get(AUTHORITIES_KEY, String.class);
+        System.out.println("role: " + roles);
 
-//        String authoritiesStr = claims.get(AUTHORITIES_KEY).toString();
-//        Collection<? extends GrantedAuthority> authorities = authoritiesStr.isEmpty()
-//                ? Collections.emptyList()
-//                : Arrays.stream(authoritiesStr.split(","))
-//                .filter(auth -> !auth.trim().isEmpty())
-//                .map(SimpleGrantedAuthority::new)
-//                .collect(Collectors.toList());
-
-        String authority = claims.get(AUTHORITIES_KEY, String.class);
-        Collection<? extends GrantedAuthority> authorities = authority != null
-                ? Collections.singletonList(new SimpleGrantedAuthority(authority))
-                : Collections.emptyList();
+        Collection<? extends GrantedAuthority> authorities = (roles == null || roles.isEmpty())
+            ? Collections.emptyList()
+            : Arrays.stream(roles.split(","))
+                .map(String::trim)
+                .filter(auth -> !auth.isEmpty())
+                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
 
         User principal = new User(claims.getSubject(), "", authorities);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
-    public boolean isTokenValid(String authToken) {
-        if (authToken == null || authToken.trim().isEmpty()) {
-            return false;
-        }
-        return validateToken(authToken);
+    private Claims parseClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

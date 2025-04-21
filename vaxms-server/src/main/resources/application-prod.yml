@@ -25,8 +25,7 @@ spring:
 logging:
   level:
     root: INFO
-    com:
-      vaxms: INFO
+    com.app.vaxms_server: INFO
   file:
     name: /var/log/vaxms-server.log
 

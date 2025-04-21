@@ -35,6 +35,9 @@ spring:
                   auth: true
                   starttls:
                       enable: true
+#              debug: true
+#              transport:
+#                  protocol: smtp
 
 #    data:
 #      redis:
@@ -63,8 +66,7 @@ jwt:
 logging:
     level:
         root: info
-        com:
-            vaxms: debug
+        com.app.vaxms_server: debug
     file:
         name: logs/vaxms-server.log
 
@@ -80,3 +82,8 @@ springdoc:
 
 url:
     frontend: http://localhost:3000
+
+cloudinary:
+    cloud-name: dhe0ysmoy
+    api-key: 875921558241419
+    api-secret: drsU20BRAs03UlD0JWRc5dHwKcg
