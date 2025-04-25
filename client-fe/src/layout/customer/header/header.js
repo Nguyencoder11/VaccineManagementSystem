@@ -19,12 +19,12 @@ function Header() {
 
   const [danhMuc, setDanhMuc] = useState([]);
   useEffect(() => {
-      const getDanhMucCha = async() =>{
-          var response = await getMethod('/api/vaccine-type/find-primary')
-          var result = await response.json();
-          setDanhMuc(result)
-      };
-      getDanhMucCha();
+    const getDanhMucCha = async () => {
+      var response = await getMethod('/api/vaccine-type/find-primary')
+      var result = await response.json();
+      setDanhMuc(result)
+    };
+    getDanhMucCha();
   }, []);
   function logout() {
     localStorage.removeItem("token");
@@ -59,24 +59,24 @@ function Header() {
         </div>
         <hr className='hrheader-web' />
         <div class="container-web container-bottom-header">
-        <nav class="navbar-expand-lg">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            {danhMuc.map((item, index)=>{
+          <nav class="navbar-expand-lg">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {danhMuc.map((item, index) => {
                 return <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle itemheader itembottomheder" href="#" id={"navbarDropdown"+index} role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {item.typeName}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby={"navbarDropdown"+index}>
-                {item.vaccineTypes.map((child, indexChild)=>{
-                  return <li><a class="dropdown-item" href={"vaccine-danhmuc?danhmuc="+child.id}>{child.typeName}</a></li>
-                })} 
-                </ul>
-              </li>
-            })} 
-             <li class="nav-item"><a class="nav-link itemheader itembottomheder" href="tra-cuu-lich-tiem">Tra cứu lịch tiêm</a></li>
-          </ul>
-        </nav>
-      </div>
+                  <a class="nav-link dropdown-toggle itemheader itembottomheder" href="#" id={"navbarDropdown" + index} role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {item.typeName}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby={"navbarDropdown" + index}>
+                    {item.vaccineTypes.map((child, indexChild) => {
+                      return <li><a class="dropdown-item" href={"vaccine-danhmuc?danhmuc=" + child.id}>{child.typeName}</a></li>
+                    })}
+                  </ul>
+                </li>
+              })}
+              <li class="nav-item"><a class="nav-link itemheader itembottomheder" href="tra-cuu-lich-tiem">Tra cứu lịch tiêm</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
 
     </>

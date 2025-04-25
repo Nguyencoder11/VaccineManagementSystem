@@ -40,74 +40,58 @@ import Vaccine from "../pages/staff/vaccine/vaccine";
 import VaccineInventory from "../pages/staff/vaccineInventory/VaccineInventory";
 import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
 import CustomerScheduleView from "../pages/staff/customerSchedule";
-import {CustomerScheduleViewDetail} from "../pages/staff/customerSchedule/modal/CustomerScheduleViewDetail";
+import { CustomerScheduleViewDetail } from "../pages/staff/customerSchedule/modal/CustomerScheduleViewDetail";
 import lichTiemChungStaff from "../pages/staff/lichtiemchung";
 import addLichTiemChungStaff from "../pages/staff/addlichtiemchung";
 import StaffAddVaccine from "../pages/staff/vaccine/addvaccine";
 
 const publicRoutes = [
-    {path: "/", component: index},
+    { path: "/", component: index },
     { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
-    {path: "/index", component: index},
-    {path: "/login", component: login, layout: layoutLogin},
+    { path: "/index", component: index },
+    { path: "/login", component: login, layout: layoutLogin },
     { path: "/activate-account", component: ActivateAccount },
-    {path: "/register", component: register },
-    {path: "/signin", component: signin },
-    {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
-    {path: "/lich-tiem-da-qua", component: LichTiemDaQua},
+    { path: "/register", component: register },
+    { path: "/signin", component: signin },
+    { path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem },
+    { path: "/lich-tiem-da-qua", component: LichTiemDaQua },
     { path: "/quenmatkhau", component: QuenMatKhau },
     { path: "/datlaimatkhau", component: DatLaiMatKhau },
-    {path: "/vaccine-danhmuc", component: VaccineDanhMuc},
-    {path: "/thong-tin-vaccine", component: ThongTinVaccine},
+    { path: "/vaccine-danhmuc", component: VaccineDanhMuc },
+    { path: "/thong-tin-vaccine", component: ThongTinVaccine },
 ];
 
 const customerRoutes = [
-    {path: "/dang-ky-tiem-chung", component: dangkytiemchung},
-    {path: "/tai-khoan", component: taikhoan},
-    {path: "/thong-bao", component: thongbao},
-    {path: "/xac-nhan-dang-ky", component: XacNhanDangky},
-    {path: "/thanh-cong", component: ThanhCong},
+    { path: "/dang-ky-tiem-chung", component: dangkytiemchung },
+    { path: "/tai-khoan", component: taikhoan },
+    { path: "/thong-bao", component: thongbao },
+    { path: "/xac-nhan-dang-ky", component: XacNhanDangky },
+    { path: "/thanh-cong", component: ThanhCong },
 ];
 
 const adminRoutes = [
-    {path: "/admin/index", component: homeAdmin, layout: layoutAdmin},
-    {path: "/admin/user", component: userAdmin, layout: layoutAdmin},
+    { path: "/admin/index", component: homeAdmin, layout: layoutAdmin },
+    { path: "/admin/user", component: userAdmin, layout: layoutAdmin },
     { path: "/admin/nhanvien", component: nhanvienAdmin, layout: layoutAdmin },
     { path: "/admin/danhmuc", component: AdminDanhMuc, layout: layoutAdmin },
     { path: "/admin/adddanhmuc", component: AdminAddDanhMuc, layout: layoutAdmin },
-    {
-        path: "/admin/lich-tiem-chung",
-        component: lichTiemChungAdmin,
-        layout: layoutAdmin,
-    },
-    {
-        path: "/admin/add-lich-tiem-chung",
-        component: addLichTiemChungAdmin,
-        layout: layoutAdmin,
-    },
-    {
-        path: "/admin/khach-hang",
-        component: khachHangAdmin,
-        layout: layoutAdmin,
-    },
-    {
-        path: "/admin/nhan-vien",
-        component: employeeAdmin,
-        layout: layoutAdmin,
-    },
+    { path: "/admin/lich-tiem-chung", component: lichTiemChungAdmin, layout: layoutAdmin },
+    { path: "/admin/add-lich-tiem-chung", component: addLichTiemChungAdmin, layout: layoutAdmin },
+    { path: "/admin/khach-hang", component: khachHangAdmin, layout: layoutAdmin },
+    { path: "/admin/nhan-vien", component: employeeAdmin, layout: layoutAdmin },
 ];
 
 const staffRoutes = [
-    {path: "/staff/chat", component: StaffChat, layout: layoutStaff},
-    {path: "/staff/vaccine", component: Vaccine, layout: layoutStaff},
-    {path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff},
-    {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
-    {path: "/staff/customer-schedule-1", component: CustomerScheduleView, layout: layoutStaff},
-    {path: "/staff/customer-schedule-1-detail", component: CustomerScheduleViewDetail, layout: layoutStaff},
-    {path: "/staff/lich-tiem-chung", component: lichTiemChungStaff, layout: layoutStaff},
-    {path: "/staff/add-lich-tiem-chung", component: addLichTiemChungStaff, layout: layoutStaff},
-    {path: "/staff/add-vaccine", component: StaffAddVaccine, layout: layoutStaff},
+    { path: "/staff/chat", component: StaffChat, layout: layoutStaff },
+    { path: "/staff/vaccine", component: Vaccine, layout: layoutStaff },
+    { path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff },
+    { path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff },
+    { path: "/staff/customer-schedule-1", component: CustomerScheduleView, layout: layoutStaff },
+    { path: "/staff/customer-schedule-1-detail", component: CustomerScheduleViewDetail, layout: layoutStaff },
+    { path: "/staff/lich-tiem-chung", component: lichTiemChungStaff, layout: layoutStaff },
+    { path: "/staff/add-lich-tiem-chung", component: addLichTiemChungStaff, layout: layoutStaff },
+    { path: "/staff/add-vaccine", component: StaffAddVaccine, layout: layoutStaff },
 ];
 
 
-export {publicRoutes, adminRoutes, customerRoutes, staffRoutes};
+export { publicRoutes, adminRoutes, customerRoutes, staffRoutes };
