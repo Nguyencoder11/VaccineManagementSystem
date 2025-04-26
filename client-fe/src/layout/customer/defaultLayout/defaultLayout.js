@@ -50,9 +50,6 @@ function DefaultLayout({ children }) {
         };
     }, []);
 
-    // var token = localStorage.getItem("token");
-    // console.log("Token : {}", token);
-
     return (
         <div>
             <Headers />

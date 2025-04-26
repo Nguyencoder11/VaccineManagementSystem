@@ -3,12 +3,11 @@ spring:
     activate:
       on-profile: prod
 
-  # Ghi đè cấu hình datasource cho môi trường prod (PostgreSQL)
+  # Ghi đè cấu hình datasource cho môi trường prod
   datasource:
     url: ${PROD_URL}
     username: ${PROD_USERNAME}
     password: ${PROD_PASSWORD}
-    driver-class-name: org.postgresql.Driver
 
   # Ghi đè cấu hình JPA
   jpa:

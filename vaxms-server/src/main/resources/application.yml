@@ -6,12 +6,24 @@ spring:
 #    profiles:
 #        active: dev
 
+    web:
+      resources:
+          add-mappings: true
+    main:
+        lazy-initialization: true
+
+
     # Database Config
     datasource:
-        url: jdbc:postgresql://localhost:5432/vaxms_db
+        url: jdbc:postgresql://localhost:5432/vaxms
         username: ${LOCAL_POSTGRES_USERNAME}
         password: ${LOCAL_POSTGRES_PASSWORD}
         driver-class-name: org.postgresql.Driver
+
+#        url: jdbc:mysql://localhost:3306/vaxms
+#        username: ${LOCAL_MYSQL_USERNAME}
+#        password: ${LOCAL_MYSQL_PASSWORD}
+#        driver-class-name: com.mysql.cj.jdbc.Driver
 
     # JPA/Hibernate Config
     jpa:
@@ -22,6 +34,9 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
         database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#                dialect: org.hibernate.dialect.MySQLDialect
+#        database-platform: org.hibernate.dialect.MySQLDialect
 
     # Mail Config
     mail:
