@@ -17,8 +17,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerProfile {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_profile_seq")
-    @SequenceGenerator(name = "customer_profile_seq", sequenceName = "customer_profile_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_profile_seq")
+//    @SequenceGenerator(name = "customer_profile_seq", sequenceName = "customer_profile_sequence", allocationSize = 1)
     @Column(name = "profile_id")
     Long id;
 

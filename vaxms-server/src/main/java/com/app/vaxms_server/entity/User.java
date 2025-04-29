@@ -16,8 +16,9 @@ import java.sql.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
-    @SequenceGenerator(name = "account_seq", sequenceName = "account_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
+//    @SequenceGenerator(name = "account_seq", sequenceName = "account_sequence", allocationSize = 1)
     @Column(name = "account_id")
     Long id;
 

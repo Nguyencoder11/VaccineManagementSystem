@@ -20,8 +20,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerSchedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_schedule_seq")
-    @SequenceGenerator(name = "customer_schedule_seq", sequenceName = "customer_schedule_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_schedule_seq")
+//    @SequenceGenerator(name = "customer_schedule_seq", sequenceName = "customer_schedule_sequence", allocationSize = 1)
     @Column(name = "id")
     Long id;
 

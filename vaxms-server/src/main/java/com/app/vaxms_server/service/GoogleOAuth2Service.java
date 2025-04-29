@@ -5,6 +5,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.Collections;
 public class GoogleOAuth2Service {
     public GoogleIdToken.Payload verifyToken(String idTokenString) {
         try {
-            JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jsonFactory)
                     .setAudience(Collections.singletonList("1036430779393-2bep1gc6igqjphdje5kb19fef6egh11a.apps.googleusercontent.com"))
                     .build();

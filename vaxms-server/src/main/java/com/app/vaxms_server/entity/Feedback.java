@@ -16,8 +16,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Feedback {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "feedback_seq")
-    @SequenceGenerator(name = "feedback_seq", sequenceName = "feedback_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "feedback_seq")
+//    @SequenceGenerator(name = "feedback_seq", sequenceName = "feedback_sequence", allocationSize = 1)
     @Column(name = "id")
     Long id;
 

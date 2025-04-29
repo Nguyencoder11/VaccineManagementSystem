@@ -12,8 +12,9 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WorkSchedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_schedule_seq")
-    @SequenceGenerator(name = "work_schedule_seq", sequenceName = "work_schedule_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_schedule_seq")
+//    @SequenceGenerator(name = "work_schedule_seq", sequenceName = "work_schedule_sequence", allocationSize = 1)
     Long id;
 
     @Column(name = "doctor_id", nullable = false)

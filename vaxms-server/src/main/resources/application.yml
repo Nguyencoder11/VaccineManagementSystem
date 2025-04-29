@@ -15,15 +15,14 @@ spring:
 
     # Database Config
     datasource:
-        url: jdbc:postgresql://localhost:5432/vaxms
-        username: ${LOCAL_POSTGRES_USERNAME}
-        password: ${LOCAL_POSTGRES_PASSWORD}
-        driver-class-name: org.postgresql.Driver
-
-#        url: jdbc:mysql://localhost:3306/vaxms
-#        username: ${LOCAL_MYSQL_USERNAME}
-#        password: ${LOCAL_MYSQL_PASSWORD}
-#        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/vaxms
+        username: ${LOCAL_MYSQL_USERNAME}
+        password: ${LOCAL_MYSQL_PASSWORD}
+        driver-class-name: com.mysql.cj.jdbc.Driver
+#        url: jdbc:postgresql://localhost:5432/vaxms
+#        username: ${LOCAL_POSTGRES_USERNAME}
+#        password: ${LOCAL_POSTGRES_PASSWORD}
+#        driver-class-name: org.postgresql.Driver
 
     # JPA/Hibernate Config
     jpa:
@@ -32,11 +31,12 @@ spring:
         show-sql: true
         properties:
             hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-#                dialect: org.hibernate.dialect.MySQLDialect
+                id:
+                    new_generator_mappings: false
+                dialect: org.hibernate.dialect.MySQLDialect
 #        database-platform: org.hibernate.dialect.MySQLDialect
+#                dialect: org.hibernate.dialect.PostgreSQLDialect
+#        database-platform: org.hibernate.dialect.PostgreSQLDialect
 
     # Mail Config
     mail:
@@ -71,7 +71,7 @@ spring:
 # JWT Config
 jwt:
     secret:  6b8d9e0b7efbb1cb476a1f1b4d3cd5b4a72ecfdfc934d6e889a5b98a781f1234
-    expiration: 86400000 # 1 day
+    expiration: 604800000 # 7 day
 
 # Server Config
 #server:

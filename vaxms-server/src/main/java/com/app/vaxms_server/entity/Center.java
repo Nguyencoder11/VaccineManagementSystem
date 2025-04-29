@@ -15,8 +15,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Center {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_seq")
-    @SequenceGenerator(name = "center_seq", sequenceName = "center_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_seq")
+//    @SequenceGenerator(name = "center_seq", sequenceName = "center_sequence", allocationSize = 1)
     @Column(name = "center_id")
     Long id;
 

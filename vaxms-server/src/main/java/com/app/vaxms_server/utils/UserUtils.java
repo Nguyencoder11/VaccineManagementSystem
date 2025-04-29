@@ -3,16 +3,12 @@ package com.app.vaxms_server.utils;
 import com.app.vaxms_server.config.SecurityUtils;
 import com.app.vaxms_server.dto.CustomerUserDetails;
 import com.app.vaxms_server.entity.User;
-import com.app.vaxms_server.exception.MessageException;
-import com.app.vaxms_server.repository.AuthorityRepository;
 import com.app.vaxms_server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

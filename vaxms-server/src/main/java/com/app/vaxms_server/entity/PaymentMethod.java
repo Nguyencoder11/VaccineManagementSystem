@@ -13,8 +13,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentMethod {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_seq")
-    @SequenceGenerator(name = "payment_method_seq", sequenceName = "payment_method_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_seq")
+//    @SequenceGenerator(name = "payment_method_seq", sequenceName = "payment_method_sequence", allocationSize = 1)
     @Column(name = "method_id")
     Long id;
 

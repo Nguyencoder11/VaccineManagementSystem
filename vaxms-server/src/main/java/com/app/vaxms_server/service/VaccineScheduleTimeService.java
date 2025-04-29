@@ -98,8 +98,8 @@ public class VaccineScheduleTimeService {
 
             VaccineScheduleTime vaccineScheduleTime = new VaccineScheduleTime();
             vaccineScheduleTime.setVaccineSchedule(vaccineSchedule);
-            vaccineScheduleTime.setTimeEnd(new Time(slotEndTimeInMillis));
-            vaccineScheduleTime.setTimeStart(new Time(currentTimeMillis));
+            vaccineScheduleTime.setEnd(new Time(slotEndTimeInMillis));
+            vaccineScheduleTime.setStart(new Time(currentTimeMillis));
             vaccineScheduleTime.setInjectDate(dto.getDate());
             vaccineScheduleTime.setLimitPeople(peopleDistribution.get(i));
             list.add(vaccineScheduleTime);
@@ -139,8 +139,8 @@ public class VaccineScheduleTimeService {
 
     public VaccineScheduleTime update(VaccineScheduleTime vaccineScheduleTime) {
         VaccineScheduleTime ex = vaccineScheduleTimeRepository.findById(vaccineScheduleTime.getId()).get();
-        ex.setTimeStart(vaccineScheduleTime.getTimeStart());
-        ex.setTimeEnd(vaccineScheduleTime.getTimeEnd());
+        ex.setStart(vaccineScheduleTime.getStart());
+        ex.setEnd(vaccineScheduleTime.getEnd());
         ex.setLimitPeople(vaccineScheduleTime.getLimitPeople());
         vaccineScheduleTimeRepository.save(ex);
         return ex;

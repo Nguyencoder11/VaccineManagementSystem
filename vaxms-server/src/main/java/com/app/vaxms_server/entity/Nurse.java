@@ -15,8 +15,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Nurse {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nurse_seq")
-    @SequenceGenerator(name = "nurse_seq", sequenceName = "nurse_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nurse_seq")
+//    @SequenceGenerator(name = "nurse_seq", sequenceName = "nurse_sequence", allocationSize = 1)
     @Column(name = "nurse_id")
     Long id;
 

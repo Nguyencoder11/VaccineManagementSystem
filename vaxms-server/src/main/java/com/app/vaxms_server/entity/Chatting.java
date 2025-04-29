@@ -17,8 +17,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Chatting {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_seq")
-    @SequenceGenerator(name = "chat_seq", sequenceName = "chatting_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_seq")
+//    @SequenceGenerator(name = "chat_seq", sequenceName = "chatting_sequence", allocationSize = 1)
     @Column(name = "id")
     Long id;
 
@@ -29,6 +30,8 @@ public class Chatting {
     Boolean isFile = false;
 
     String fileName;
+
+//    String typeFile;
 
     @ManyToOne
     @JoinColumn(name = "sender")

@@ -18,8 +18,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VaccineType {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccine_type_seq")
-    @SequenceGenerator(name = "vaccine_type_seq", sequenceName = "vaccine_type_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccine_type_seq")
+//    @SequenceGenerator(name = "vaccine_type_seq", sequenceName = "vaccine_type_sequence", allocationSize = 1)
     @Column(name = "type_id")
     Long id;
 

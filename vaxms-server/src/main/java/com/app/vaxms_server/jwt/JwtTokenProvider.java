@@ -4,8 +4,7 @@ import com.app.vaxms_server.dto.CustomerUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+
 
 import javax.crypto.SecretKey;
 import java.util.Arrays;
@@ -22,54 +22,58 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class JwtTokenProvider {
     @Value("${jwt.secret}")
     private String JWT_SECRET;
 
     @Value("${jwt.expiration}")
-    private long JWT_EXPIRATION_TIME;
+    private long JWT_EXPIRATION;
 
     private static final String AUTHORITIES_KEY = "roles";
-    private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    SecretKey key;
-
-    @PostConstruct
-    public void init() {
-        this.key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
-    }
+//    SecretKey key;
+//
+//    @PostConstruct
+//    public void init() {
+//        this.key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
+//    }
 
     // Create jwt from user info
     public String generateToken(CustomerUserDetails userDetails){
         Date now = new Date();
-        Date expirationDate = new Date(now.getTime() + JWT_EXPIRATION_TIME);
+        Date expirationDate = new Date(now.getTime() + JWT_EXPIRATION);
 
-        String authorities = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+//        String authorities = userDetails.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(","));
 
         // Create json web token string from id of user
         return Jwts.builder()
                 .setSubject(Long.toString(userDetails.getUser().getId()))
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
-                .claim(AUTHORITIES_KEY, authorities)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .claim(AUTHORITIES_KEY, userDetails.getAuthorities().toString())
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
                 .compact();
     }
 
     // Get user info from jwt
     public Long getUserIdFromJWT(String token) {
-        Claims claims = parseClaims(token);
+//        Claims claims = parseClaims(token);
+        Claims claims = Jwts.parser()
+                .setSigningKey(JWT_SECRET)
+                .parseClaimsJws(token)
+                .getBody();
 //        Date date = claims.getExpiration();
         return Long.parseLong(claims.getSubject());
     }
 
     public boolean validateToken(String authToken) {
         try {
-            if(authToken == null || authToken.isBlank()) {
-                return false;
-            }
+//            if(authToken == null || authToken.isBlank()) {
+//                return false;
+//            }
             parseClaims(authToken);
 
             return true;
@@ -92,20 +96,32 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = null;
         try {
-            claims = parseClaims(token);
+//            claims = parseClaims(token);
+            claims = Jwts.parser()
+                    .setSigningKey(JWT_SECRET)
+                    .parseClaimsJws(token)
+                    .getBody();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String roles = claims.get(AUTHORITIES_KEY, String.class);
-        System.out.println("role: " + roles);
+//        String roles = claims.get(AUTHORITIES_KEY, String.class);
+//        System.out.println("role: " + roles);
 
-        Collection<? extends GrantedAuthority> authorities = (roles == null || roles.isEmpty())
-            ? Collections.emptyList()
-            : Arrays.stream(roles.split(","))
-                .map(String::trim)
-                .filter(auth -> !auth.isEmpty())
-                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+//        Collection<? extends GrantedAuthority> authorities = (roles == null || roles.isEmpty())
+//            ? Collections.emptyList()
+//            : Arrays.stream(roles.split(","))
+//                .map(String::trim)
+//                .filter(auth -> !auth.isEmpty())
+//                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+
+        String author = claims.get(AUTHORITIES_KEY).toString().substring(1, claims.get(AUTHORITIES_KEY).toString().length()-1);
+        System.out.println("role: "+author);
+        Collection<? extends GrantedAuthority>authorities = Arrays
+                .stream(author.split(","))
+                .filter(auth -> !auth.trim().isEmpty())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
@@ -115,7 +131,7 @@ public class JwtTokenProvider {
 
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(JWT_SECRET)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

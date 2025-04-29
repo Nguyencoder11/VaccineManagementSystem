@@ -15,8 +15,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
-    @SequenceGenerator(name = "comment_seq", sequenceName = "comment_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
+//    @SequenceGenerator(name = "comment_seq", sequenceName = "comment_sequence", allocationSize = 1)
     @Column(name = "comment_id")
     Long id;
 

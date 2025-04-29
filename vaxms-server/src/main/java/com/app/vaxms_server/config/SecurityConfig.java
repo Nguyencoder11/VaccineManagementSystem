@@ -38,12 +38,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider, userRepository), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> {})
                 .headers(headers -> {})
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-//                        .requestMatchers("**").permitAll()
+                        .requestMatchers("**").permitAll()
                         .requestMatchers("/api/*/public/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 
@@ -61,10 +60,11 @@ public class SecurityConfig {
                                 Contains.ROLE_STAFF)
 
                         // All other requests require authentication
-                        .anyRequest().authenticated()
-                );
-        return http.build();
-    }
+                        .anyRequest().permitAll()
+                )
+                .addFilterAfter(new JwtAuthenticationFilter(tokenProvider, userRepository), UsernamePasswordAuthenticationFilter.class);
+            return http.build();
+        }
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

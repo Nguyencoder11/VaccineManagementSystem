@@ -61,6 +61,7 @@ public class Encoder {
     }
 
     public static String encode64(String s) {
+        // encode data on your side using BASE64
         byte[] bytesEncoded = Base64.encodeBase64(s.getBytes());
         return new String(bytesEncoded);
     }

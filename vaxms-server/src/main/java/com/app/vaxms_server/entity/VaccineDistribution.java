@@ -16,8 +16,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VaccineDistribution {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccine_distribution_seq")
-    @SequenceGenerator(name = "vaccine_distribution_seq", sequenceName = "vaccine_distribution_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccine_distribution_seq")
+//    @SequenceGenerator(name = "vaccine_distribution_seq", sequenceName = "vaccine_distribution_sequence", allocationSize = 1)
     @Column(name = "distribution_id")
     Long id;
 

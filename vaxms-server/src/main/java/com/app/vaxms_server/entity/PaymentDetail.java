@@ -15,8 +15,9 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_detail_seq")
-    @SequenceGenerator(name = "payment_detail_seq", sequenceName = "payment_detail_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_detail_seq")
+//    @SequenceGenerator(name = "payment_detail_seq", sequenceName = "payment_detail_sequence", allocationSize = 1)
     @Column(name = "payment_detail_id")
     Long id;
 

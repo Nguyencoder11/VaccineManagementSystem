@@ -249,7 +249,6 @@ public class UserService {
 
     public void updateInfo(UserUpdate userUpdate) {
         User user = userUtils.getUserWithAuthority();
-
         userRepository.save(user);
     }
 

@@ -19,9 +19,9 @@ public class CustomerUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String rolestr = user.getAuthority().getName();
-        System.out.println("rolelist: " + rolestr);
-        return Collections.singleton(new SimpleGrantedAuthority(rolestr));
+        String roles = user.getAuthority().getName();
+        System.out.println("rolelist: " + roles);
+        return Collections.singleton(new SimpleGrantedAuthority(roles));
     }
 
     @Override

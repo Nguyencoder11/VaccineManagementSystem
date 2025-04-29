@@ -13,8 +13,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewSource {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "news_sources_seq")
-    @SequenceGenerator(name = "news_sources_seq", sequenceName = "news_sources_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "news_sources_seq")
+//    @SequenceGenerator(name = "news_sources_seq", sequenceName = "news_sources_sequence", allocationSize = 1)
     @Column(name = "source_id")
     Long id;
 
