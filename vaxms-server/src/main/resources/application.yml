@@ -70,7 +70,7 @@ spring:
 
 # JWT Config
 jwt:
-    secret:  6b8d9e0b7efbb1cb476a1f1b4d3cd5b4a72ecfdfc934d6e889a5b98a781f1234
+    secret:  ${JWT_SECRET}
     expiration: 604800000 # 7 day
 
 # Server Config
