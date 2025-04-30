@@ -23,6 +23,7 @@ public class Vaccine {
 
     String name;
 
+    @Column(length = 1000)
     String description;
 
     String image;
