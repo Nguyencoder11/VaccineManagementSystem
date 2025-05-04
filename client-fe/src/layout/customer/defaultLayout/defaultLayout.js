@@ -59,7 +59,7 @@ function DefaultLayout({ children }) {
     const [isLoading, setIsLoading] = useState(false);
 
     const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY ||
-        "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"
+        ""
 
     useEffect(() => {
         const chatContainer = document.querySelector(".chat-messages");
