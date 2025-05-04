@@ -68,7 +68,7 @@ const AdminLichTiemChung = ()=>{
 
     return (
         <>
-            <div class="row header-page-admin">
+            <div className="row header-page-admin">
                 <div className='col-sm-3'>
                     <a className='btn btn-primary' href='add-lich-tiem-chung'>Thêm lịch tiêm chủng</a>
                 </div>
@@ -82,15 +82,15 @@ const AdminLichTiemChung = ()=>{
                     <input id='to' type='date' className='form-control'/>
                 </div>
                 <div className='col-sm-2'>
-                    <button className='btn btn-primary' onClick={()=>getAllLich(0)}><i class="fa fa-filter"></i> Lọc</button>
+                    <button className='btn btn-primary' onClick={()=>getAllLich(0)}><i className="fa fa-filter"></i> Lọc</button>
                 </div>
             </div>
-            <div class="tablediv">
-                <div class="headertable">
-                    <span class="lbtable">Danh sách lịch tiêm chủng</span>
+            <div className="tablediv">
+                <div className="headertable">
+                    <span className="lbtable">Danh sách lịch tiêm chủng</span>
                 </div>
-                <div class="divcontenttable">
-                    <table id="example" class="table table-bordered">
+                <div className="divcontenttable">
+                    <table id="example" className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -116,10 +116,10 @@ const AdminLichTiemChung = ()=>{
                                 <td>{item.endDate}</td>
                                 <td>{item.limitPeople}</td>
                                 <td>
-                                    <i onClick={()=>deleteLich(item.id)} class="fa fa-trash iconaction"></i>
-                                    <i onClick={()=>window.location.href='add-lich-tiem-chung?id='+item.id} class="fa fa-edit iconaction pointer"></i>
-                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalGioTiem" class="fa fa-clock iconaction"></i>
-                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalDoctorInjectdate" class="fa fa-users iconaction"></i>
+                                    <i onClick={()=>deleteLich(item.id)} className="fa fa-trash iconaction"></i>
+                                    <i onClick={()=>window.location.href='add-lich-tiem-chung?id='+item.id} className="fa fa-edit iconaction pointer"></i>
+                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalGioTiem" className="fa fa-clock iconaction"></i>
+                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalDoctorInjectdate" className="fa fa-users iconaction"></i>
                                 </td>
                             </tr>
                          })}

@@ -34,20 +34,20 @@ function Header() {
   return (
     <>
       <div id="headerweb">
-        <div class="container-web">
-          <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/"><img src={logo} class="imagelogoheader" /></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <div className="container-web">
+          <nav className="navbar navbar-expand-lg">
+            <div className="container-fluid">
+              <a className="navbar-brand" href="/"><img src={logo} className="imagelogoheader" alt=""/></a>
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <div class="d-flex">
+                <div className="d-flex">
                   {/* <a href="" class="itemheader itemtopheader"><i class="fa fa-map-marker"></i> Tìm trung tâm</a> */}
-                  <a href="/dang-ky-tiem-chung" class="itemheader itemtopheader"><i class="fa fa-calendar"></i> Đăng ký tiêm</a>
-                  <a href="tel:0967332130" class="itemheader itemtopheader hotlineheader">Hotline: 0967.332.130</a>
+                  <a href="/dang-ky-tiem-chung" className="itemheader itemtopheader"><i className="fa fa-calendar"></i> Đăng ký tiêm</a>
+                  <a href="tel:0362741543" className="itemheader itemtopheader hotlineheader">Hotline: 0362.741.543</a>
                   {auth}
                 </div>
                 <form action='tim-kiem-vaccine' className='d-flex'>
@@ -58,22 +58,22 @@ function Header() {
           </nav>
         </div>
         <hr className='hrheader-web' />
-        <div class="container-web container-bottom-header">
-          <nav class="navbar-expand-lg">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div className="container-web container-bottom-header">
+          <nav className="navbar-expand-lg">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {danhMuc.map((item, index) => {
-                return <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle itemheader itembottomheder" href="#" id={"navbarDropdown" + index} role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                return <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle itemheader itembottomheder" href="#" id={"navbarDropdown" + index} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {item.typeName}
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby={"navbarDropdown" + index}>
+                  <ul className="dropdown-menu" aria-labelledby={"navbarDropdown" + index}>
                     {item.vaccineTypes.map((child, indexChild) => {
-                      return <li><a class="dropdown-item" href={"vaccine-danhmuc?danhmuc=" + child.id}>{child.typeName}</a></li>
+                      return <li><a className="dropdown-item" href={"vaccine-danhmuc?danhmuc=" + child.id}>{child.typeName}</a></li>
                     })}
                   </ul>
                 </li>
               })}
-              <li class="nav-item"><a class="nav-link itemheader itembottomheder" href="tra-cuu-lich-tiem">Tra cứu lịch tiêm</a></li>
+              <li className="nav-item"><a className="nav-link itemheader itembottomheder" href="tra-cuu-lich-tiem">Tra cứu lịch tiêm</a></li>
             </ul>
           </nav>
         </div>

@@ -71,11 +71,11 @@ function ThanhCong(){
                     <p className='notithanhcong'>Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi.</p>
                     <p className='notithanhcong'>Hãy kiểm tra thông tin lịch đặt của bạn trong mục tài khoản</p>
                     <br/><br/>
-                    <a href="tai-khoan#lichtiem" class="btn btn-danger">Xem lịch sử lịch đặt</a>
+                    <a href="tai-khoan#lichtiem" className="btn btn-danger">Xem lịch sử lịch đặt</a>
                 </div>
 
                 <div id="thatbai">
-                    <h3 sclassName='notithanhcong'>Thông báo</h3>
+                    <h3 className='notithanhcong'>Thông báo</h3>
                     <p className='notithanhcong' id="errormess">Bạn chưa hoàn thành thanh toán.</p>
                     <br/><br/>
                     <p>Quay về <a href="index">trang chủ</a></p>

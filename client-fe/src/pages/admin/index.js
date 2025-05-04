@@ -65,58 +65,58 @@ const HomeAdmin = ()=>{
   
     return(
        <>
-        <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left shadow h-100 py-2">
-                    <span class="lbcard">Doanh thu tháng này</span>
+        <div className="row">
+            <div className="col-xl-3 col-md-6 mb-4">
+                <div className="card border-left shadow h-100 py-2">
+                    <span className="lbcard">Doanh thu tháng này</span>
                     <span className='solieudoanhthu'>{formatMoney(doanhthu.doanhThuThangNay)}</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left shadow h-100 py-2">
-                    <span class="lbcard">Doanh thu hôm nay</span>
+            <div className="col-xl-3 col-md-6 mb-4">
+                <div className="card border-left shadow h-100 py-2">
+                    <span className="lbcard">Doanh thu hôm nay</span>
                     <span className='solieudoanhthu'>{formatMoney(doanhthu.doanhThuHomNay)}</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left shadow h-100 py-2">
-                    <span class="lbcard">Số lượng tài khoản</span>
+            <div className="col-xl-3 col-md-6 mb-4">
+                <div className="card border-left shadow h-100 py-2">
+                    <span className="lbcard">Số lượng tài khoản</span>
                     <span className='solieudoanhthu'>{doanhthu.nunUser}</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left shadow h-100 py-2">
-                    <span class="lbcard">Số lượng vaccine hiện có</span>
+            <div className="col-xl-3 col-md-6 mb-4">
+                <div className="card border-left shadow h-100 py-2">
+                    <span className="lbcard">Số lượng vaccine hiện có</span>
                     <span className='solieudoanhthu'>{doanhthu.nunVaccine}</span>
                 </div>
             </div>
         </div>
 
         <div>
-            <div class="col-sm-12 header-sp-thongke row ">
-                <div class="col-md-3">
-                    <label class="lbbooking">Chọn năm cần xem</label>
-                <select id="nams" class="form-control">
+            <div className="col-sm-12 header-sp-thongke row ">
+                <div className="col-md-3">
+                    <label className="lbbooking">Chọn năm cần xem</label>
+                <select id="nams" className="form-control">
                 </select>
                 </div>
-                <div class="col-md-2">
+                <div className="col-md-2">
                     <label class="lbbooking whitespace" dangerouslySetInnerHTML={{__html: '<span>&ThinSpace;</span>'}}></label>
-                    <button onClick={()=>loadByNam()} class="btn btn-primary form-control"><i class="fa fa-filter"></i> Lọc</button>
+                    <button onClick={()=>loadByNam()} className="btn btn-primary form-control"><i className="fa fa-filter"></i> Lọc</button>
                 </div>
             </div>
-            <div class="col-sm-12 divtale">
-                <div class="card chart-container divtale">
+            <div className="col-sm-12 divtale">
+                <div className="card chart-container divtale">
                     <canvas id="chart"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="tablediv">
-                <div class="headertable">
-                    <span class="lbtable">Danh sách vaccine tiêm nhiều</span>
+        <div className="tablediv">
+                <div className="headertable">
+                    <span className="lbtable">Danh sách vaccine tiêm nhiều</span>
                 </div>
-                <div class="divcontenttable">
-                    <table id="example" class="table table-bordered">
+                <div className="divcontenttable">
+                    <table id="example" className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -150,7 +150,7 @@ async function revenueYear(nam) {
     if (nam < 2000) {
         nam = new Date().getFullYear()
     }
-    var url = 'http://localhost:8080/api/statistic/admin/revenue-year?year=' + nam;
+    var url = 'http://localhost:9090/api/statistic/admin/revenue-year?year=' + nam;
     const response = await fetch(url, {
         method: 'GET',
         headers: new Headers({

@@ -71,14 +71,14 @@ function DoiLich({customerSchedule}){
     }
   
     return(
-        <div class="modal fade" id="modeldoilich" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Đổi lịch tiêm {customerSchedule?.vaccineScheduleTime.vaccineSchedule.vaccine.name}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="modal fade" id="modeldoilich" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-lg modal-dialog-centered">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Đổi lịch tiêm {customerSchedule?.vaccineScheduleTime.vaccineSchedule.vaccine.name}</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body row">
+                <div className="modal-body row">
                 <div className='col-sm-4'>
                     <div id='titlengaytiem'>
                       <div className='col-sm-12'>
@@ -115,9 +115,9 @@ function DoiLich({customerSchedule}){
                     </div>
                 </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button onClick={xacNhandoiLich} type="button" class="btn btn-primary">Xác nhận</button>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button onClick={xacNhandoiLich} type="button" className="btn btn-primary">Xác nhận</button>
                 </div>
                 </div>
             </div>

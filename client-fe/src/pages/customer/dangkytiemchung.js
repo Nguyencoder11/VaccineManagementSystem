@@ -141,7 +141,7 @@ function DangKyTiem() {
             <div style={{ padding: '20px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ marginRight: '15px' }}>
-                  <img src={logomini} style={{ width: '60px', height: '60px' }} />
+                  <img src={logomini} alt="" style={{ width: '60px', height: '60px' }} />
                 </div>
                 <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>ĐĂNG KÝ TIÊM CHỦNG</h2>
               </div>

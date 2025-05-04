@@ -8,7 +8,7 @@ import './user.scss';
 const token = localStorage.getItem("token");
 
 async function loadUser(role) {
-    let url = 'http://localhost:8080/api/user/admin/get-user-by-role';
+    let url = 'http://localhost:9090/api/user/admin/get-user-by-role';
     if (role) url += `?role=${role}`;
 
     try {
@@ -44,7 +44,7 @@ async function handleAddAccount(event) {
         password: password.value
     };
 
-    const res = await fetch('http://localhost:8080/api/user/admin/addaccount', {
+    const res = await fetch('http://localhost:9090/api/user/admin/addaccount', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -71,7 +71,7 @@ const AdminUser = () => {
     const roles = ["Admin", "Doctor", "Nurse", "Customer", "Support Staff"];
 
     async function handleRoleChange(userId, newRole) {
-        const res = await fetch(`http://localhost:8080/api/user/admin/change-role?id=${userId}&role=${newRole}`, {
+        const res = await fetch(`http://localhost:9090/api/user/admin/change-role?id=${userId}&role=${newRole}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -104,7 +104,7 @@ const AdminUser = () => {
         const confirmation = window.confirm("Bạn có chắc chắn muốn xóa người dùng này?");
         if (!confirmation) return;
 
-        const res = await fetch(`http://localhost:8080/api/user/admin/delete?id=${id}`, {
+        const res = await fetch(`http://localhost:9090/api/user/admin/delete?id=${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -131,7 +131,7 @@ const AdminUser = () => {
             phone: event.target.elements.phone.value,
         };
 
-        const res = await fetch('http://localhost:8080/api/user/admin/all/update-infor', {
+        const res = await fetch('http://localhost:9090/api/user/admin/all/update-infor', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -156,7 +156,7 @@ const AdminUser = () => {
         const confirmation = window.confirm("Xác nhận hành động?");
         if (!confirmation) return;
 
-        const response = await fetch(`http://localhost:8080/api/user/admin/lockOrUnlockUser?id=${id}`, {
+        const response = await fetch(`http://localhost:9090/api/user/admin/lockOrUnlockUser?id=${id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

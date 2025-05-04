@@ -43,19 +43,19 @@ function DoiMatKhau(){
   
     return(
         <>
-            <div class="headeraccount">
-                <span class="fontyel"></span><span class="smyl"> Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
+            <div className="headeraccount">
+                <span className="fontyel"></span><span className="smyl"> Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
             </div>
-            <div class="col-lg-9 col-md-8 col-sm-12 col-12 passacc">
-                <form onSubmit={handleChangePass} autocomplete="off">
-                    <label class="lbacc">Mật khẩu hiện tại *</label>
-                    <input name="oldpass" type="password" class="form-control" required/>
-                    <label class="lbacc">Mật khẩu mới *</label>
-                    <input name="newpass" type="password" class="form-control" required/>
-                    <label class="lbacc">Xác nhận mật khẩu mới *</label>
-                    <input name="renewpass" type="password" class="form-control" required/>
+            <div className="col-lg-9 col-md-8 col-sm-12 col-12 passacc">
+                <form onSubmit={handleChangePass} autoComplete="off">
+                    <label className="lbacc">Mật khẩu hiện tại *</label>
+                    <input name="oldpass" type="password" className="form-control" required/>
+                    <label className="lbacc">Mật khẩu mới *</label>
+                    <input name="newpass" type="password" className="form-control" required/>
+                    <label className="lbacc">Xác nhận mật khẩu mới *</label>
+                    <input name="renewpass" type="password" className="form-control" required/>
                     <br/>
-                    <button type="submit" class="btndoimk">LƯU</button>
+                    <button type="submit" className="btndoimk">LƯU</button>
                 </form>
             </div>
         </>

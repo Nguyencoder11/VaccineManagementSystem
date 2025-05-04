@@ -39,19 +39,19 @@ async function processLogin(user, token) {
     await new Promise(resolve => setTimeout(resolve, 1500));
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
-    if (user.authorities.name === "Admin") {
+    if (user.authority.name === "Admin") {
         window.location.href = 'admin/index';
     }
-    if (user.authorities.name === "Customer") {
+    if (user.authority.name === "Customer") {
         window.location.href = '/index';
     }
-    if (user.authorities.name === "Doctor") {
+    if (user.authority.name === "Doctor") {
         
     }
-    if (user.authorities.name === "Nurse") {
+    if (user.authority.name === "Nurse") {
         window.location.href = 'staff/vaccine';
     }
-    if (user.authorities.name === "Support Staff") {
+    if (user.authority.name === "Support Staff") {
         window.location.href = '/staff/chat';
     }
 }
@@ -61,7 +61,7 @@ function login(){
     const handleLoginSuccess = async (accessToken) => {
         console.log(accessToken);
         
-        var response = await fetch('http://localhost:8080/api/user/login/google', {
+        var response = await fetch('http://localhost:9090/api/user/login/google', {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain'
@@ -82,22 +82,22 @@ function login(){
     };
 
     return(
-        <div class="contentweb">
-        <div class="container">
-            <div class="dangnhapform">
-                <div class="divctlogin">
-                    <p class="labeldangnhap">Đăng Nhập</p>
-                    <form onSubmit={handleLogin} autocomplete="off">
-                        <label class="lbform">Tên tài khoản</label>
-                        <input required name='username' id="username" class="inputlogin"/>
-                        <label class="lbform">Mật khẩu</label>
-                        <input required name='password' type="password" id="password" class="inputlogin"/>
-                        <button class="btndangnhap">ĐĂNG NHẬP</button>
+        <div className="contentweb">
+        <div className="container">
+            <div className="dangnhapform">
+                <div className="divctlogin">
+                    <p className="labeldangnhap">Đăng Nhập</p>
+                    <form onSubmit={handleLogin} autoComplete="off">
+                        <label className="lbform">Tên tài khoản</label>
+                        <input required name='username' id="username" className="inputlogin"/>
+                        <label className="lbform">Mật khẩu</label>
+                        <input required name='password' type="password" id="password" className="inputlogin"/>
+                        <button className="btndangnhap">ĐĂNG NHẬP</button>
                         <button type="button"  onClick={()=>{window.location.href = 'regis'}} class="btndangky">ĐĂNG KÝ</button>
                     </form><br/><br/><br/>
                     <hr/>
                     <p className='text-center'>Hoặc đăng nhập với google</p>
-                    <GoogleOAuthProvider clientId="663646080535-l004tgn5o5cpspqdglrl3ckgjr3u8nbf.apps.googleusercontent.com">
+                    <GoogleOAuthProvider clientId="396090369247-l6bfg6ojk7c3i6a6vfj1k7858hebiv0n.apps.googleusercontent.com">
                     <div className='divcenter' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <GoogleLogin
                         onSuccess={handleLoginSuccess}

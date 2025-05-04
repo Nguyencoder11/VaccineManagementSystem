@@ -87,49 +87,52 @@ function VaccineDanhMuc(){
                     </table>
                 </div>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Thông tin vaccine</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table className='table'>
-                            <tr>
-                                <th>Ảnh</th>
-                                <td><img src={vaccine==null?'':vaccine.image} className='imgtableschedule'/></td>
-                            </tr>
-                            <tr>
-                                <th>Tên vaccine</th>
-                                <td>{vaccine==null?'':vaccine.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Nhóm tuổi</th>
-                                <td>{vaccine==null?'':vaccine.ageGroup.ageRange}</td>
-                            </tr>
-                            <tr>
-                                <th>Mô tả</th>
-                                <td>{vaccine==null?'':vaccine.description}</td>
-                            </tr>
-                            <tr>
-                                <th>Giá tiền</th>
-                                <td>{vaccine==null?'':formatMoney(vaccine.price)}</td>
-                            </tr>
-                            <tr>
-                                <th>Loại vaccine</th>
-                                <td>{vaccine==null?'':vaccine.vaccineType.typeName}</td>
-                            </tr>
-                            <tr>
-                                <th>Nhà máy sản xuất</th>
-                                <td>{vaccine==null?'':vaccine.manufacturer.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Quốc gia sản xuất</th>
-                                <td>{vaccine==null?'':vaccine.manufacturer.country}</td>
-                            </tr>
-                        </table>
-                    </div>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Thông tin vaccine</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <table className='table'>
+                                <tbody>
+                                    <tr>
+                                        <th>Ảnh</th>
+                                        <td><img alt="" src={vaccine == null ? '' : vaccine.image}
+                                                 className='imgtableschedule'/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tên vaccine</th>
+                                        <td>{vaccine == null ? '' : vaccine.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nhóm tuổi</th>
+                                        <td>{vaccine == null ? '' : vaccine.ageGroup.ageRange}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mô tả</th>
+                                        <td>{vaccine == null ? '' : vaccine.description}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giá tiền</th>
+                                        <td>{vaccine == null ? '' : formatMoney(vaccine.price)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loại vaccine</th>
+                                        <td>{vaccine == null ? '' : vaccine.vaccineType.typeName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nhà máy sản xuất</th>
+                                        <td>{vaccine == null ? '' : vaccine.manufacturer.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Quốc gia sản xuất</th>
+                                        <td>{vaccine == null ? '' : vaccine.manufacturer.country}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -77,11 +77,11 @@ const AdminDanhMuc = () => {
                                 <tr>
                                     <td>{item.id}</td>
                                     <td>{item.typeName}</td>
-                                    <td>{item.isPrimary == true?<span className='green-text'><i class="fa fa-check-circle" aria-hidden="true"></i> Là danh mục chính</span>:''}</td>
+                                    <td>{item.isPrimary == true?<span className='green-text'><i className="fa fa-check-circle" aria-hidden="true"></i> Là danh mục chính</span>:''}</td>
                                     <td>{item.vaccineType?.typeName}</td>
                                     <td>
-                                    <a href={'adddanhmuc?id='+item.id} class="edit-btn"><i className='fa fa-edit'></i></a>
-                                    <button onClick={()=>deleteData(item.id)} class="delete-btn"><i className='fa fa-trash'></i></button>
+                                    <a href={'adddanhmuc?id='+item.id} className="edit-btn"><i className='fa fa-edit'></i></a>
+                                    <button onClick={()=>deleteData(item.id)} className="delete-btn"><i className='fa fa-trash'></i></button>
                                     </td>
                                 </tr>
                             ))}

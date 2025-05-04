@@ -1,5 +1,5 @@
 
-var firstUrl = 'http://localhost:8080'
+var firstUrl = 'http://localhost:9090'
 async function uploadSingleFile(filePath) {
     const formData = new FormData()
     formData.append("file", filePath.files[0])
@@ -22,7 +22,7 @@ async function uploadMultipleFile(listFile) {
     for (var i = 0; i < listFile.length; i++) {
         formData.append("file", listFile[i])
     }
-    var urlUpload = 'http://localhost:8080/api/public/upload-multiple-file';
+    var urlUpload = 'http://localhost:9090/api/public/upload-multiple-file';
     const res = await fetch(urlUpload, {
         method: 'POST',
         body: formData
@@ -36,7 +36,7 @@ async function uploadMultipleFile(listFile) {
 
 var token = localStorage.getItem("token");
 async function getMethod(url) {
-    if(url.includes(firstUrl) == false){
+    if(!url.includes(firstUrl)){
         url = firstUrl + url;
     }
     const response = await fetch(url, {
@@ -49,7 +49,7 @@ async function getMethod(url) {
 }
 
 async function postMethod(url) {
-    if(url.includes(firstUrl) == false){
+    if(!url.includes(firstUrl)){
         url = firstUrl + url;
     }
     const response = await fetch(url, {
@@ -62,7 +62,7 @@ async function postMethod(url) {
 }
 
 async function postMethodPayload(url, payload) {
-    if(url.includes(firstUrl) == false){
+    if(!url.includes(firstUrl)){
         url = firstUrl + url;
     }
     const response = await fetch(url, {
@@ -77,7 +77,7 @@ async function postMethodPayload(url, payload) {
 }
 
 async function deleteMethod(url) {
-    if(url.includes(firstUrl) == false){
+    if(!url.includes(firstUrl)){
         url = firstUrl + url;
     }
     const response = await fetch(url, {
@@ -90,7 +90,7 @@ async function deleteMethod(url) {
 }
 
 async function putMethod(url, payload) {
-    if(url.includes(firstUrl) == false){
+    if(!url.includes(firstUrl)){
         url = firstUrl + url;
     }
     const response = await fetch(url, {

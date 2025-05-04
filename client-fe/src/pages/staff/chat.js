@@ -59,7 +59,7 @@ const StaffChat = () => {
 
     const userlc = localStorage.getItem("user");
     const userEmail = JSON.parse(userlc)?.email;
-    const sock = new SockJS("http://localhost:8080/hello");
+    const sock = new SockJS("http://localhost:9090/hello");
     const stompClient = new Client({
       webSocketFactory: () => sock,
       onConnect: () => {

@@ -43,12 +43,12 @@ function FeedBack(){
     
     return(
         <>
-            <div class="tablediv">
-                <div class="headertable">
-                    <span class="lbtable">Danh sách phản hồi của bạn</span>
+            <div className="tablediv">
+                <div className="headertable">
+                    <span className="lbtable">Danh sách phản hồi của bạn</span>
                 </div>
-                <div class="divcontenttable">
-                    <table id="example" class="table table-bordered">
+                <div className="divcontenttable">
+                    <table id="example" className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Nội dung phản hồi</th>
@@ -61,7 +61,7 @@ function FeedBack(){
                             </tr>
                         </thead>
                         <tbody>
-                        {item.map((item, index)=>{
+                        {Array.isArray(item) && item.map((item, index)=>{
                             return <tr>
                                 <td>{item.content}</td>
                                 <td>{item.createdDate}</td>

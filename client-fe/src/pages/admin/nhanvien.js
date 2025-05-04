@@ -14,7 +14,7 @@ const EmployeeSchedule = () => {
     const token = localStorage.getItem("token");
 
     const loadEmployees = async () => {
-        const url = 'http://localhost:8080/api/user/admin/get-user-by-role?role=Doctor';
+        const url = 'http://localhost:9090/api/user/admin/get-user-by-role?role=Doctor';
         try {
             const response = await fetch(url, {
                 method: 'GET',
@@ -34,7 +34,7 @@ const EmployeeSchedule = () => {
     };
 
     const loadSchedules = async (doctorId) => {
-        const url = `http://localhost:8080/api/work_schedules/doctor/${doctorId}`;
+        const url = `http://localhost:9090/api/work_schedules/doctor/${doctorId}`;
         try {
             const response = await fetch(url, {
                 method: 'GET',
@@ -57,7 +57,7 @@ const EmployeeSchedule = () => {
 
     const scheduleWork = async (payload) => {
         try {
-            const res = await fetch('http://localhost:8080/api/work_schedules', {
+            const res = await fetch('http://localhost:9090/api/work_schedules', {
                 method: 'POST',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + token,

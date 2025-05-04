@@ -106,26 +106,26 @@ function CapNhatThongTin(){
     return(
         <form onSubmit={handleUpdateInfor} class="row">
             <div className='col-sm-4'>
-                <label class="lbacc">Họ tên *</label>
-                <input name="fullname" defaultValue={profile!=null?profile.fullName:''} class="form-control" required/>
-                <label class="lbacc">Số điện thoại liên lạc *</label>
-                <input name="phone" defaultValue={profile!=null?profile.phone:''} class="form-control" required/>
-                <label class="lbacc">Giới tính *</label>
-                <select name="gender" class="form-control">
+                <label className="lbacc">Họ tên *</label>
+                <input name="fullname" defaultValue={profile!=null?profile.fullName:''} className="form-control" required/>
+                <label className="lbacc">Số điện thoại liên lạc *</label>
+                <input name="phone" defaultValue={profile!=null?profile.phone:''} className="form-control" required/>
+                <label className="lbacc">Giới tính *</label>
+                <select name="gender" className="form-control">
                     <option value="Male" selected={profile==null?false:(profile.gender =='Male')}>Nam</option>
                     <option value="Female" selected={profile==null?false:(profile.gender =='Female')}>Nữ</option>
                     <option value="Other" selected={profile==null?false:(profile.gender =='Other')}>Khác</option>
                 </select>
-                <label class="lbacc">Ngày sinh</label>
-                <input name="birthdate" defaultValue={profile!=null?profile.birthdate:''} type='date' class="form-control" required/>
+                <label className="lbacc">Ngày sinh</label>
+                <input name="birthdate" defaultValue={profile!=null?profile.birthdate:''} type='date' className="form-control" required/>
                 <br/>
-                <label class="checkbox-custom">Đã có bảo hiểm 
+                <label className="checkbox-custom">Đã có bảo hiểm
                     <input id='insurance' onChange={changeBh} type="checkbox" checked={baohiem}/>
-                    <span class="checkmark-checkbox"></span>
+                    <span className="checkmark-checkbox"></span>
                 </label>
             </div>
             <div className='col-sm-4'>
-                <label class="lbacc">Tỉnh/ Thành phố</label>
+                <label className="lbacc">Tỉnh/ Thành phố</label>
                 <Select
                     options={address.map((item) => ({
                         label: item.name,
@@ -138,25 +138,25 @@ function CapNhatThongTin(){
                     isSearchable={true} 
                 />
 
-                <label class="lbacc">Quận/ huyện</label>
-                <select class="form-control" name='district' id='district'>
+                <label className="lbacc">Quận/ huyện</label>
+                <select className="form-control" name='district' id='district'>
                     {huyen.map((item, index)=>{
                         return <option selected={huyencs == item.name?true:false} value={item.name}>{item.name}</option>
                     })}
                 </select>
-                <label class="lbacc">Phường/ xã</label>
-                <input name="ward" defaultValue={profile!=null?profile.ward:''} class="form-control" required/>
-                <label class="lbacc">tên đường, số nhà</label>
-                <input name="street" class="form-control"  defaultValue={profile!=null?profile.street:''}  required/>
+                <label className="lbacc">Phường/ xã</label>
+                <input name="ward" defaultValue={profile!=null?profile.ward:''} className="form-control" required/>
+                <label className="lbacc">tên đường, số nhà</label>
+                <input name="street" className="form-control"  defaultValue={profile!=null?profile.street:''}  required/>
                 <br/>
                 <div id="loading">
-                    <div class="bar1 bar"></div>
+                    <div className="bar1 bar"></div>
                 </div><br/>
-                <button type="submit" class="btndoimk">LƯU</button>
+                <button type="submit" className="btndoimk">LƯU</button>
             </div>
             <div className='col-sm-4'>
-                <label class="lbacc">Chọn hình ảnh</label>
-                <img id='imgpreview' src={profile!=null?profile.avatar:''} className='image-profile'/>
+                <label className="lbacc">Chọn hình ảnh</label>
+                <img id='imgpreview' alt="" src={profile!=null?profile.avatar:''} className='image-profile'/>
                 <button onClick={()=>clickChooseFile()} type='button' className='btnuploadimage-profile'><i className='fa fa-upload'></i> Chọn ảnh</button>
                 <input onChange={()=>preImage()} type='file' className='hidden' name="fileupload" id='fileupload'/>
             </div>

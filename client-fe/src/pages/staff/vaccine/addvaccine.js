@@ -125,18 +125,18 @@ const StaffAddVaccine = ()=>{
             </div>
             <form className='row' onSubmit={addVaccine} method='post'>
                 <div className='col-sm-5'>
-                    <label class="lb-form">Tên vaccine</label>
-                    <input defaultValue={item?.name} name='vaccineName' type="text" class="form-control"/><br/>
-                    <label class="lb-form">Giá tiền</label>
-                    <input defaultValue={item?.price} name='price' class="form-control"/><br/>
-                    <label class="lb-form">Số lượng</label>
-                    <input defaultValue={item?.inventory} name='inventory' class="form-control"/><br/>
-                    <label class="lb-form">Trạng thái</label>
-                    <input defaultValue={item?.status} name='status' class="form-control"/><br/>
-                    <label class="lb-form">Ảnh</label>
-                    <input onChange={onchangeFile} id='fileimage' type='file' class="form-control"/><br/>
+                    <label className="lb-form">Tên vaccine</label>
+                    <input defaultValue={item?.name} name='vaccineName' type="text" className="form-control"/><br/>
+                    <label className="lb-form">Giá tiền</label>
+                    <input defaultValue={item?.price} name='price' className="form-control"/><br/>
+                    <label className="lb-form">Số lượng</label>
+                    <input defaultValue={item?.inventory} name='inventory' className="form-control"/><br/>
+                    <label className="lb-form">Trạng thái</label>
+                    <input defaultValue={item?.status} name='status' className="form-control"/><br/>
+                    <label className="lb-form">Ảnh</label>
+                    <input onChange={onchangeFile} id='fileimage' type='file' className="form-control"/><br/>
                     <img id='imgpreview' src={item?.image} className='imgtable'/><br/>
-                    <label class="lb-forms">Danh mục</label>
+                    <label className="lb-forms">Danh mục</label>
                     <Select
                         options={type}
                         value={typeSelect}
@@ -147,7 +147,7 @@ const StaffAddVaccine = ()=>{
                         name='danhMuc'
                         placeholder="Chọn danh mục"
                     />
-                    <label class="lb-forms">Nhà máy sản xuất</label>
+                    <label className="lb-forms">Nhà máy sản xuất</label>
                     <Select
                         options={manufacturer}
                         value={manufacturerSelect}
@@ -158,7 +158,7 @@ const StaffAddVaccine = ()=>{
                         name='manufacturer'
                         placeholder="Chọn nhà máy sản xuất"
                     />
-                    <label class="lb-forms">Nhóm tuổi</label>
+                    <label className="lb-forms">Nhóm tuổi</label>
                     <Select
                         options={ageGroup}
                         value={ageGroupSelect}
@@ -171,7 +171,7 @@ const StaffAddVaccine = ()=>{
                     />
                 </div>
                 <div className='col-sm-7'>
-                    <label class="lb-forms">Mô tả vaccine</label>
+                    <label className="lb-forms">Mô tả vaccine</label>
                     <Editor name='editor' tinymceScriptSrc={'https://cdn.tiny.cloud/1/mcvdwnvee5gbrtksfafzj5cvgml51to5o3u7pfvnjhjtd2v1/tinymce/6/tinymce.min.js'}
                                         onInit={(evt, editor) => editorRef.current = editor} 
                                         initialValue={item==null?'':item.description}

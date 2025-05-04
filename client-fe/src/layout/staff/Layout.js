@@ -57,6 +57,7 @@ function Header({ children }) {
           <div className="profile">
             <img src={avatar} alt="Avatar" />
             <span>Staff</span>
+            {/*<div onClick={logout}>Đăng xuất</div>*/}
           </div>
         </div>
       </div>

@@ -87,7 +87,7 @@ function Header({ children }) {
 
 async function checkAdmin() {
     var token = localStorage.getItem("token");
-    var url = 'http://localhost:8080/api/admin/check-role-admin';
+    var url = 'http://localhost:9090/api/admin/check-role-admin';
     const response = await fetch(url, {
         headers: new Headers({
             'Authorization': 'Bearer ' + token,

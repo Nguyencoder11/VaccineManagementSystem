@@ -46,7 +46,7 @@ function Login() {
   const handleLoginSuccess = async (accessToken) => {
     console.log(accessToken);
 
-    var response = await fetch('http://localhost:8080/api/user/login/google', {
+    var response = await fetch('http://localhost:9090/api/user/login/google', {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain',
@@ -67,19 +67,19 @@ function Login() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    if (user.authorities.name === 'Admin') {
+    if (user.authority.name === 'Admin') {
       window.location.href = 'admin/index';
     }
-    if (user.authorities.name === 'Customer') {
+    if (user.authority.name === 'Customer') {
       window.location.href = '/';
     }
-    if (user.authorities.name === 'Doctor') {
+    if (user.authority.name === 'Doctor') {
       window.location.href = '/doctor/dashboard';
     }
-    if (user.authorities.name === 'Nurse') {
+    if (user.authority.name === 'Nurse') {
       window.location.href = 'staff/vaccine';
     }
-    if (user.authorities.name === 'Support Staff') {
+    if (user.authority.name === 'Support Staff') {
       window.location.href = '/staff/chat';
     }
   }
@@ -141,7 +141,7 @@ function Login() {
           </form>
 
           <div className="or-divider">HOẶC</div>
-          <GoogleOAuthProvider clientId="663646080535-l004tgn5o5cpspqdglrl3ckgjr3u8nbf.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="396090369247-l6bfg6ojk7c3i6a6vfj1k7858hebiv0n.apps.googleusercontent.com">
             <div className='divcenter' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <GoogleLogin
                 onSuccess={handleLoginSuccess}

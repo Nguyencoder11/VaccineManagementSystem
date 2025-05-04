@@ -64,7 +64,7 @@ function Register() {
     const handleLoginSuccess = async (accessToken) => {
         console.log(accessToken);
 
-        var response = await fetch('http://localhost:8080/api/user/login/google', {
+        var response = await fetch('http://localhost:9090/api/user/login/google', {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain'
@@ -164,7 +164,7 @@ function Register() {
                         </button>
                     </form>
                     <div className="or-divider">HOẶC</div>
-                    <GoogleOAuthProvider clientId="663646080535-l004tgn5o5cpspqdglrl3ckgjr3u8nbf.apps.googleusercontent.com">
+                    <GoogleOAuthProvider clientId="396090369247-l6bfg6ojk7c3i6a6vfj1k7858hebiv0n.apps.googleusercontent.com">
                         <div className='divcenter' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <GoogleLogin
                                 onSuccess={handleLoginSuccess}

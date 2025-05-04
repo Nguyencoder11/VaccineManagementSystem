@@ -204,9 +204,9 @@ function LichDaDangKy(){
     
     return(
         <>
-            <div class="tablediv">
-                <div class="headertable">
-                    <span class="lbtable">Danh sách lịch tiêm chủng đã đăng ký</span>
+            <div className="tablediv">
+                <div className="headertable">
+                    <span className="lbtable">Danh sách lịch tiêm chủng đã đăng ký</span>
                     <div className='row'>
                         <div className='col-sm-3'>
                             <label dangerouslySetInnerHTML={{__html:'&ThinSpace;'}}></label>
@@ -226,12 +226,12 @@ function LichDaDangKy(){
                         </div>
                         <div className='col-sm-1'>
                         <label dangerouslySetInnerHTML={{__html:'&ThinSpace;'}}></label>
-                           <button onClick={loadDuLieu}  className='form-control btn btn-primary btncommont'><i class="fa fa-refresh"></i></button>
+                           <button onClick={loadDuLieu}  className='form-control btn btn-primary btncommont'><i className="fa fa-refresh"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="divcontenttable">
-                    <table id="example" class="table table-bordered">
+                <div className="divcontenttable">
+                    <table id="example" className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Mã đăng ký</th>
@@ -302,14 +302,14 @@ function LichDaDangKy(){
                         nextLabel='Trang sau'
                         activeClassName='active'/>
                 </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gửi phản hổi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Gửi phản hổi</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form onSubmit={taoPhanHoi} method='post'>
                                 <label className='lb-form-dky-tiem'><span>*</span> Đánh giá sao</label>
                                 <StarRating onRatingSelect={handleRatingSelect} />
@@ -343,26 +343,26 @@ function LichDaDangKy(){
                     </div>
                 </div>
 
-                <div class="modal fade" id="modelthanhtoan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Thanh toán {formatMoney(item?.vaccineScheduleTime.vaccineSchedule.vaccine.price)}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div className="modal fade" id="modelthanhtoan" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Thanh toán {formatMoney(item?.vaccineScheduleTime.vaccineSchedule.vaccine.price)}</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form onSubmit={dangKyTiem}  class="modal-body">
-                            <table class="table tablepay">
+                        <form onSubmit={dangKyTiem}  className="modal-body">
+                            <table className="table tablepay">
                                 <tr onClick={momoClick}>
-                                    <td><label class="radiocustom">	<p>Thanh toán qua Ví MoMo</p>
+                                    <td><label className="radiocustom">	<p>Thanh toán qua Ví MoMo</p>
                                             <input value="momo" id="momo" type="radio" name="paytype"/>
-                                            <span class="checkmark"></span></label></td>
-                                    <td><img src={momo} class="momopay"/></td>
+                                            <span className="checkmark"></span></label></td>
+                                    <td><img src={momo} alt="" className="momopay"/></td>
                                 </tr>
                                 <tr onClick={vnpayClick}>
-                                    <td><label class="radiocustom">	<p>Thanh toán qua Ví Vnpay</p>
+                                    <td><label className="radiocustom">	<p>Thanh toán qua Ví Vnpay</p>
                                             <input value="vnpay" id="vnpay" type="radio" name="paytype"/>
-                                            <span class="checkmark"></span></label></td>
-                                    <td><img src={vnpay} class="momopay"/></td>
+                                            <span className="checkmark"></span></label></td>
+                                    <td><img src={vnpay} className="momopay" alt=""/></td>
                                 </tr>
 
                             </table>

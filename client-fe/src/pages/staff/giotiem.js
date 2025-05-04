@@ -191,16 +191,16 @@ const AdminGioTiemChung = ({lichtiem})=>{
     }
 
     return (
-    <div class="modal fade" id="modalGioTiem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Giờ tiêm chủng vaccine {lichtiem?.vaccine.name}, tổng {lichtiem?.limitPeople} mũi tiêm, {soLuongDefault.toFixed(2)}/ngày
+    <div className="modal fade" id="modalGioTiem" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-xl">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Giờ tiêm chủng vaccine {lichtiem?.vaccine.name}, tổng {lichtiem?.limitPeople} mũi tiêm, {soLuongDefault.toFixed(2)}/ngày
                         , Tổng mũi hiện tại: {tongHienTai}
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id='noidungtimeschedule'>
+                <div className="modal-body" id='noidungtimeschedule'>
                 {listNgay.map((item, index)=>{
                     return <div style={{marginTop:'30px'}}>
                     <div className='d-flex' style={{background:'#9e9e9e', paddingLeft:'10px'}}>
@@ -250,8 +250,8 @@ const AdminGioTiemChung = ({lichtiem})=>{
                                         </td>
                                         <td><input id={'soluongupdate'+giotiem.id} defaultValue={giotiem.limitPeople}/></td>
                                         <td>
-                                            <i onClick={()=>deleteGioTiem(giotiem.id)} class="fa fa-trash iconaction"></i>
-                                            <i onClick={()=>capNhatGio(giotiem.id)} class="fa fa-edit iconaction"></i>
+                                            <i onClick={()=>deleteGioTiem(giotiem.id)} className="fa fa-trash iconaction"></i>
+                                            <i onClick={()=>capNhatGio(giotiem.id)} className="fa fa-edit iconaction"></i>
                                         </td>
                                     </tr>
                                 }

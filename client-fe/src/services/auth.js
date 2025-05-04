@@ -14,7 +14,7 @@ async function handleChangePass(event) {
         oldPass: event.target.elements.currentpass.value,
         newPass: event.target.elements.newpass.value
     };
-    var res = await fetch('http://localhost:8080/api/user/change-password', {
+    var res = await fetch('http://localhost:9090/api/user/change-password', {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',

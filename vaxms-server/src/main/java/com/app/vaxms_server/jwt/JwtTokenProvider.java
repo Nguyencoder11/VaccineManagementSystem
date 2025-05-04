@@ -15,10 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 import javax.crypto.SecretKey;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -32,12 +29,14 @@ public class JwtTokenProvider {
 
     private static final String AUTHORITIES_KEY = "roles";
 
-//    SecretKey key;
-//
-//    @PostConstruct
-//    public void init() {
+    SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        byte[] decodedKey = Base64.getDecoder().decode(JWT_SECRET);
 //        this.key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
-//    }
+        this.key = Keys.hmacShaKeyFor(decodedKey);
+    }
 
     // Create jwt from user info
     public String generateToken(CustomerUserDetails userDetails){
@@ -54,17 +53,17 @@ public class JwtTokenProvider {
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
                 .claim(AUTHORITIES_KEY, userDetails.getAuthorities().toString())
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
     // Get user info from jwt
     public Long getUserIdFromJWT(String token) {
-//        Claims claims = parseClaims(token);
-        Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims = parseClaims(token);
+//        Claims claims = Jwts.parser()
+//                .setSigningKey(key)
+//                .parseClaimsJws(token)
+//                .getBody();
 //        Date date = claims.getExpiration();
         return Long.parseLong(claims.getSubject());
     }
@@ -96,11 +95,11 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         Claims claims = null;
         try {
-//            claims = parseClaims(token);
-            claims = Jwts.parser()
-                    .setSigningKey(JWT_SECRET)
-                    .parseClaimsJws(token)
-                    .getBody();
+            claims = parseClaims(token);
+//            claims = Jwts.parser()
+//                    .setSigningKey(key)
+//                    .parseClaimsJws(token)
+//                    .getBody();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,7 +118,7 @@ public class JwtTokenProvider {
 
         String author = claims.get(AUTHORITIES_KEY).toString().substring(1, claims.get(AUTHORITIES_KEY).toString().length()-1);
         System.out.println("role: "+author);
-        Collection<? extends GrantedAuthority>authorities = Arrays
+        Collection<? extends GrantedAuthority> authorities = Arrays
                 .stream(author.split(","))
                 .filter(auth -> !auth.trim().isEmpty())
                 .map(SimpleGrantedAuthority::new)
@@ -131,7 +130,7 @@ public class JwtTokenProvider {
 
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(JWT_SECRET)
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

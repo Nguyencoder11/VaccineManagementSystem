@@ -55,7 +55,7 @@ function XacNhanDangky() {
             toast.error("Ngày sinh phải nhỏ hơn ngày hiện tại.");
             return;
         }
-        const age = today.getFullYear() - dobValue.getFullYear();
+        var age = today.getFullYear() - dobValue.getFullYear();
         const monthDifference = today.getMonth() - dobValue.getMonth();
         const dayDifference = today.getDate() - dobValue.getDate();
         if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {

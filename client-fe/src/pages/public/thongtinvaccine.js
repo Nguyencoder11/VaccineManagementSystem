@@ -32,7 +32,7 @@ function ThongTinVaccine(){
 
     return(
      <div className='container-web'>
-        <img src={ttvc} style={{width:"100%"}}/>
+        <img src={ttvc} alt="" style={{width:"100%"}}/>
         <div className='row listvaccinesearch'>
             <div className='row'>
                 <div className='col-sm-8'>

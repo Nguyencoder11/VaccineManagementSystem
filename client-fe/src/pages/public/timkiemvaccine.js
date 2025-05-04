@@ -78,12 +78,12 @@ function TimKiemVacxin(){
             nextLabel='Trang sau'
             activeClassName='active'/>
 
-        <div class="modal fade" id="motamodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Mô tả vaccine</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                        <div class="modal-body row">
+        <div className="modal fade" id="motamodal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Mô tả vaccine</h5> <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div className="modal-body row">
                             <div dangerouslySetInnerHTML={{__html:description}}>
 
                             </div>

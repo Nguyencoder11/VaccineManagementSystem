@@ -70,12 +70,12 @@ spring:
 
 # JWT Config
 jwt:
-    secret:  6b8d9e0b7efbb1cb476a1f1b4d3cd5b4a72ecfdfc934d6e889a5b98a781f1234
+    secret:  ${JWT_SECRET_KEY}
     expiration: 604800000 # 7 day
 
 # Server Config
-#server:
-#    port: 8080
+server:
+    port: 9090
 
 # Logging Config
 logging:
@@ -95,8 +95,14 @@ springdoc:
         operations-sorter: alpha
         enabled: true
 
+openai:
+    api:
+        key: ${OPENAI_API_KEY}
+
+
+
 url:
-    frontend: http://localhost:3000
+    frontend: http://localhost:3001
 
 cloudinary:
     cloud-name: dhe0ysmoy

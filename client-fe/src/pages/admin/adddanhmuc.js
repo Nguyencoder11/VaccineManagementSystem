@@ -63,14 +63,14 @@ const AdminAddDanhMuc = () => {
 
     return (
         <>
-            <div class="col-sm-5">
-                    <label class="lb-form">Tên danh mục</label>
-                    <input defaultValue={category?.typeName} id="catename" type="text" class="form-control"/><br/>
-                    <label class="checkbox-custom">Danh mục chính 
+            <div className="col-sm-5">
+                    <label className="lb-form">Tên danh mục</label>
+                    <input defaultValue={category?.typeName} id="catename" type="text" className="form-control"/><br/>
+                    <label className="checkbox-custom">Danh mục chính
                         <input id="primaryCate" type="checkbox"/>
-                        <span class="checkmark-checkbox"></span>
+                        <span className="checkmark-checkbox"></span>
                     </label><br/>
-                    <label class="lb-form">Danh mục cha</label>
+                    <label className="lb-form">Danh mục cha</label>
                     <Select
                         options={items}
                         value={selectParent}
@@ -82,7 +82,7 @@ const AdminAddDanhMuc = () => {
                         placeholder="Chọn danh mục cha"
                     />
                     <br/>
-                    <button onClick={()=>saveCategory()} class="btn btn-success form-control action-btn">Thêm/ Cập nhật danh mục</button>
+                    <button onClick={()=>saveCategory()} className="btn btn-success form-control action-btn">Thêm/ Cập nhật danh mục</button>
             </div>
         </>
     );

@@ -493,12 +493,12 @@ export const CustomerScheduleViewDetail = () => {
             ...prev, [name]: value,
         }));
     };
-    const statusOptions = [{ label: "Trạng Thái", value: "" }, {
-        label: "Chưa đủ điều kiện",
-        value: "pending",
-        label: "Huỷ Tiêm",
-        value: "cancelled"
-    }, { label: "Đủ điều kiện", value: "confirmed" },];
+    const statusOptions = [
+        { label: "Trạng Thái", value: "" },
+        { label: "Chưa đủ điều kiện", value: "pending" },
+        { label: "Huỷ Tiêm", value: "cancelled" },
+        { label: "Đủ điều kiện", value: "confirmed" },
+    ];
     return (<React.Fragment>
         <div style={{ marginBottom: "20px" }}>
 

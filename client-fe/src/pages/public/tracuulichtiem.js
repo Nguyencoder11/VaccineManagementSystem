@@ -56,17 +56,17 @@ function TraCuuLichTiem(){
 
     return(
      <div className='container-web'>
-        <img src={dctracuu} className='imgtracuulichtiem'/>
+        <img alt="" src={dctracuu} className='imgtracuulichtiem'/>
         <div className='row'>
                 <div className='col-sm-12'>
                     <p className='link-head-section'>
                         <a href="https://vnvc.vn/">Trang chủ</a>
-                        <span class="separator"> » </span>
-                        <span class="last">Tra cứu lịch tiêm chủng</span>
+                        <span className="separator"> » </span>
+                        <span className="last">Tra cứu lịch tiêm chủng</span>
                     </p>
                     <div className='section-content-web'>
                         <div className='flex-section'>
-                            <div className='divsc-dkytiem'><img src={logomini} className='img-section-dky-tiem'/></div>
+                            <div className='divsc-dkytiem'><img alt="" src={logomini} className='img-section-dky-tiem'/></div>
                             <h2 className='title-dki-tiem-chung'>TRA CỨU LỊCH TIÊM CHỦNG SẮP TỚI</h2>
                         </div>
                     </div>
@@ -127,47 +127,50 @@ function TraCuuLichTiem(){
                         activeClassName='active'/>
                 </div>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Thông tin vaccine</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Thông tin vaccine</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <table className='table'>
-                            <tr>
-                                <th>Ảnh</th>
-                                <td><img src={schedule==null?'':schedule.vaccine.image} className='imgtableschedule'/></td>
-                            </tr>
-                            <tr>
-                                <th>Tên vaccine</th>
-                                <td>{schedule==null?'':schedule.vaccine.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Nhóm tuổi</th>
-                                <td>{schedule==null?'':schedule.vaccine.ageGroup.ageRange}</td>
-                            </tr>
-                            <tr>
-                                <th>Mô tả</th>
-                                <td>{schedule==null?'':schedule.vaccine.description}</td>
-                            </tr>
-                            <tr>
-                                <th>Giá tiền</th>
-                                <td>{schedule==null?'':formatMoney(schedule.vaccine.price)}</td>
-                            </tr>
-                            <tr>
-                                <th>Loại vaccine</th>
-                                <td>{schedule==null?'':schedule.vaccine.vaccineType.typeName}</td>
-                            </tr>
-                            <tr>
-                                <th>Nhà máy sản xuất</th>
-                                <td>{schedule==null?'':schedule.vaccine.manufacturer.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Quốc gia sản xuất</th>
-                                <td>{schedule==null?'':schedule.vaccine.manufacturer.country}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <td><img src={schedule == null ? '' : schedule.vaccine.image}
+                                             className='imgtableschedule'/></td>
+                                </tr>
+                                <tr>
+                                    <th>Tên vaccine</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.name}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nhóm tuổi</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.ageGroup.ageRange}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mô tả</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.description}</td>
+                                </tr>
+                                <tr>
+                                    <th>Giá tiền</th>
+                                    <td>{schedule == null ? '' : formatMoney(schedule.vaccine.price)}</td>
+                                </tr>
+                                <tr>
+                                    <th>Loại vaccine</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.vaccineType.typeName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nhà máy sản xuất</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.manufacturer.name}</td>
+                                </tr>
+                                <tr>
+                                    <th>Quốc gia sản xuất</th>
+                                    <td>{schedule == null ? '' : schedule.vaccine.manufacturer.country}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     </div>

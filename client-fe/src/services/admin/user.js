@@ -2,7 +2,7 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 var token = localStorage.getItem('token');
 async function loadAllUser(page, size, role){
-    var url = 'http://localhost:8080/api/admin/get-user-by-role?page=' + page + '&size=' + size;
+    var url = 'http://localhost:9090/api/admin/get-user-by-role?page=' + page + '&size=' + size;
     if (role != "") {
         url += '&role=' + role
     }
@@ -16,7 +16,7 @@ async function loadAllUser(page, size, role){
 }
 
 async function loadAuthority(){
-    var url = 'http://localhost:8080/api/admin/authority';
+    var url = 'http://localhost:9090/api/admin/authority';
     const response = await fetch(url, {
         method: 'GET',
         headers: new Headers({
@@ -31,7 +31,7 @@ async function lockOrUnlock(id, typeLock) {
     if (con == false) {
         return;
     }
-    var url = 'http://localhost:8080/api/admin/lockOrUnlockUser?id=' + id;
+    var url = 'http://localhost:9090/api/admin/lockOrUnlockUser?id=' + id;
     const response = await fetch(url, {
         method: 'POST',
         headers: new Headers({
@@ -54,7 +54,7 @@ async function lockOrUnlock(id, typeLock) {
 }
 
 async function changeRole(rolename, iduser){
-    var url = 'http://localhost:8080/api/admin/update-role?id='+iduser+'&role='+rolename;
+    var url = 'http://localhost:9090/api/admin/update-role?id='+iduser+'&role='+rolename;
     const response = await fetch(url, {
         method: 'POST',
         headers: new Headers({

@@ -5,6 +5,7 @@ import com.app.vaxms_server.entity.Chatting;
 import com.app.vaxms_server.entity.User;
 import com.app.vaxms_server.repository.ChatRepository;
 import com.app.vaxms_server.repository.UserRepository;
+import com.app.vaxms_server.service.ChatGptService;
 import com.app.vaxms_server.service.UserService;
 import com.app.vaxms_server.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ChatController {
 
     @Autowired
     private UserUtils userUtils;
+
+    @Autowired
+    private ChatGptService chatGptService;
 
     @GetMapping("/customer/my-chat")
     public ResponseEntity<?> myChat() {
@@ -89,5 +93,30 @@ public class ChatController {
             return x.toString() + " day";
         }
         return "0 min";
+    }
+
+    @PostMapping("/ask")
+    public ResponseEntity<?> customerSendMessage(@RequestBody Map<String, String> request) {
+        String userMessage = request.get("message");
+        User currentUser = userUtils.getUserWithAuthority();
+
+        // Send to ChatGpt
+        String gptReply = chatGptService.askChatGpt(userMessage);
+
+        // Save customer's message
+        Chatting userChat = new Chatting();
+        userChat.setSender(currentUser);
+        userChat.setContent(userMessage);
+        userChat.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        chatRepository.save(userChat);
+
+        // Save response from GPT
+        Chatting botReply = new Chatting();
+        botReply.setSender(currentUser);
+        botReply.setContent(gptReply);
+        botReply.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        chatRepository.save(botReply);
+
+        return ResponseEntity.ok(Collections.singletonMap("reply", gptReply));
     }
 }

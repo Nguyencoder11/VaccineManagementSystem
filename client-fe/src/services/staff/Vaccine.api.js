@@ -1,5 +1,5 @@
 import Axios from "axios";
-var BASE_URL = "http://localhost:8080";
+var BASE_URL = "http://localhost:9090";
 
 export const axios = Axios.create({
   baseURL: BASE_URL,

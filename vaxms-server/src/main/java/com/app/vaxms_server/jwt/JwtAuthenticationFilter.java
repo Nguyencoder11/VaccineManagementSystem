@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     public String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        log.info("Authorization Header: {}" , bearerToken);
+        log.info("Bearer token: {}", bearerToken);
         // Check if 'header Authorization' contains jwt info, or not?
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
@@ -84,7 +84,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 System.out.println("user by access token-----: " + userDetails);
 
                 if (userDetails != null) {
-                    Authentication authentication = getAuthentication(jwt, userId);
+//                    Authentication authentication = getAuthentication(jwt, userId);
+                    Authentication authentication = tokenProvider.getAuthentication(jwt);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
