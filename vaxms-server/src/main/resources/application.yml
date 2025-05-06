@@ -15,7 +15,7 @@ spring:
 
     # Database Config
     datasource:
-        url: jdbc:mysql://localhost:3306/vaxms
+        url: jdbc:mysql://host.docker.internal:3306/vaxms
         username: ${LOCAL_MYSQL_USERNAME}
         password: ${LOCAL_MYSQL_PASSWORD}
         driver-class-name: com.mysql.cj.jdbc.Driver

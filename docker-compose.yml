@@ -6,11 +6,11 @@ services:
       context: ./vaxms-server
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "9090:9090"
     env_file:
-      - /vaxms-server/src/main/resources/.env
-    depends_on:
-      -
+      - ./vaxms-server/src/main/resources/.env
+#    depends_on:
+#      - mysql
     networks:
       - app-network
 
@@ -18,20 +18,33 @@ services:
     image: vaxms-frontend
     container_name: vaxms-frontend-1
     build:
-      context: ./vaxms-ui
+      context: ./client-fe
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3001:80"
     depends_on:
-      -
+      - backend
     networks:
       - app-network
 
-  db:
-    image:
-    environment:
-    ports:
-      -
+#  mysql:
+#    image: mysql:8.0
+#    container_name: vaxms-db
+#    restart: always
+#    environment:
+#      MYSQL_DATABASE: vaxms
+#      MYSQL_ROOT_PASSWORD: ""
+#      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - mysql-data:/var/lib/mysql
+#    networks:
+#      - app-network
+
 networks:
   app-network:
     driver: bridge
+
+#volumes:
+#  mysql-data:
